@@ -1,54 +1,59 @@
 #include <iostream>
 #include <vector>
 
-unsigned const int numberOfDots = 0;
-Dot dots[numberOfDots];
+unsigned const int numberOfDots = 5;
 
-class dot
+class Dot
 {
 public:
-    std::string name;
-    weight;
+    int weight;
     bool isUsed;
     std::vector<int[2]> ways;
 };
 
-void addWay(dot *dot1, dot *dot2, int lenght)
+Dot dots[numberOfDots];
+
+void addWay(Dot *dot1, Dot *dot2, int lenght)
 {
-  //  dot1->ways.push_back({dot1->name, lenght}); ПЕРЕПИСАТЬ
-  //  dot2->ways.push_back({dot1->number, lenght});
 }
 
 void sendToRobot(std::vector<int> path)
 {
 }
 
-class request
+class Request
 {
 public:
-    request(dot from, dot to)
-    {/*
-        std::vector<int> path;
-            void dijkstra(dot s);
-        for(int v = 0; v < numberOfDots; v++) 
-        {      
-            dots[v].weight = 9999;
-            dots[v].isUsed = false;
-        }
-        from.weight = 0;
-        dot V(V, );
-        for j∈V
-                            // найдём вершину с минимальным расстоянием
-            if !used[j] and (v == null or d[j] < d[v])
-                    v = j
-            if d[v] == ∞
+    std::vector<int> path;
+    Request(int from, int to)
+    {
+        std::vector<std::vector<std::pair<int, int>>> g(numberOfDots);
+        std::vector<int> d(numberOfDots, 9999), p(numberOfDots);
+        std::vector<bool> used(numberOfDots, false);
+        for (int i = 0; i < numberOfDots; i++)
+        {
+            int v = -1;
+            for (int j = 0; j < numberOfDots; j++)
+            {
+                if (v == -1 || d[j] < d[v])
+                {
+                    v = j;
+                }
+                if (d[v] == 9999)
+                    break;
+                used[v] = true;
 
-            break
-        used[v] = true
-        for e : исходящие из v рёбра     // произведём релаксацию по всем рёбрам, исходящим из v
-            if d[v] + e.len < d[e.to]
-                d[e.to] = d[v] + e.len
-            // дописать по алгоритму дейкстры*/
+                for (int j = 0; j < g[v].size(); j++)
+                {
+                    int to = g[v][j].first,
+                        len = g[v][j].second;
+                    if (d[v] + len < d[to])
+                    {
+                        d[to] = d[v] + len;
+                        p[to] = v;
+                    }
+                }
+            }
+        }
     }
 };
-
