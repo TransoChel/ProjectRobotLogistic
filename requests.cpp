@@ -2,31 +2,18 @@
 #include <vector>
 #include <algorithm>
 const unsigned short numberOfDots = 7;
-class Dot
-{
-public:
-    int number, numberOfFather;
-    bool isUsed;
-    Dot()
-    {
-        isUsed = false;
-        numberOfFather = 0;
-    }
-};
 
-Dot dots[numberOfDots];
 
-void sendToRobot(std::vector<int> path)
-{
-}
+int dots[numberOfDots] = {0, 1, 2, 3, 4, 5, 6};
 
+void sendToRobot(std::vector<int> path){}
 class Request
 {
 public:
-    std::vector<Dot> path;
-    Request(Dot from, Dot to)
+    std::vector<int> path;
+    Request(int from, int to)
     {
-        std::vector<std::vector<std::pair<Dot, int>>> g(numberOfDots); // двумерный вектор пар "таблица смежности" Dot - точка куда ведёт ребро, int - его вес. Первая мера вектора - все точки, Вторая мера вектора - конкретная точка, от неё идут пары с ребром.
+        std::vector<std::vector<std::pair<int, int>>> g(numberOfDots); // двумерный вектор пар "таблица смежности" int1 - точка куда ведёт ребро, int2 - его вес. Первая мера вектора - все точки, Вторая мера вектора - конкретная точка, от неё идут пары с ребром.
         
         g[0].push_back({dots[1], 10});
         g[0].push_back({dots[2], 5});
@@ -46,38 +33,49 @@ public:
         g[5].push_back({dots[6], 6});
         g[6].push_back({dots[5], 6});
         g[6].push_back({dots[3], 2});
-        
+
         std::vector<int> d(numberOfDots, 9999);  // d - вектор путей до точки, индекс - номер точки, значение - длинна пути до него
-        std::vector<bool> used(numberOfDots, false);
+        d[from] = 0;
+        std::vector<bool> isUsed(numberOfDots, false);
+        std::vector<int> father(numberOfDots, 0);
         for (int i = 0; i < numberOfDots; i++) // выполнить для всех точек
         {
-            Dot v;  v.number = -1;// v - точка с которой мы делаем всякое
+            int v = -1;// v - точка с которой мы делаем всякое
             for (int j = 0; j < numberOfDots; j++) //ищем ближайшего соседа точки v
             {
-                if (!v.isUsed && (v.number == -1 || d[j] < d[v.number]))
+                if ((v == -1 || d[j] < d[v]) && !isUsed[j])
                 {
-                    v.number = j; // нашли
+                    // нашли
+                    v = j;
                 }
             }
 
-            if (d[v.number] == 9999) // если путь до ближайшей точки 9999 то мы точно закончили
+            if (d[v] == 9999) // если путь до ближайшей точки 9999 то мы точно закончили
                 break;
-            v.isUsed = true; // помечаем v как уже обработанную
+            isUsed[v] = true; // помечаем v как уже обработанную
 
-            for (int j = 0; j < g[v.number].size(); j++) //выполнить для всех соседей точки v
+            for (int j = 0; j < g[v].size(); j++) //выполнить для всех соседей точки v
             {
-                Dot to = g[v.number][j].first; // переменная номера точки куда идём
-                int len = g[v.number][j].second; //переменная длины пути до to
-                if (d[v.number] + len < d[to.number]) //если существующая указанная длина пути до точки to больше, чем посчитанная нами, то заменим значение
+                int target = g[v][j].first; // переменная номера точки куда идём
+                int len = g[v][j].second; //переменная длины пути до to
+                if (d[v] + len < d[target]) //если существующая указанная длина пути до точки to больше, чем посчитанная нами, то заменим значение
                 {
-                    d[to.number] = d[v.number] + len;
-                    to.numberOfFather = v.number;//указать отцом точки to точку v
+                    d[target] = d[v] + len;
+                    father[target] = v;//указать отцом точки to точку v
                 }
             }
         }
 
-        for (Dot v = to; v.number != from.number; v.numberOfFather = v.number) //восстанавливаем путь до изначально точки to от точки from
+        for (size_t i = 0; i < numberOfDots; i++)
+        {
+            std::cout << d[i] << "\n";
+        }
+        
+
+        for (int v = to; v != from; v = father[v]) //восстанавливаем путь до изначально точки to от точки from
+        {
             this->path.push_back(v);
+        }
         this->path.push_back(from);
         std::reverse(this->path.begin(), this->path.end());
     }

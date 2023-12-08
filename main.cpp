@@ -2,10 +2,8 @@
 
 int main()
 {
-    Dot from, to;
-    from.number = 0;
-    to.number = 5;
-    Request Test(from, to);
+    Request Test(0, 5);
+    std::cout << "path: ";
     for(int i = 0; i < Test.path.size(); i++)
-        std::cout << Test.path[i].number << ' ';
+        std::cout << Test.path[i] << ' ';
 }
