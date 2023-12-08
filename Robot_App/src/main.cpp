@@ -7,14 +7,14 @@
 int main() {
     // Initialization
     //--------------------------------------------------------------------------------------
-    const int screenWidth = 1400;
-    const int screenHeight = 700;
+    const int screenWidth = 1920;
+    const int screenHeight = 1035;
 
-    InitWindow(screenWidth, screenHeight, "Robot");
+    InitWindow(screenWidth, screenHeight, "RoboLogi");
 
     bool OrderMenu = false;
 
-    std::string text = "";
+    std::string text = "Ffjaslkj";
     SetTargetFPS(60);               // Set our game to run at 60 frames-per-second
     //---------------------------------------------------------------------------------------
 
@@ -25,9 +25,14 @@ int main() {
         //----------------------------------------------------------------------------------
 
         if(IsMouseButtonDown(MOUSE_BUTTON_LEFT)) {
-            if(CheckCollisionPointRec(GetMousePosition(), {550, 225, 500, 250})) {
+            if(CheckCollisionPointRec(GetMousePosition(), {960, 350, 500, 200})) {
                 OrderMenu = true;
             }
+        }
+        if(IsMouseButtonDown(MOUSE_BUTTON_LEFT))
+        {
+            if(CheckCollisionPointRec(GetMousePosition(), {1420, 885, 1820, 935}))
+                OrderMenu = false;
         }
 
         //----------------------------------------------------------------------------------
@@ -39,14 +44,16 @@ int main() {
         BeginDrawing();
 
         ClearBackground(BLUE);
-        DrawRectangleV({0, 0}, {300, 700}, DARKBLUE);
-        DrawText("Query:", 75, 25, 50, WHITE);
+        DrawRectangleV({0, 0}, {500, 1035}, DARKBLUE);
+        DrawText("Queue", 175, 25, 50, WHITE);
         if (!OrderMenu) {
-            DrawRectangleV({550, 225}, {500, 250}, SKYBLUE);
-            DrawText("Order", 675, 325, 75, WHITE);
+            DrawRectangleV({960, 350}, {500, 200}, SKYBLUE);
+            DrawText("Order", 1150, 410, 50, WHITE);
         }
         else {
-            DrawText("Placeholder", 400, 100, 50, WHITE);
+            DrawText("Placeholder", 1070, 25, 50, WHITE);
+            DrawRectangleV({1420, 885}, {1820, 935}, DARKBLUE);
+            DrawText("To main", 1600, 905, 50, WHITE);
         }
 
         EndDrawing();
