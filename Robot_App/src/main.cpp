@@ -10,13 +10,17 @@ int main() {
     const int screenWidth = 1920;
     const int screenHeight = 1035;
 
-    InitWindow(screenWidth, screenHeight, "RoboLogi");
+    InitWindow(screenWidth, screenHeight, "RoboLogist");
 
     bool OrderMenu = false;
 
     std::string text = "Ffjaslkj";
     SetTargetFPS(60);               // Set our game to run at 60 frames-per-second
     //---------------------------------------------------------------------------------------
+
+    Texture2D logo = LoadTexture("../tectures/logo.png");
+
+
 
     // Main game loop
     while (!WindowShouldClose())    // Detect window close button or ESC key
@@ -25,13 +29,13 @@ int main() {
         //----------------------------------------------------------------------------------
 
         if(IsMouseButtonDown(MOUSE_BUTTON_LEFT)) {
-            if(CheckCollisionPointRec(GetMousePosition(), {960, 350, 500, 200})) {
+            if(CheckCollisionPointRec(GetMousePosition(), {960, 350, 500, 200}) && !OrderMenu) {
                 OrderMenu = true;
             }
         }
         if(IsMouseButtonDown(MOUSE_BUTTON_LEFT))
         {
-            if(CheckCollisionPointRec(GetMousePosition(), {1420, 885, 1820, 935}))
+            if(CheckCollisionPointRec(GetMousePosition(), {1420, 885, 1820, 935}) && OrderMenu)
                 OrderMenu = false;
         }
 
@@ -43,17 +47,18 @@ int main() {
         //----------------------------------------------------------------------------------
         BeginDrawing();
 
-        ClearBackground(BLUE);
-        DrawRectangleV({0, 0}, {500, 1035}, DARKBLUE);
-        DrawText("Queue", 175, 25, 50, WHITE);
+        ClearBackground(WHITE);
+        DrawRectangleV({0, 100}, {500, 935}, {255, 0, 0, 255});
+        DrawRectangleV({0, 0}, {screenWidth, 100}, {200, 0, 0, 255});
+        DrawText("Queue", 175, 125, 50, WHITE);
         if (!OrderMenu) {
-            DrawRectangleV({960, 350}, {500, 200}, SKYBLUE);
+            DrawRectangleV({960, 350}, {500, 200}, {255, 0, 0, 255});
             DrawText("Order", 1150, 410, 50, WHITE);
         }
         else {
             DrawText("Placeholder", 1070, 25, 50, WHITE);
-            DrawRectangleV({1420, 885}, {1820, 935}, DARKBLUE);
-            DrawText("To main", 1600, 905, 50, WHITE);
+            DrawRectangleV({1570, 935}, {1680, 885}, {255, 0, 0, 255});
+            DrawText("To main", 1650, 955, 50, WHITE);
         }
 
         EndDrawing();
