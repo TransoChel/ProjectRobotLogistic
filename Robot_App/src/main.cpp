@@ -19,6 +19,9 @@ int main() {
     //---------------------------------------------------------------------------------------
 
     Texture2D logo = LoadTexture("../textures/logo.png"), doRequest = LoadTexture("../textures/doRequest.png");
+    Texture2D toMenu = LoadTexture("../textures/toMenu.png");
+    Texture2D send = LoadTexture("../textures/send.png");
+    Texture2D fromTo = LoadTexture("../textures/fromTo.png");
 
     // Main game loop
     while (!WindowShouldClose())    // Detect window close button or ESC key
@@ -57,9 +60,9 @@ int main() {
             //DrawText("Order", 1150, 410, 50, WHITE);
         }
         else {
-            DrawText("Customize your request", 920, 25, 50, WHITE);
-            DrawRectangleV({1570, 935}, {1680, 885}, {255, 0, 0, 255});
-            DrawText("To main", 1650, 955, 50, WHITE);
+            DrawTextureEx(toMenu, {1350, 855}, 0, 5, WHITE);
+            DrawTextureEx(fromTo, {920, 125}, 0, 5, WHITE);
+            DrawTextureEx(send, {1150, 855}, 0, 5, WHITE);
         }
 
         EndDrawing();
