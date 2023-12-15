@@ -9,12 +9,13 @@ int main() {
     //--------------------------------------------------------------------------------------
     const int screenWidth = 1920;
     const int screenHeight = 1035;
-
     InitWindow(screenWidth, screenHeight, "RoboLogi");
 
+    Texture2D doRequest = LoadTexture("../textures/doRequest.png");
+    Texture2D logo = LoadTexture("../textures/logo.png");
     bool OrderMenu = false;
 
-    std::string text = "Ffjaslkj";
+    std::string text = "";
     SetTargetFPS(60);               // Set our game to run at 60 frames-per-second
     //---------------------------------------------------------------------------------------
 
@@ -25,7 +26,7 @@ int main() {
         //----------------------------------------------------------------------------------
 
         if(IsMouseButtonDown(MOUSE_BUTTON_LEFT)) {
-            if(CheckCollisionPointRec(GetMousePosition(), {960, 350, 500, 200})) {
+            if(CheckCollisionPointRec(GetMousePosition(), {920, 485, 640, 160})) {
                 OrderMenu = true;
             }
         }
@@ -43,17 +44,19 @@ int main() {
         //----------------------------------------------------------------------------------
         BeginDrawing();
 
-        ClearBackground(BLUE);
-        DrawRectangleV({0, 0}, {500, 1035}, DARKBLUE);
-        DrawText("Queue", 175, 25, 50, WHITE);
+        ClearBackground(WHITE);
+        DrawRectangleV({0, 0}, {500, 1035}, LIGHTGRAY);
+        DrawText("Queue", 150, 50, 50, BLACK);
+        DrawRectangleV({0,0}, {1920, 100}, {255, 0, 0, 255});
+        DrawText("RoboLogi", 114, 20, 50, WHITE);
+        DrawTextureEx(logo, {25, 15}, 0 , 2, WHITE);  
         if (!OrderMenu) {
-            DrawRectangleV({960, 350}, {500, 200}, SKYBLUE);
-            DrawText("Order", 1150, 410, 50, WHITE);
+            DrawTextureEx(doRequest, {920, 485}, 0, 5, RAYWHITE);
         }
         else {
-            DrawText("Placeholder", 1070, 25, 50, WHITE);
-            DrawRectangleV({1420, 885}, {1820, 935}, DARKBLUE);
-            DrawText("To main", 1600, 905, 50, WHITE);
+            DrawText("Placeholder", 1070, 125, 50, BLACK);
+            DrawRectangleV({1420, 885}, {1820, 935}, {255, 0, 0, 255});
+            DrawText("To main", 1600, 915, 50, BLACK);
         }
 
         EndDrawing();
