@@ -18,11 +18,12 @@ int main() {
     SetTargetFPS(60);               // Set our game to run at 60 frames-per-second
     //---------------------------------------------------------------------------------------
 
-    Texture2D logo = LoadTexture("../textures/logo.png"), doRequest = LoadTexture("../textures/doRequest.png");
+    Texture2D logo = LoadTexture("../textures/logo.png");
+    Texture2D doRequest = LoadTexture("../textures/doRequest.png");
     Texture2D toMenu = LoadTexture("../textures/toMenu.png");
     Texture2D send = LoadTexture("../textures/send.png");
     Texture2D fromTo = LoadTexture("../textures/fromTo.png");
-
+    Texture2D queue = LoadTexture("../textures/queue.png");
     // Main game loop
     while (!WindowShouldClose())    // Detect window close button or ESC key
     {
@@ -53,7 +54,7 @@ int main() {
         DrawRectangleV({0, 0}, {screenWidth, 100}, {200, 0, 0, 255});
         
         DrawTextureEx(logo, {18, 18}, 0, 2, WHITE);
-        DrawText("Queue", 175, 125, 50, WHITE);
+        DrawTextureEx(queue, {100, 125}, 0, 5, WHITE);
         if (!OrderMenu) {
             DrawTextureEx(doRequest, {960, 450}, 0, 5, WHITE);
             //DrawRectangleV({960, 350}, {500, 200}, {255, 0, 0, 255});
