@@ -24,11 +24,11 @@ void addNeighbors(int from, std::vector<std::pair<int, int>> neighbors)
 }
 
 
-void sendToRobot(std::vector<int> path){}
+void sendToRobot(std::vector<char> path){}
 class Request
 {
 public:
-    std::vector<int> path;
+    std::vector<char> path;
     Request(int from, int to)
     {
         addNeighbors(0, {{1, 10}, {2, 5}});
@@ -37,13 +37,19 @@ public:
         addNeighbors(3, {{4, 12}, {6, 2}});
         addNeighbors(4, {{5, 11}});
         addNeighbors(5, {{6, 6}});
-        std::vector<int> d(numberOfDots, 9999);  // d - вектор путей до точки, индекс - номер точки, значение - длинна пути до него
+        short d[numberOfDots];  // d - вектор путей до точки, индекс - номер точки, значение - длинна пути до него
+        bool isUsed[numberOfDots];
+        char father[numberOfDots];
+        for(char i = 0; i < numberOfDots; i++)
+        {
+            isUsed[i] = false;
+            father[i] = 0;
+            d[i] = -3;
+        }
         d[from] = 0;
-        std::vector<bool> isUsed(numberOfDots, false);
-        std::vector<int> father(numberOfDots, 0);
         for (int i = 0; i < numberOfDots; i++) // выполнить для всех точек
         {
-            int v = -1;// v - точка с которой мы делаем всякое
+            char v = -1;// v - точка с которой мы делаем всякое
             for (int j = 0; j < numberOfDots; j++) //ищем ближайшего соседа точки v
             {
                 if ((v == -1 || d[j] < d[v]) && !isUsed[j])
@@ -53,7 +59,7 @@ public:
                 }
             }
 
-            if (d[v] == 9999) // если путь до ближайшей точки 9999 то мы точно закончили
+            if (d[v] == -3) // если путь до ближайшей точки -3 то мы точно закончили
                 break;
             isUsed[v] = true; // помечаем v как уже обработанную
 
@@ -68,7 +74,7 @@ public:
         }
         
 
-        for (int v = to; v != from; v = father[v]) //восстанавливаем путь до изначально точки to от точки from
+        for (char v = to; v != from; v = father[v]) //восстанавливаем путь до изначально точки to от точки from
         {
             this->path.push_back(v);
         }
