@@ -4,6 +4,7 @@
 #define RAYGUI_IMPLEMENTATION
 #include "extras/raygui.h"
 #include "../../robot/requests.cpp"
+#include "../classes/button.cpp"
 // 255 130 130
 
 int main() {
