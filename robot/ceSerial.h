@@ -54,7 +54,7 @@ public:
 	void Close();
 	char ReadChar(bool& success);//return read char if success
 	bool WriteChar(char ch);////return success flag
-	bool Write(char *data);//write null terminated string and return success flag
+	const bool Write(const char *data);//write null terminated string and return success flag
 	bool Write(char *data,long n);
 	bool SetRTS(bool value);//return success flag
 	bool SetDTR(bool value);//return success flag
@@ -286,7 +286,7 @@ bool ceSerial::IsOpened() {
 	else return true;
 }
 
-bool ceSerial::Write(char *data) {
+const bool ceSerial::Write(const char *data) {
 	if (!IsOpened()) {
 		return false;
 	}

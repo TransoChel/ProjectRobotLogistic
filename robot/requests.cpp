@@ -2,6 +2,11 @@
 #include <vector>
 #include <algorithm>
 #include<map>
+
+#include <stdio.h>
+#define CE_SERIAL_IMPLEMENTATION
+#include "ceSerial.h"
+
 const unsigned short numberOfDots = 7;
 
 std::vector<std::map<int, int>> g(numberOfDots); // двумерный вектор пар "таблица смежности" int1 - точка куда ведёт ребро, int2 - его вес. Первая мера вектора - все точки, Вторая мера вектора - конкретная точка, от неё идут пары с ребром.
@@ -24,7 +29,27 @@ void addNeighbors(int from, std::vector<std::pair<int, int>> neighbors)
 }
 
 
-void sendToRobot(std::vector<char> path){}
+void sendToRobot(ceSerial *com ,std::vector<char> path)
+{
+
+    bool successFlag;
+    printf("Writing.\n");
+    std::string s;
+    for (short i = 0; i < path.size(); i++)
+    {
+        s += path[i];
+    }
+    char size = s.size();
+    successFlag = com->Write(&size);
+    successFlag = com->Write(s.c_str());       // write string
+}
+void readFromRobot(ceSerial *com)
+{
+    bool successFlag;
+    char status = com->ReadChar(successFlag); // read a char
+
+    printf("Closing port %s.\n", com->GetPort().c_str());
+}
 class Request
 {
 public:
@@ -80,5 +105,9 @@ public:
         }
         this->path.push_back(from);
         std::reverse(this->path.begin(), this->path.end());
+    }
+    std::vector<char> getPath()
+    {
+        return path;
     }
 };
