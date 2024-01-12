@@ -32,11 +32,15 @@ int main() {
     Texture2D send = LoadTexture("../textures/send.png");
     Texture2D fromTo = LoadTexture("../textures/fromTo.png");
     Texture2D queue = LoadTexture("../textures/queue.png");
+
     // Main game loop
     while (!WindowShouldClose())    // Detect window close button or ESC key
     {
         // Update
         //----------------------------------------------------------------------------------
+
+        int from;
+        int to;
 
         if(IsMouseButtonDown(MOUSE_BUTTON_LEFT)) {
             if(CheckCollisionPointRec(GetMousePosition(), {960, 450, 128*5, 32*5}) && !OrderMenu) {
@@ -45,7 +49,10 @@ int main() {
             else if(CheckCollisionPointRec(GetMousePosition(), {1420, 885, 1820, 935}) && OrderMenu) {
                 OrderMenu = false;
             }
-            //else if (CheckCollisionPointRec(GetMousePosition(), ))
+            else if (CheckCollisionPointRec(GetMousePosition(), {675, 325, 350, 75})) {
+                //p
+                from = 0;
+            }
             // else if (CheckCollisionPointCircle(GetMousePosition(), ))
         }
 
@@ -70,6 +77,7 @@ int main() {
         }
         else {
             Sent = false;
+            DrawRectangleV({1420, 885}, {500, 300}, GREEN);
             DrawTextureEx(toMenu, {1550, 900}, 0, 3, WHITE);
             DrawText("From", 750, 250, 60, RED);
             DrawRectangleV({675, 325}, {350, 75}, GRAY);

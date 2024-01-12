@@ -1,5 +1,6 @@
 #include <raylib.h>
 #include <string>
+#pragma once
 class Button
 {
     public:
@@ -15,7 +16,7 @@ class Button
             this->text = text;
         }
 
-        void DrawButton()
+        virtual void DrawButton()
         {
             DrawRectangleV(coord, size, color);
             DrawText(text.c_str(), coord.x + size.x/2 - 50 * text.size()/2, coord.y + size.y/2, 50, WHITE);
