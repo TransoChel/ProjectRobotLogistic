@@ -17,8 +17,8 @@ class Button
 
         void DrawButton()
         {
-            DrawRectangleV(coord, size, color)
-            DrawText(&text, coord.x + size.x/2 - 50 * text.size()/2, coord.y + size.y/2, 50, WHITE);
+            DrawRectangleV(coord, size, color);
+            DrawText(text.c_str(), coord.x + size.x/2 - 50 * text.size()/2, coord.y + size.y/2, 50, WHITE);
         }
         bool CheckButtonPressed()
         {
