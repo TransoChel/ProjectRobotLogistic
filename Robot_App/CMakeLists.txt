@@ -4,7 +4,7 @@ project(RayLibTemplate)
 set(CMAKE_CXX_STANDARD 17)
 set(CMAKE_CXX_STANDARD_REQUIRED ON)
 
-file(GLOB SOURCES src/*.cpp)
+file(GLOB SOURCES src/*.cpp classes/*.cpp)
 
 add_executable(RayLibTemplate ${SOURCES})
 # Setting parameters for raylib

@@ -1,16 +1,16 @@
 #include <raylib.h>
 #include <string>
 #include "button.cpp"
+#pragma once
 
-class RadioButton : public Button;
-{
+class RadioButton : public Button {
 public:
     Color pressedcol = {255, 130, 130, 255};
     bool active = false;
     RadioButton(Vector2 coord, Vector2 size, Color color, std::string text) : Button(coord, size, color, text)
     {
     }
-    override void DrawButton()
+    void DrawButton()
     {
         if (active) {
             DrawRectangleV(coord, size, pressedcol);

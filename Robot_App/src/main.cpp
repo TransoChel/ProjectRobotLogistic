@@ -5,7 +5,9 @@
 #include "extras/raygui.h"
 #include "../../robot/requests.cpp"
 #include "../classes/button.cpp"
-// 255 130 130
+#include "../classes/radiobutton.cpp"
+#include "../classes/radiobuttoncontrol.cpp"
+
 
 int main() {
     // Initialization
@@ -42,17 +44,27 @@ int main() {
         int from;
         int to;
 
+        //RadioButton A({675, 325}, {350, 75}, GRAY, "A");
+        //RadioButton B({675, 400}, {350, 75}, GRAY, "B");
+        //RadioButtonControl AB;
+        //AB.buttons.push_back(A);
+        //AB.buttons.push_back(B);
+        
+
         if(IsMouseButtonDown(MOUSE_BUTTON_LEFT)) {
             if(CheckCollisionPointRec(GetMousePosition(), {960, 450, 128*5, 32*5}) && !OrderMenu) {
                 OrderMenu = true;
             }
-            else if(CheckCollisionPointRec(GetMousePosition(), {1420, 885, 1820, 935}) && OrderMenu) {
-                OrderMenu = false;
+            else if (OrderMenu) {
+                //AB.Update();
             }
-            else if (CheckCollisionPointRec(GetMousePosition(), {675, 325, 350, 75})) {
+            //else if(CheckCollisionPointRec(GetMousePosition(), {1420, 885, 1820, 935}) && OrderMenu) {
+            //    OrderMenu = false;
+            //}
+            //else if (CheckCollisionPointRec(GetMousePosition(), {675, 325, 350, 75})) {
                 //p
-                from = 0;
-            }
+                //from = 0;
+            //}
             // else if (CheckCollisionPointCircle(GetMousePosition(), ))
         }
 
@@ -80,14 +92,6 @@ int main() {
             DrawRectangleV({1420, 885}, {500, 300}, GREEN);
             DrawTextureEx(toMenu, {1550, 900}, 0, 3, WHITE);
             DrawText("From", 750, 250, 60, RED);
-            DrawRectangleV({675, 325}, {350, 75}, GRAY);
-            DrawText("A", 830, 340, 50, RED);
-            DrawRectangleV({675, 400}, {350, 75}, GRAY);
-            DrawText("B", 830, 415, 50, RED);
-            DrawRectangleV({675, 475}, {350, 75}, GRAY);
-            DrawText("C", 830, 480, 50, RED);
-            DrawRectangleV({675, 550}, {350, 75}, GRAY);
-            DrawText("D", 830, 555, 50, RED);
             DrawTextureEx(fromTo, {920, 125}, 0, 3, WHITE);
             DrawTextureEx(send, {1425, 900}, 0, 3, WHITE);
         }
