@@ -3,7 +3,8 @@
 #include <raylib.h>
 #define RAYGUI_IMPLEMENTATION
 #include "extras/raygui.h"
-#include "../../robot/request.cpp"
+#include "../classes/request.cpp"
+#include "../classes/queue.cpp"
 #include "../classes/button.cpp"
 #include "../classes/radiobutton.cpp"
 #include "../classes/radiobuttoncontrol.cpp"
@@ -20,10 +21,11 @@ int main()
     bool OrderMenu = false;
     bool Sent = false;
     int from, to;
+    Color selectedColor = GREEN;
     int sentTimer = 180;
     std::vector<Request> Queue;
 
-    SetTargetFPS(60); // Set our game to run at 60 frames-per-second
+    SetTargetFPS(60); // Set our APP to run at 60 frames-per-second
     //---------------------------------------------------------------------------------------
 
     Texture2D logo = LoadTexture("../Robot_App/textures/logo.png");
@@ -31,7 +33,7 @@ int main()
     Texture2D toMenu = LoadTexture("../Robot_App/textures/toMenu.png");
     Texture2D send = LoadTexture("../Robot_App/textures/send.png");
     Texture2D fromTo = LoadTexture("../Robot_App/textures/fromTo.png");
-    Texture2D queue = LoadTexture("../Robot_App/textures/queue.png");
+    Texture2D queueTexture = LoadTexture("../Robot_App/textures/queue.png");
 
     RadioButton A({675, 325}, {350, 75}, RED, "A");
     RadioButton B({675, 425}, {350, 75}, RED, "B");
@@ -55,6 +57,17 @@ int main()
     ABto.buttons.push_back(&Cto);
     ABto.buttons.push_back(&Dto);
     ABto.buttons.push_back(&Eto);
+
+    Graf graf;
+
+    Queue queue;
+
+    Request A_B(0, 1, &graf), B_C(1, 2, &graf), A_C(2, 0, &graf);
+
+    queue.addRequest(&A_B);
+    queue.addRequest(&B_C);
+    queue.addRequest(&A_C);
+    
 
     // Main game loop
     while (!WindowShouldClose()) // Detect window close button or ESC key
@@ -110,7 +123,8 @@ int main()
         DrawRectangleV({0, 100}, {500, 935}, {255, 0, 0, 255});
         DrawRectangleV({0, 0}, {screenWidth, 100}, {200, 0, 0, 255});
         DrawTextureEx(logo, {18, 18}, 0, 2, WHITE);
-        DrawTextureEx(queue, {100, 125}, 0, 5, WHITE);
+        DrawTextureEx(queueTexture, {100, 125}, 0, 5, WHITE);
+        //queue.draw({150, 250}, BLUE);
         if (!OrderMenu && !Sent)
         {
             DrawTextureEx(doRequest, {960, 450}, 0, 5, WHITE);
