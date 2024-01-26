@@ -8,12 +8,6 @@ class RadioButtonControl
 {
 public:
     std::vector<RadioButton *> buttons;
-    // RadioButtonControl(int a) {
-    //     for (int i = 0; i < a; ++i) {
-    //         RadioButton(coord, size, color, text);
-    //         buttons.push_back();
-    //     }
-    // }
     void Update()
     {
         int check = -1;
@@ -43,6 +37,31 @@ public:
         for (int i = 0; i < buttons.size(); ++i)
         {
             buttons[i]->Draw();
+        }
+    }
+    bool CheckUpdate() {
+        for (int i = 0; i < buttons.size(); ++i)
+        {
+            if (buttons[i]->active) {
+                return true;
+            }
+        }
+        return false;
+    }
+    void NullUpdate() {
+        for (int i = 0; i < buttons.size(); ++i)
+        {
+            if (buttons[i]->active) {
+                buttons[i]->active = false;
+            }
+        }
+    }
+    int SendNum() {
+        for (int i = 0; i < buttons.size(); ++i)
+        {
+            if (buttons[i]->active) {
+                return i;
+            }
         }
     }
 };
