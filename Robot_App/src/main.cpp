@@ -3,7 +3,8 @@
 #include <raylib.h>
 #define RAYGUI_IMPLEMENTATION
 #include "extras/raygui.h"
-#include "../../robot/request.cpp"
+#include "../classes/request.cpp"
+#include "../classes/queue.cpp"
 #include "../classes/button.cpp"
 #include "../classes/radiobutton.cpp"
 #include "../classes/radiobuttoncontrol.cpp"
@@ -19,6 +20,7 @@ int main()
 
     bool OrderMenu = false;
     bool Sent = false;
+    bool DrawArrow = false;
     int from, to;
     int sentTimer = 180;
     std::vector<Request> Queue;
@@ -64,12 +66,18 @@ int main()
 
         int from, to;
 
-        if (Sent) {
-            while (sentTimer >= 0) {
-                ++sentTimer;
-            }
-            Sent = false;
+        if (AB.CheckUpdate() && ABto.CheckUpdate()) {
+            DrawArrow = true;
         }
+
+        if (Sent) {
+            if (sentTimer >= 0) {
+                --sentTimer;
+            }
+            else {
+                Sent = false;
+            }
+         }
 
         if (IsMouseButtonPressed(MOUSE_BUTTON_LEFT))
         {
@@ -91,6 +99,7 @@ int main()
                     if (CheckCollisionPointRec(GetMousePosition(), {1425, 900, 100, 100})) {
                         from = AB.SendNum();
                         to = AB.SendNum();
+                        //Request(from, to, );
                         Sent = true;
                         OrderMenu = false;
                         AB.NullUpdate();
@@ -125,6 +134,11 @@ int main()
             DrawTextureEx(send, {1425, 900}, 0, 3, WHITE);
             AB.Draw();
             ABto.Draw();
+            if (DrawArrow) {
+                DrawRectangleV({AB.buttons[AB.SendNum()]->coord.x + 350, AB.buttons[AB.SendNum()]->coord.y + 37}, {155, 10}, {200, 0, 0, 255});
+                DrawRectangleV({1170, std::min(AB.buttons[AB.SendNum()]->coord.y + 37, ABto.buttons[ABto.SendNum()]->coord.y + 37) + 10}, {10, std::abs(ABto.buttons[ABto.SendNum()]->coord.y - AB.buttons[AB.SendNum()]->coord.y)}, {200, 0, 0, 255});
+                DrawRectangleV({ABto.buttons[ABto.SendNum()]->coord.x - 155, ABto.buttons[ABto.SendNum()]->coord.y + 37}, {155, 10}, {200, 0, 0, 255});
+            }
         }
         else if (Sent) {
             DrawText("Order sent!", 1000, 500, 90, RED);
