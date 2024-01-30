@@ -1,33 +1,41 @@
+#pragma once
 #include <iostream>
 #include <vector>
 #include <algorithm>
 #include<map>
-#include "graf.cpp"
+#include "../classes/graf.cpp"
 
 class Request
 {
 public:
     std::vector<char> path;
+    int from, to;
     Request(int from, int to, Graf* graf)
     {
-        short d[graf->numberOfDots];  // d - вектор путей до точки, индекс - номер точки, значение - длинна пути до него
-        bool isUsed[graf->numberOfDots];
-        char father[graf->numberOfDots];
+        this->from = from;
+        this->to = to;
+        
+        unsigned short d[graf->numberOfDots - 1];  // d - вектор путей до точки, индекс - номер точки, значение - длинна пути до него
+        bool isUsed[graf->numberOfDots - 1];
+        char father[graf->numberOfDots - 1];
+        
         for(char i = 0; i < graf->numberOfDots; i++)
         {
             isUsed[i] = false;
             father[i] = 0;
-            d[i] = -3;
+            d[i] = -1;
         }
+        std::cout <<"IM ALIVE";
+        
         d[from] = 0;
+        
         for (int i = 0; i < graf->numberOfDots; i++) // выполнить для всех точек
         {
             char v = -1;// v - точка с которой мы делаем всякое
-            for (int j = 0; j < graf->numberOfDots; j++) //ищем ближайшего соседа точки v
+            for (int j = 0; j < graf->numberOfDots; j++)
             {
-                if ((v == -1 || d[j] < d[v]) && !isUsed[j])
+                if ((v == -1 || d[j] < d[v]) && !isUsed[j]) //задаём начальную точку и последующие ближайшие к ней
                 {
-                    // нашли
                     v = j;
                 }
             }
@@ -53,6 +61,11 @@ public:
         }
         this->path.push_back(from);
         std::reverse(this->path.begin(), this->path.end());
+        for(short i = 0; i < path.size(); i++)
+        {
+            std::cout << int(path[i]) << ' ';
+        }
+        std::cout <<'\n';
     }
     std::vector<char> getPath()
     {
