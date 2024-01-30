@@ -33,7 +33,7 @@ void Queue::draw(Vector2 coord, Color color)
     for(short i = 0; i < priority.size(); i++)
     {
         DrawRectangleV({coord.x, coord.y + 75 * i}, {200, 50}, color);
-        std::string text = char(priority[i]->from + 42) + "->" + char(priority[i]->to + 42);
-        DrawText(text.c_str(), coord.x + 50, 10 + coord.y + 75 * i, 10, WHITE);
+        const char text[5] = {char(priority[i]->from + 65), '-', '>', char(priority[i]->to + 65), 0};
+        DrawText(&text[0], coord.x + 65, 10 + coord.y + 75 * i, 30, WHITE);
     }
 }

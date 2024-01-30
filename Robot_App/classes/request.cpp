@@ -15,7 +15,7 @@ public:
         this->from = from;
         this->to = to;
         
-        short d[graf->numberOfDots - 1];  // d - вектор путей до точки, индекс - номер точки, значение - длинна пути до него
+        unsigned short d[graf->numberOfDots - 1];  // d - вектор путей до точки, индекс - номер точки, значение - длинна пути до него
         bool isUsed[graf->numberOfDots - 1];
         char father[graf->numberOfDots - 1];
         
@@ -23,12 +23,12 @@ public:
         {
             isUsed[i] = false;
             father[i] = 0;
-            d[i] = -3;
+            d[i] = -1;
         }
         std::cout <<"IM ALIVE";
         
         d[from] = 0;
-        /*
+        
         for (int i = 0; i < graf->numberOfDots; i++) // выполнить для всех точек
         {
             char v = -1;// v - точка с которой мы делаем всякое
@@ -61,7 +61,11 @@ public:
         }
         this->path.push_back(from);
         std::reverse(this->path.begin(), this->path.end());
-        */
+        for(short i = 0; i < path.size(); i++)
+        {
+            std::cout << int(path[i]) << ' ';
+        }
+        std::cout <<'\n';
     }
     std::vector<char> getPath()
     {

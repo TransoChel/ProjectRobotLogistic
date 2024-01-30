@@ -16,6 +16,14 @@ int main()
     const int screenWidth = 1920;
     const int screenHeight = 1035;
 
+
+    Graf graf;
+    graf.writeGraf();
+
+    Request A_B(4, 6, &graf);
+    Request B_C(1, 2, &graf), A_C(2, 0, &graf);
+
+
     InitWindow(screenWidth, screenHeight, "RoboLogist");
 
     bool OrderMenu = false;
@@ -23,7 +31,6 @@ int main()
     int from, to;
     Color selectedColor = GREEN;
     int sentTimer = 180;
-    std::vector<Request> Queue;
 
     SetTargetFPS(60); // Set our APP to run at 60 frames-per-second
     //---------------------------------------------------------------------------------------
@@ -57,13 +64,8 @@ int main()
     ABto.buttons.push_back(&Cto);
     ABto.buttons.push_back(&Dto);
     ABto.buttons.push_back(&Eto);
-
-    Graf graf;
-
+    
     Queue queue;
-
-    Request A_B(0, 1, &graf), B_C(1, 2, &graf), A_C(2, 0, &graf);
-
     queue.addRequest(&A_B);
     queue.addRequest(&B_C);
     queue.addRequest(&A_C);
@@ -124,7 +126,7 @@ int main()
         DrawRectangleV({0, 0}, {screenWidth, 100}, {200, 0, 0, 255});
         DrawTextureEx(logo, {18, 18}, 0, 2, WHITE);
         DrawTextureEx(queueTexture, {100, 125}, 0, 5, WHITE);
-        //queue.draw({150, 250}, BLUE);
+        queue.draw({150, 250}, {255, 0, 0, 255});
         if (!OrderMenu && !Sent)
         {
             DrawTextureEx(doRequest, {960, 450}, 0, 5, WHITE);
