@@ -4,7 +4,7 @@ project(Robot_Logist)
 set(CMAKE_CXX_STANDARD 17)
 set(CMAKE_CXX_STANDARD_REQUIRED ON)
 
-file(GLOB SOURCES Robot_App/src/*.cpp)
+file(GLOB SOURCES Robot_App/src/*.cpp Robot_App/classes/*.cpp)
 
 add_executable(Robot_Logist ${SOURCES})
 # Setting parameters for raylib

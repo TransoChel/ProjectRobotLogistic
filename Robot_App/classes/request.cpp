@@ -1,74 +1,64 @@
-#pragma once
-#include <iostream>
-#include <vector>
-#include <algorithm>
-#include<map>
-#include "../classes/graf.cpp"
+#include "request.h"
 
-class Request
+Request::Request(int from, int to, Graf* graf)
 {
-public:
-    std::vector<char> path;
-    int from, to;
-    Request(int from, int to, Graf* graf)
+    this->from = from;
+    this->to = to;
+    
+    unsigned short d[graf->numberOfDots - 1];  // d - вектор путей до точки, индекс - номер точки, значение - длинна пути до него
+    bool isUsed[graf->numberOfDots - 1];
+    char father[graf->numberOfDots - 1];
+    
+    for(char i = 0; i < graf->numberOfDots; i++)
     {
-        this->from = from;
-        this->to = to;
-        
-        unsigned short d[graf->numberOfDots - 1];  // d - вектор путей до точки, индекс - номер точки, значение - длинна пути до него
-        bool isUsed[graf->numberOfDots - 1];
-        char father[graf->numberOfDots - 1];
-        
-        for(char i = 0; i < graf->numberOfDots; i++)
+        isUsed[i] = false;
+        father[i] = 0;
+        d[i] = -1;
+    }
+    std::cout <<"IM ALIVE";
+    
+    d[from] = 0;
+    
+    for (int i = 0; i < graf->numberOfDots; i++) // выполнить для всех точек
+    {
+        char v = -1;// v - точка с которой мы делаем всякое
+        for (int j = 0; j < graf->numberOfDots; j++)
         {
-            isUsed[i] = false;
-            father[i] = 0;
-            d[i] = -1;
-        }
-        std::cout <<"IM ALIVE";
-        
-        d[from] = 0;
-        
-        for (int i = 0; i < graf->numberOfDots; i++) // выполнить для всех точек
-        {
-            char v = -1;// v - точка с которой мы делаем всякое
-            for (int j = 0; j < graf->numberOfDots; j++)
+            if ((v == -1 || d[j] < d[v]) && !isUsed[j]) //задаём начальную точку и последующие ближайшие к ней
             {
-                if ((v == -1 || d[j] < d[v]) && !isUsed[j]) //задаём начальную точку и последующие ближайшие к ней
-                {
-                    v = j;
-                }
-            }
-
-            if (d[v] == -3) // если путь до ближайшей точки -3 то мы точно закончили
-                break;
-            isUsed[v] = true; // помечаем v как уже обработанную
-
-            for (auto [target, len] : graf->g[v])
-            {
-                if (d[v] + len < d[target]) //если существующая указанная длина пути до точки to больше, чем посчитанная нами, то заменим значение
-                {
-                    d[target] = d[v] + len;
-                    father[target] = v;//указать отцом точки to точку v
-                }
+                v = j;
             }
         }
-        
 
-        for (char v = to; v != from; v = father[v]) //восстанавливаем путь до изначально точки to от точки from
+        if (d[v] == -3) // если путь до ближайшей точки -3 то мы точно закончили
+            break;
+        isUsed[v] = true; // помечаем v как уже обработанную
+
+        for (auto [target, len] : graf->g[v])
         {
-            this->path.push_back(v);
+            if (d[v] + len < d[target]) //если существующая указанная длина пути до точки to больше, чем посчитанная нами, то заменим значение
+            {
+                d[target] = d[v] + len;
+                father[target] = v;//указать отцом точки to точку v
+            }
         }
-        this->path.push_back(from);
-        std::reverse(this->path.begin(), this->path.end());
-        for(short i = 0; i < path.size(); i++)
-        {
-            std::cout << int(path[i]) << ' ';
-        }
-        std::cout <<'\n';
     }
-    std::vector<char> getPath()
+    
+
+    for (char v = to; v != from; v = father[v]) //восстанавливаем путь до изначально точки to от точки from
     {
-        return path;
+        this->path.push_back(v);
     }
-};
+    this->path.push_back(from);
+    std::reverse(this->path.begin(), this->path.end());
+    for(short i = 0; i < path.size(); i++)
+    {
+        std::cout << int(path[i]) << ' ';
+    }
+    std::cout <<'\n';
+}
+
+std::vector<char> Request::getPath()
+{
+    return path;
+}
