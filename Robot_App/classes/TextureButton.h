@@ -1,12 +1,12 @@
 #include <raylib.h>
-#include "button.h"
+#include "Button.h"
 
 class TextureButton : public Button
 {
 private:
-    Texture2D texture;
     float textureSize;
 public:
+    Texture2D texture;
     TextureButton(Vector2 coord, float size, Texture2D texture);
     void Draw();
 };

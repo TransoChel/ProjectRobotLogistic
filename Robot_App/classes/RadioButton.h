@@ -1,6 +1,6 @@
 #include <raylib.h>
 #include <string>
-#include "button.h"
+#include "Button.h"
 #pragma once
 
 class RadioButton : public Button {

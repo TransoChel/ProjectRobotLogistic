@@ -1,4 +1,4 @@
-#include "radioButtonControl.h"
+#include "RadioButtonControl.h"
 
 void RadioButtonControl::Update()
 {
@@ -62,4 +62,5 @@ int RadioButtonControl::SendNum()
             return i;
         }
     }
+    return -1;
 }

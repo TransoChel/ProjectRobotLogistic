@@ -1,4 +1,4 @@
-#include "queue.h"
+#include "Queue.h"
 #include <string>
 
 Request* Queue::getNext()
@@ -15,12 +15,12 @@ void Queue::doneThis()
     priority.pop_back();
 }
 
-void Queue::addRequest(Request* request)
+void Queue::addRequest(Request request)
 {
-    priority.push_back(request);
+    requests.push_back(request);
 }
 
-Queue::Queue(std::vector<Request *> requests)
+Queue::Queue(std::vector<Request> requests)
 {
     for (short i = 0; i < requests.size(); i++)
     {
@@ -30,10 +30,10 @@ Queue::Queue(std::vector<Request *> requests)
 
 void Queue::draw(Vector2 coord, Color color)
 {
-    for(short i = 0; i < priority.size(); i++)
+    for(short i = 0; i < requests.size(); i++)
     {
         DrawRectangleV({coord.x, coord.y + 75 * i}, {200, 50}, color);
-        const char text[5] = {char(priority[i]->from + 65), '-', '>', char(priority[i]->to + 65), 0};
+        const char text[5] = {char(requests[i].from + 65), '-', '>', char(requests[i].to + 65), 0};
         DrawText(&text[0], coord.x + 65, 10 + coord.y + 75 * i, 30, WHITE);
     }
 }

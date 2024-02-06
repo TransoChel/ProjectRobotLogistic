@@ -1,7 +1,7 @@
-#include "../classes/request.h"
-#include "../classes/queue.h"
-#include "../classes/radioButtonControl.h"
-#include "../classes/textureButton.h"
+#include "../classes/Request.h"
+#include "../classes/Queue.h"
+#include "../classes/RadioButtonControl.h"
+#include "../classes/TextureButton.h"
 
 
 enum WindowStatus
@@ -15,7 +15,8 @@ enum WindowStatus
 class App
 {
 private:
-    WindowStatus status = STARTING;
+    Graf* graf;
+    int from, to;
     Texture2D logo = LoadTexture("../Robot_App/textures/logo.png");
     Texture2D toMenu = LoadTexture("../Robot_App/textures/toMenu.png");
     Texture2D send = LoadTexture("../Robot_App/textures/send.png");
@@ -32,21 +33,14 @@ private:
     RadioButton Cto = RadioButton({1325, 525}, {350, 75}, RED, "C");
     RadioButton Dto = RadioButton({1325, 625}, {350, 75}, RED, "D");
     RadioButton Eto = RadioButton({1325, 725}, {350, 75}, RED, "E");
+public:
+    bool ShouldIDrawArrow = false;
     RadioButtonControl AB;
     RadioButtonControl ABto;
-    // AB.buttons.push_back(&A);
-    // AB.buttons.push_back(&B);
-    // AB.buttons.push_back(&C);
-    // AB.buttons.push_back(&D);
-    // AB.buttons.push_back(&E);
-    // ABto.buttons.push_back(&Ato);
-    // ABto.buttons.push_back(&Bto);
-    // ABto.buttons.push_back(&Cto);
-    // ABto.buttons.push_back(&Dto);
-    // ABto.buttons.push_back(&Eto);
-public:
-    TextureButton doRequest = TextureButton({960, 450}, {128 * 5, 32 * 5}, LoadTexture("../Robot_App/textures/doRequest.png"));
+    WindowStatus status = STARTING;
+    TextureButton doRequest = TextureButton(Vector2({960, 450}), (float)5, LoadTexture("../Robot_App/textures/doRequest.png"));
     Queue queue;
+    App(Graf* graf);
     void LeftMouseButtonPressed();
-    void drawGeneral();
+    void drawGeneral(float screenWidth);
 };

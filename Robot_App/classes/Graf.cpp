@@ -1,4 +1,4 @@
-#include "graf.h"
+#include "Graf.h"
 
 void Graf::addWay(int from, int to, int lenght)
 {
