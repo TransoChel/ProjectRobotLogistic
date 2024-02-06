@@ -14,6 +14,9 @@ App::App(Graf* graf)
     this->graf = graf;
 
 }
+
+
+
 void App::LeftMouseButtonPressed()
 {
     if (CheckCollisionPointRec(GetMousePosition(), {960, 450, 128 * 5, 32 * 5}) && status == STARTING)
@@ -56,7 +59,6 @@ void App::drawGeneral(float screenWidth)
     if (status == STARTING)
     {
         doRequest.Draw();
-        DrawTextureEx(doRequest.texture, {960, 450}, 0, 5, WHITE);
     }
     else if (status == ORDERING)
     {
@@ -64,8 +66,8 @@ void App::drawGeneral(float screenWidth)
         DrawText("From", 775, 250, 60, RED);
         DrawText("To", 1450, 250, 60, RED);
         //DrawTextureEx(fromTo, {920, 125}, 0, 3, WHITE);
-        DrawTextureEx(fromTo, {975, 125}, 0, 3, WHITE);
-        DrawTextureEx(send, {1425, 900}, 0, 3, WHITE);
+        fromTo.Draw();
+        send.Draw();
         AB.Draw();
         ABto.Draw();
         if (ShouldIDrawArrow) 

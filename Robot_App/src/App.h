@@ -19,8 +19,6 @@ private:
     int from, to;
     Texture2D logo = LoadTexture("../Robot_App/textures/logo.png");
     Texture2D toMenu = LoadTexture("../Robot_App/textures/toMenu.png");
-    Texture2D send = LoadTexture("../Robot_App/textures/send.png");
-    Texture2D fromTo = LoadTexture("../Robot_App/textures/fromTo.png");
     Texture2D queueTexture = LoadTexture("../Robot_App/textures/queue.png");
 
     RadioButton A = RadioButton({675.f, 325.f}, {350.f, 75}, RED, "A");
@@ -39,6 +37,8 @@ public:
     RadioButtonControl ABto;
     WindowStatus status = STARTING;
     TextureButton doRequest = TextureButton(Vector2({960, 450}), (float)5, LoadTexture("../Robot_App/textures/doRequest.png"));
+    TextureButton fromTo = TextureButton(Vector2({975, 125}), (float)3, LoadTexture("../Robot_App/textures/fromTo.png"));
+    TextureButton send = TextureButton(Vector2({1425, 900}), (float)3, LoadTexture("../Robot_App/textures/send.png"));
     Queue queue;
     App(Graf* graf);
     void LeftMouseButtonPressed();
