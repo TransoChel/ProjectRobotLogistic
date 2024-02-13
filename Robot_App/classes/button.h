@@ -12,5 +12,5 @@ class Button
         Button(Vector2 coord, Vector2 size, Color color, std::string text);
 
         virtual void Draw();
-        bool CheckButtonPressed();
+        virtual bool CheckButtonPressed();
 };

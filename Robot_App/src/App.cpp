@@ -19,7 +19,7 @@ App::App(Graf* graf)
 
 void App::LeftMouseButtonPressed()
 {
-    if (CheckCollisionPointRec(GetMousePosition(), {960, 450, 128 * 5, 32 * 5}) && status == STARTING)
+    if (doRequest.CheckButtonPressed() && status == STARTING)
     {
         status = ORDERING;
     }
@@ -27,7 +27,7 @@ void App::LeftMouseButtonPressed()
     {
         AB.Update();
         ABto.Update();
-        if (CheckCollisionPointRec(GetMousePosition(), {1550, 900, (float)toMenu.width * 3, (float)toMenu.height * 3}))
+        if (toMenu.CheckButtonPressed())
         {
             status = STARTING;
             ShouldIDrawArrow = false;
@@ -50,7 +50,7 @@ void App::LeftMouseButtonPressed()
     }
 }
 
-void App::drawGeneral(float screenWidth)
+void App::drawGeneral(float screenWidth, float screenHeight)
 {
     DrawRectangleV({0, 100}, {500, 935}, {255, 0, 0, 255});
     DrawRectangleV({0, 0}, {screenWidth, 100}, {200, 0, 0, 255});
@@ -62,23 +62,23 @@ void App::drawGeneral(float screenWidth)
     }
     else if (status == ORDERING)
     {
-        DrawTextureEx(toMenu, {1550, 900}, 0, 3, WHITE);
-        DrawText("From", 775, 250, 60, RED);
-        DrawText("To", 1450, 250, 60, RED);
-        //DrawTextureEx(fromTo, {920, 125}, 0, 3, WHITE);
-        fromTo.Draw();
+        toMenu.Draw();
+        DrawText("From", (screenWidth - 500 - 150) / 2 + 500 - 350, 250, 60, RED);//350
+        DrawText("To", (screenWidth - 500 - 100) / 2 + 500 + 350, 250, 60, RED);
+        DrawTextureEx(fromTo, {(screenWidth - 500 - fromTo.width * 3) / 2 + 500, 100 + 25}, 0, 3, WHITE);
         send.Draw();
         AB.Draw();
         ABto.Draw();
         if (ShouldIDrawArrow) 
         {
-            DrawRectangleV({AB.buttons[AB.SendNum()]->coord.x + 350, AB.buttons[AB.SendNum()]->coord.y + 37}, {155, 10}, {200, 0, 0, 255});
-            DrawRectangleV({1170, std::min(AB.buttons[AB.SendNum()]->coord.y + 37, ABto.buttons[ABto.SendNum()]->coord.y + 37) + 10}, {10, std::abs(ABto.buttons[ABto.SendNum()]->coord.y - AB.buttons[AB.SendNum()]->coord.y)}, {200, 0, 0, 255});
-            DrawRectangleV({ABto.buttons[ABto.SendNum()]->coord.x - 155, ABto.buttons[ABto.SendNum()]->coord.y + 37}, {155, 10}, {200, 0, 0, 255});
+            DrawRectangleV({AB.buttons[AB.SendNum()]->coord.x + 350, AB.buttons[AB.SendNum()]->coord.y + 37}, {180, 10}, {200, 0, 0, 255});
+            DrawRectangleV({(screenWidth - 500) / 2 - 5 + 500, std::min(AB.buttons[AB.SendNum()]->coord.y + 37, ABto.buttons[ABto.SendNum()]->coord.y + 37) + 10}, {10, std::abs(ABto.buttons[ABto.SendNum()]->coord.y - AB.buttons[AB.SendNum()]->coord.y)}, {200, 0, 0, 255});
+            DrawRectangleV({ABto.buttons[ABto.SendNum()]->coord.x - 180, ABto.buttons[ABto.SendNum()]->coord.y + 37}, {180, 10}, {200, 0, 0, 255});
         }
     }
     else if (status == SENT) 
     {
-        DrawText("Order sent!", 1000, 500, 90, RED);
+        DrawTextureEx(Sent, {(screenWidth - 500 - Sent.width * 10) / 2 + 500, (screenHeight - 100 - Sent.height * 10) / 2 + 100}, 0, 10, WHITE);
+        //DrawText("Order sent!", 1000, 500, 90, RED);
     }
 }

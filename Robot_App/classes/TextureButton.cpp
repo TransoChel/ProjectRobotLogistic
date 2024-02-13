@@ -10,3 +10,8 @@ TextureButton::TextureButton(Vector2 coord, float size, Texture2D texture) : But
     this->textureSize = size;
     this->texture = texture;
 }
+
+bool TextureButton::CheckButtonPressed()
+{
+    return CheckCollisionPointRec(GetMousePosition(), {coord.x, coord.y, texture.width * textureSize, texture.height * textureSize});
+}

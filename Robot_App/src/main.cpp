@@ -28,6 +28,8 @@ int main()
     while (!WindowShouldClose()) // Detect window close button or ESC key
     {
         // Update
+        //----------------------debug-functions---------------------------------------------
+
         //----------------------------------------------------------------------------------
 
         if (app.AB.CheckUpdate() && app.ABto.CheckUpdate()) 
@@ -59,7 +61,7 @@ int main()
 
         ClearBackground(WHITE);
         
-        app.drawGeneral(screenWidth);
+        app.drawGeneral(screenWidth, screenHeight);
         app.queue.draw({150, 250}, {255, 0, 0, 255});
 
         EndDrawing();
