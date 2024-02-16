@@ -22,9 +22,11 @@ private:
     Texture2D fromTo = LoadTexture("../Robot_App/textures/fromTo.png");
     Texture2D Sent = LoadTexture("../Robot_App/textures/Sent.png");
     Texture2D doRequestTexture = LoadTexture("../Robot_App/textures/doRequest.png");
+    Texture2D fromTexture = LoadTexture("../Robot_App/textures/from.png");
+    Texture2D toTexture = LoadTexture("../Robot_App/textures/to.png");
 
     float radioButtonFromX = (1920 - 500 - 350) / 2 + 500 - 350, radioButtonToX = (1920 - 500 - 350) / 2 + 500 + 350;
-    RadioButton A = RadioButton({radioButtonFromX, 325.f}, {350.f, 75}, RED, "A");
+    RadioButton A = RadioButton({radioButtonFromX, 325}, {350, 75}, RED, "A");
     RadioButton B = RadioButton({radioButtonFromX, 425}, {350, 75}, RED, "B");
     RadioButton C = RadioButton({radioButtonFromX, 525}, {350, 75}, RED, "C");
     RadioButton D = RadioButton({radioButtonFromX, 625}, {350, 75}, RED, "D");
@@ -35,7 +37,9 @@ private:
     RadioButton Dto = RadioButton({radioButtonToX, 625}, {350, 75}, RED, "D");
     RadioButton Eto = RadioButton({radioButtonToX, 725}, {350, 75}, RED, "E");
 public:
+    int errorTimer = 120;
     bool ShouldIDrawArrow = false;
+    bool InvalidRequest = false;
     RadioButtonControl AB;
     RadioButtonControl ABto;
     WindowStatus status = STARTING;
