@@ -55,7 +55,7 @@ public:
 	char ReadChar(bool& success);//return read char if success
 	bool WriteChar(char ch);////return success flag
 	const bool Write(const char *data);//write null terminated string and return success flag
-	bool Write(char *data,long n);
+	bool Write(const char *data,long n);
 	bool SetRTS(bool value);//return success flag
 	bool SetDTR(bool value);//return success flag
 	bool GetCTS(bool& success);
@@ -309,7 +309,7 @@ const bool ceSerial::Write(const char *data) {
 	return fRes;
 }
 
-bool ceSerial::Write(char *data,long n) {
+bool ceSerial::Write(const char *data,long n) {
 	if (!IsOpened()) {
 		return false;
 	}

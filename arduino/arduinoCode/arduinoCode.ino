@@ -1,30 +1,42 @@
 #include <SoftwareSerial.h>
 
-SoftwareSerial mySerial(15, 14); // RX, TX
+enum status : char 
+{
+  WAITING_FOR_TAKING = 1,
+  DOING_REQUEST = 2,
+  WAITING_FOR_RDOPPING = 3,
+  DONE = 4,
+};
 
-void setup() {
+void setup() 
+{
   // Open serial communications and wait for port to open:
   Serial.begin(9600);
-  Serial.print("\n begin");
-  while (!Serial) {
-    ; // wait for serial port to connect. Needed for native USB port only
-  }
-  Serial.print("\n connected");
-  
+  Serial.println("begin");
+
   // set the data rate for the SoftwareSerial port
-  mySerial.begin(9600);
-  while (!mySerial) {
-    ; // wait for serial port to connect. Needed for native USB port only
-  }
-  Serial.print("\n connected myserial");
-
+  Serial3.begin(9600);
+  Serial.println("connected myserial");
+  status = DONE;
 }
-
+String dataFromComputer = "";
 void loop() 
-{ // run over and over
-  if (mySerial.available()) 
+{  // run over and over
+  if (status == DONE) 
   {
-    Serial.write(mySerial.read());
-    Serial.print("imalive ");
+    char c = Serial3.read();
+    if (c != -1) 
+    {
+      Serial.println(Serial3.available());
+      Serial.print("Processing ");
+      Serial.println(c);
+      dataFromComputer += String(c);
+      if (c == 0) 
+      {
+        Serial.println(dataFromComputer);
+        dataFromComputer = "";
+      }
+    }
   }
+  else if()
 }

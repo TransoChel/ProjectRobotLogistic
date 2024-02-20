@@ -1,20 +1,22 @@
 #include "robot.h"
 
-void Robot::send(ceSerial *com, std::vector<char> path)
+void Robot::send(std::vector<char> path)//ceSerial *com, 
 {
+    ceSerial com("\\\\.\\COM4", 9600, 8, 'N', 1);
+    if (!com.Open()) printf("OK.\n");
     bool successFlag;
-    printf("Writing.\n");
-    std::string s;
+    std::string s = "";
     for (short i = 0; i < path.size(); i++)
     {
-        s += path[i];
+        if(i != 0) s += ",";
+        s += std::to_string(path[i]);   
     }
-    char size = s.size();
-    successFlag = com->Write(&size);
-    successFlag = com->Write(s.c_str()); // write string
+    printf("Writing %s of size %d\n", s.c_str(), s.length() + 1);
+    successFlag = com.Write(s.c_str(), s.length() + 1); // write string
+    com.Close();
 }
 
-void Robot::read(ceSerial *com, Robot* robot)
+void Robot::read(ceSerial *com, Robot *robot)
 {
     bool successFlag;
     char status = com->ReadChar(successFlag); // read a char
