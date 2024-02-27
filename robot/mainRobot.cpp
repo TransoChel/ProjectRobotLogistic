@@ -9,10 +9,11 @@ int main()
    // printf("Opening port %s.\n", com.GetPort().c_str());
     
     
-    for(int i = 0; i < 10; i++)
+    
+    for(int i = 0; i < 100; i++)
     {
-        logist.send({0, 1, 2, 7, 8, 9});//&com, 
-        Sleep(2000);
+        logist.read(&com);//&com, 
+        Sleep(20);
     }
     std::cout<< "finish";
     com.Close();

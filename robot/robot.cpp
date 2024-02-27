@@ -21,7 +21,7 @@ void Robot::read(ceSerial *com)
     bool successFlag;
     char status = com->ReadChar(successFlag); // read a char
     this->status = RobotStatus(status);
-    if(status != -1) std::cout << "read: " + status + '\n'; 
+    if(status != -1) std::cout << "read: " + std::to_string(status) + '\n'; 
 }
 
 RobotStatus Robot::getStatus()
