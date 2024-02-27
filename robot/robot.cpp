@@ -1,9 +1,9 @@
 #include "robot.h"
 
-void Robot::send(std::vector<char> path)//ceSerial *com, 
+void Robot::send(std::vector<char> path, ceSerial* com)//ceSerial *com, 
 {
-    ceSerial com("\\\\.\\COM4", 9600, 8, 'N', 1);
-    if (!com.Open()) printf("OK.\n");
+    
+    if (!com->Open()) printf("OK.\n");
     bool successFlag;
     std::string s = "";
     for (short i = 0; i < path.size(); i++)
@@ -12,16 +12,16 @@ void Robot::send(std::vector<char> path)//ceSerial *com,
         s += std::to_string(path[i]);   
     }
     printf("Writing %s of size %d\n", s.c_str(), s.length() + 1);
-    successFlag = com.Write(s.c_str(), s.length() + 1); // write string
-    com.Close();
+    successFlag = com->Write(s.c_str(), s.length() + 1); // write string
+    Sleep(200);
 }
 
-void Robot::read(ceSerial *com, Robot *robot)
+void Robot::read(ceSerial *com)
 {
     bool successFlag;
     char status = com->ReadChar(successFlag); // read a char
-    printf("Closing port %s.\n", com->GetPort().c_str());
-    robot->status = RobotStatus(status);
+    this->status = RobotStatus(status);
+    if(status != -1) std::cout << "read: " + status + '\n'; 
 }
 
 RobotStatus Robot::getStatus()

@@ -1,5 +1,6 @@
 #include <vector>
 #include <stdio.h>
+#include <iostream>
 #define CE_SERIAL_IMPLEMENTATION
 #include "ceSerial.h"
 
@@ -18,7 +19,7 @@ private:
     RobotStatus status = OFF;
 
 public:
-    void send(std::vector<char> path);//ceSerial *com, 
-    void read(ceSerial *com, Robot* robot);
+    void send(std::vector<char> path, ceSerial* com);//ceSerial *com, 
+    void read(ceSerial *com);
     RobotStatus getStatus();
 };
