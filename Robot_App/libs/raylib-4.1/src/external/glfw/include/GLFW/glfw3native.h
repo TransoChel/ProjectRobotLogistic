@@ -90,7 +90,7 @@ extern "C" {
   #undef GLFW_APIENTRY_DEFINED
  #endif
 // @raysan5: Actually, only HWND handler needs to be defined
-// Including windows.h could suppose symbols re-definition issues (i.e Rectangle type)
+// Including windows.h could suppose symbols re-definition issues (i.e RlibRectangle type)
 //#include <windows.h>
  typedef void *PVOID;
  typedef PVOID HANDLE;

@@ -24,7 +24,7 @@ int main(void)
 
     InitWindow(screenWidth, screenHeight, "raylib [shapes] example - rectangle scaling mouse");
 
-    Rectangle rec = { 100, 100, 200, 80 };
+    RlibRectangle rec = { 100, 100, 200, 80 };
 
     Vector2 mousePosition = { 0 };
 
@@ -42,7 +42,7 @@ int main(void)
         mousePosition = GetMousePosition();
 
         if (CheckCollisionPointRec(mousePosition, rec) &&
-            CheckCollisionPointRec(mousePosition, (Rectangle){ rec.x + rec.width - MOUSE_SCALE_MARK_SIZE, rec.y + rec.height - MOUSE_SCALE_MARK_SIZE, MOUSE_SCALE_MARK_SIZE, MOUSE_SCALE_MARK_SIZE }))
+            CheckCollisionPointRec(mousePosition, (RlibRectangle){ rec.x + rec.width - MOUSE_SCALE_MARK_SIZE, rec.y + rec.height - MOUSE_SCALE_MARK_SIZE, MOUSE_SCALE_MARK_SIZE, MOUSE_SCALE_MARK_SIZE }))
         {
             mouseScaleReady = true;
             if (IsMouseButtonPressed(MOUSE_BUTTON_LEFT)) mouseScaleMode = true;
@@ -87,7 +87,7 @@ int main(void)
 
     // De-Initialization
     //--------------------------------------------------------------------------------------
-    CloseWindow();        // Close window and OpenGL context
+    RlibCloseWindow();        // Close window and OpenGL context
     //--------------------------------------------------------------------------------------
 
     return 0;

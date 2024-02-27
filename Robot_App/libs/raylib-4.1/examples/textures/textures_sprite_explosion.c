@@ -37,7 +37,7 @@ int main(void)
     int currentFrame = 0;
     int currentLine = 0;
 
-    Rectangle frameRec = { 0, 0, frameWidth, frameHeight };
+    RlibRectangle frameRec = { 0, 0, frameWidth, frameHeight };
     Vector2 position = { 0.0f, 0.0f };
 
     bool active = false;
@@ -113,7 +113,7 @@ int main(void)
 
     CloseAudioDevice();
 
-    CloseWindow();              // Close window and OpenGL context
+    RlibCloseWindow();              // Close window and OpenGL context
     //--------------------------------------------------------------------------------------
 
     return 0;

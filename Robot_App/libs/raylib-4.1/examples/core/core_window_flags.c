@@ -139,7 +139,7 @@ int main(void)
         else ClearBackground(RAYWHITE);
 
         DrawCircleV(ballPosition, ballRadius, MAROON);
-        DrawRectangleLinesEx((Rectangle) { 0, 0, (float)GetScreenWidth(), (float)GetScreenHeight() }, 4, RAYWHITE);
+        DrawRectangleLinesEx((RlibRectangle) { 0, 0, (float)GetScreenWidth(), (float)GetScreenHeight() }, 4, RAYWHITE);
 
         DrawCircleV(GetMousePosition(), 10, DARKBLUE);
 
@@ -184,7 +184,7 @@ int main(void)
 
     // De-Initialization
     //---------------------------------------------------------
-    CloseWindow();        // Close window and OpenGL context
+    RlibCloseWindow();        // Close window and OpenGL context
     //----------------------------------------------------------
 
     return 0;

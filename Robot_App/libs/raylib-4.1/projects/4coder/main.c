@@ -34,6 +34,6 @@ int main() {
         EndDrawing();
     }
     
-    CloseWindow();
+    RlibCloseWindow();
     return 0;
 }

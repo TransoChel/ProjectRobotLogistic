@@ -75,7 +75,7 @@ int main(void)
     RenderTexture screenPlayer2 = LoadRenderTexture(screenWidth / 2, screenHeight);
 
     // Build a flipped rectangle the size of the split view to use for drawing later
-    Rectangle splitScreenRect = { 0.0f, 0.0f, (float)screenPlayer1.texture.width, (float)-screenPlayer1.texture.height };
+    RlibRectangle splitScreenRect = { 0.0f, 0.0f, (float)screenPlayer1.texture.width, (float)-screenPlayer1.texture.height };
 
     SetTargetFPS(60);               // Set our game to run at 60 frames-per-second
     //--------------------------------------------------------------------------------------
@@ -148,7 +148,7 @@ int main(void)
     UnloadRenderTexture(screenPlayer2); // Unload render texture
     UnloadTexture(textureGrid);         // Unload texture
 
-    CloseWindow();                      // Close window and OpenGL context
+    RlibCloseWindow();                      // Close window and OpenGL context
     //--------------------------------------------------------------------------------------
 
     return 0;

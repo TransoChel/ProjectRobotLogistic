@@ -33,7 +33,7 @@ int main(void)
 
     InitWindow(screenWidth, screenHeight, "raylib [shapes] example - easings rectangle array");
 
-    Rectangle recs[MAX_RECS_X*MAX_RECS_Y] = { 0 };
+    RlibRectangle recs[MAX_RECS_X*MAX_RECS_Y] = { 0 };
 
     for (int y = 0; y < MAX_RECS_Y; y++)
     {
@@ -48,7 +48,7 @@ int main(void)
 
     float rotation = 0.0f;
     int framesCounter = 0;
-    int state = 0;                  // Rectangles animation state: 0-Playing, 1-Finished
+    int state = 0;                  // RlibRectangles animation state: 0-Playing, 1-Finished
 
     SetTargetFPS(60);               // Set our game to run at 60 frames-per-second
     //--------------------------------------------------------------------------------------
@@ -111,7 +111,7 @@ int main(void)
 
     // De-Initialization
     //--------------------------------------------------------------------------------------
-    CloseWindow();        // Close window and OpenGL context
+    RlibCloseWindow();        // Close window and OpenGL context
     //--------------------------------------------------------------------------------------
 
     return 0;

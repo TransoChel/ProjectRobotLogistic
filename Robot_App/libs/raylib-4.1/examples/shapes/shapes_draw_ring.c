@@ -65,17 +65,17 @@ int main(void)
 
             // Draw GUI controls
             //------------------------------------------------------------------------------
-            startAngle = GuiSliderBar((Rectangle){ 600, 40, 120, 20 }, "StartAngle", NULL, startAngle, -450, 450);
-            endAngle = GuiSliderBar((Rectangle){ 600, 70, 120, 20 }, "EndAngle", NULL, endAngle, -450, 450);
+            startAngle = GuiSliderBar((RlibRectangle){ 600, 40, 120, 20 }, "StartAngle", NULL, startAngle, -450, 450);
+            endAngle = GuiSliderBar((RlibRectangle){ 600, 70, 120, 20 }, "EndAngle", NULL, endAngle, -450, 450);
 
-            innerRadius = GuiSliderBar((Rectangle){ 600, 140, 120, 20 }, "InnerRadius", NULL, innerRadius, 0, 100);
-            outerRadius = GuiSliderBar((Rectangle){ 600, 170, 120, 20 }, "OuterRadius", NULL, outerRadius, 0, 200);
+            innerRadius = GuiSliderBar((RlibRectangle){ 600, 140, 120, 20 }, "InnerRadius", NULL, innerRadius, 0, 100);
+            outerRadius = GuiSliderBar((RlibRectangle){ 600, 170, 120, 20 }, "OuterRadius", NULL, outerRadius, 0, 200);
 
-            segments = (int)GuiSliderBar((Rectangle){ 600, 240, 120, 20 }, "Segments", NULL, (float)segments, 0, 100);
+            segments = (int)GuiSliderBar((RlibRectangle){ 600, 240, 120, 20 }, "Segments", NULL, (float)segments, 0, 100);
 
-            drawRing = GuiCheckBox((Rectangle){ 600, 320, 20, 20 }, "Draw Ring", drawRing);
-            drawRingLines = GuiCheckBox((Rectangle){ 600, 350, 20, 20 }, "Draw RingLines", drawRingLines);
-            drawCircleLines = GuiCheckBox((Rectangle){ 600, 380, 20, 20 }, "Draw CircleLines", drawCircleLines);
+            drawRing = GuiCheckBox((RlibRectangle){ 600, 320, 20, 20 }, "Draw Ring", drawRing);
+            drawRingLines = GuiCheckBox((RlibRectangle){ 600, 350, 20, 20 }, "Draw RingLines", drawRingLines);
+            drawCircleLines = GuiCheckBox((RlibRectangle){ 600, 380, 20, 20 }, "Draw CircleLines", drawCircleLines);
             //------------------------------------------------------------------------------
 
             int minSegments = (int)ceilf((endAngle - startAngle) / 90);
@@ -89,7 +89,7 @@ int main(void)
 
     // De-Initialization
     //--------------------------------------------------------------------------------------
-    CloseWindow();        // Close window and OpenGL context
+    RlibCloseWindow();        // Close window and OpenGL context
     //--------------------------------------------------------------------------------------
 
     return 0;
