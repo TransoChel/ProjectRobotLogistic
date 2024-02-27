@@ -94,8 +94,8 @@ int main(void)
             ClearBackground(BLACK);     // Clear screen background
 
             // Draw render texture to screen, properly scaled
-            DrawTexturePro(target.texture, (Rectangle){ 0.0f, 0.0f, (float)target.texture.width, (float)-target.texture.height },
-                           (Rectangle){ (GetScreenWidth() - ((float)gameScreenWidth*scale))*0.5f, (GetScreenHeight() - ((float)gameScreenHeight*scale))*0.5f,
+            DrawTexturePro(target.texture, (RlibRectangle){ 0.0f, 0.0f, (float)target.texture.width, (float)-target.texture.height },
+                           (RlibRectangle){ (GetScreenWidth() - ((float)gameScreenWidth*scale))*0.5f, (GetScreenHeight() - ((float)gameScreenHeight*scale))*0.5f,
                            (float)gameScreenWidth*scale, (float)gameScreenHeight*scale }, (Vector2){ 0, 0 }, 0.0f, WHITE);
         EndDrawing();
         //--------------------------------------------------------------------------------------
@@ -105,7 +105,7 @@ int main(void)
     //--------------------------------------------------------------------------------------
     UnloadRenderTexture(target);        // Unload render texture
 
-    CloseWindow();                      // Close window and OpenGL context
+    RlibCloseWindow();                      // Close window and OpenGL context
     //--------------------------------------------------------------------------------------
 
     return 0;

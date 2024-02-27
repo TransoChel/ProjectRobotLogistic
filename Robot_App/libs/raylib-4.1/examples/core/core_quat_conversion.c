@@ -125,7 +125,7 @@ int main(void)
     //--------------------------------------------------------------------------------------
     UnloadModel(model);   // Unload model data (mesh and materials)
 
-    CloseWindow();        // Close window and OpenGL context
+    RlibCloseWindow();        // Close window and OpenGL context
     //--------------------------------------------------------------------------------------
 
     return 0;

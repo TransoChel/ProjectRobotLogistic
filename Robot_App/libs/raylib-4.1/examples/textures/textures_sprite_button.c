@@ -29,10 +29,10 @@ int main(void)
 
     // Define frame rectangle for drawing
     float frameHeight = (float)button.height/NUM_FRAMES;
-    Rectangle sourceRec = { 0, 0, (float)button.width, frameHeight };
+    RlibRectangle sourceRec = { 0, 0, (float)button.width, frameHeight };
 
     // Define button bounds on screen
-    Rectangle btnBounds = { screenWidth/2.0f - button.width/2.0f, screenHeight/2.0f - button.height/NUM_FRAMES/2.0f, (float)button.width, frameHeight };
+    RlibRectangle btnBounds = { screenWidth/2.0f - button.width/2.0f, screenHeight/2.0f - button.height/NUM_FRAMES/2.0f, (float)button.width, frameHeight };
 
     int btnState = 0;               // Button state: 0-NORMAL, 1-MOUSE_HOVER, 2-PRESSED
     bool btnAction = false;         // Button action should be activated
@@ -90,7 +90,7 @@ int main(void)
 
     CloseAudioDevice();     // Close audio device
 
-    CloseWindow();          // Close window and OpenGL context
+    RlibCloseWindow();          // Close window and OpenGL context
     //--------------------------------------------------------------------------------------
 
     return 0;

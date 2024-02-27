@@ -58,11 +58,11 @@ int main(void)
 
             // Draw GUI controls
             //------------------------------------------------------------------------------
-            startAngle = GuiSliderBar((Rectangle){ 600, 40, 120, 20}, "StartAngle", NULL, startAngle, 0, 720);
-            endAngle = GuiSliderBar((Rectangle){ 600, 70, 120, 20}, "EndAngle", NULL, endAngle, 0, 720);
+            startAngle = GuiSliderBar((RlibRectangle){ 600, 40, 120, 20}, "StartAngle", NULL, startAngle, 0, 720);
+            endAngle = GuiSliderBar((RlibRectangle){ 600, 70, 120, 20}, "EndAngle", NULL, endAngle, 0, 720);
 
-            outerRadius = GuiSliderBar((Rectangle){ 600, 140, 120, 20}, "Radius", NULL, outerRadius, 0, 200);
-            segments = (int)GuiSliderBar((Rectangle){ 600, 170, 120, 20}, "Segments", NULL, (float)segments, 0, 100);
+            outerRadius = GuiSliderBar((RlibRectangle){ 600, 140, 120, 20}, "Radius", NULL, outerRadius, 0, 200);
+            segments = (int)GuiSliderBar((RlibRectangle){ 600, 170, 120, 20}, "Segments", NULL, (float)segments, 0, 100);
             //------------------------------------------------------------------------------
 
             minSegments = (int)ceilf((endAngle - startAngle) / 90);
@@ -76,7 +76,7 @@ int main(void)
 
     // De-Initialization
     //--------------------------------------------------------------------------------------
-    CloseWindow();        // Close window and OpenGL context
+    RlibCloseWindow();        // Close window and OpenGL context
     //--------------------------------------------------------------------------------------
 
     return 0;

@@ -27,7 +27,7 @@ int main(void)
     Texture2D scarfy = LoadTexture("resources/scarfy.png");        // Texture loading
 
     Vector2 position = { 350.0f, 280.0f };
-    Rectangle frameRec = { 0.0f, 0.0f, (float)scarfy.width/6, (float)scarfy.height };
+    RlibRectangle frameRec = { 0.0f, 0.0f, (float)scarfy.width/6, (float)scarfy.height };
     int currentFrame = 0;
 
     int framesCounter = 0;
@@ -92,7 +92,7 @@ int main(void)
     //--------------------------------------------------------------------------------------
     UnloadTexture(scarfy);       // Texture unloading
 
-    CloseWindow();                // Close window and OpenGL context
+    RlibCloseWindow();                // Close window and OpenGL context
     //--------------------------------------------------------------------------------------
 
     return 0;

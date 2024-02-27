@@ -25,7 +25,7 @@ int main(void)
     char name[MAX_INPUT_CHARS + 1] = "\0";      // NOTE: One extra space required for null terminator char '\0'
     int letterCount = 0;
 
-    Rectangle textBox = { screenWidth/2.0f - 100, 180, 225, 50 };
+    RlibRectangle textBox = { screenWidth/2.0f - 100, 180, 225, 50 };
     bool mouseOnText = false;
 
     int framesCounter = 0;
@@ -108,7 +108,7 @@ int main(void)
 
     // De-Initialization
     //--------------------------------------------------------------------------------------
-    CloseWindow();        // Close window and OpenGL context
+    RlibCloseWindow();        // Close window and OpenGL context
     //--------------------------------------------------------------------------------------
 
     return 0;

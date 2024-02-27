@@ -32,7 +32,7 @@ int main(void)
         "DARKBROWN", "GRAY", "RED", "GOLD", "LIME", "BLUE", "VIOLET", "BROWN",
         "LIGHTGRAY", "PINK", "YELLOW", "GREEN", "SKYBLUE", "PURPLE", "BEIGE" };
 
-    Rectangle colorsRecs[MAX_COLORS_COUNT] = { 0 };     // Rectangles array
+    RlibRectangle colorsRecs[MAX_COLORS_COUNT] = { 0 };     // RlibRectangles array
 
     // Fills colorsRecs data (for every rectangle)
     for (int i = 0; i < MAX_COLORS_COUNT; i++)
@@ -92,7 +92,7 @@ int main(void)
 
     // De-Initialization
     //--------------------------------------------------------------------------------------
-    CloseWindow();                // Close window and OpenGL context
+    RlibCloseWindow();                // Close window and OpenGL context
     //--------------------------------------------------------------------------------------
 
     return 0;

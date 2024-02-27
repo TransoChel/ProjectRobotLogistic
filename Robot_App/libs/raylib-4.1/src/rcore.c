@@ -349,7 +349,7 @@ typedef struct {
     pthread_t threadId;             // Event reading thread id
     int fd;                         // File descriptor to the device it is assigned to
     int eventNum;                   // Number of 'event<N>' device
-    Rectangle absRange;             // Range of values for absolute pointing devices (touchscreens)
+    RlibRectangle absRange;             // Range of values for absolute pointing devices (touchscreens)
     int touchSlot;                  // Hold the touch slot number of the currently being sent multitouch block
     bool isMouse;                   // True if device supports relative X Y movements
     bool isTouch;                   // True if device supports absolute X Y movements and has BTN_TOUCH
@@ -850,16 +850,16 @@ void InitWindow(int width, int height, const char *title)
     // WARNING: External function: Module required: rtext
     LoadFontDefault();
     #if defined(SUPPORT_MODULE_RSHAPES)
-    Rectangle rec = GetFontDefault().recs[95];
+    RlibRectangle rec = GetFontDefault().recs[95];
     // NOTE: We setup a 1px padding on char rectangle to avoid pixel bleeding on MSAA filtering
-    SetShapesTexture(GetFontDefault().texture, (Rectangle){ rec.x + 1, rec.y + 1, rec.width - 2, rec.height - 2 }); // WARNING: Module required: rshapes
+    SetShapesTexture(GetFontDefault().texture, (RlibRectangle){ rec.x + 1, rec.y + 1, rec.width - 2, rec.height - 2 }); // WARNING: Module required: rshapes
     #endif
 #else
     #if defined(SUPPORT_MODULE_RSHAPES)
     // Set default texture and rectangle to be used for shapes drawing
     // NOTE: rlgl default texture is a 1x1 pixel UNCOMPRESSED_R8G8B8A8
     Texture2D texture = { rlGetTextureIdDefault(), 1, 1, 1, PIXELFORMAT_UNCOMPRESSED_R8G8B8A8 };
-    SetShapesTexture(texture, (Rectangle){ 0.0f, 0.0f, 1.0f, 1.0f });    // WARNING: Module required: rshapes
+    SetShapesTexture(texture, (RlibRectangle){ 0.0f, 0.0f, 1.0f, 1.0f });    // WARNING: Module required: rshapes
     #endif
 #endif
 #if defined(SUPPORT_MODULE_RTEXT) && defined(SUPPORT_DEFAULT_FONT)
@@ -921,7 +921,7 @@ void InitWindow(int width, int height, const char *title)
 }
 
 // Close window and unload OpenGL context
-void CloseWindow(void)
+void RlibCloseWindow(void)
 {
 #if defined(SUPPORT_GIF_RECORDING)
     if (gifRecording)
@@ -5453,10 +5453,10 @@ static void AndroidCommandCallback(struct android_app *app, int32_t cmd)
                     // Load default font
                     // WARNING: External function: Module required: rtext
                     LoadFontDefault();
-                    Rectangle rec = GetFontDefault().recs[95];
+                    RlibRectangle rec = GetFontDefault().recs[95];
                     // NOTE: We setup a 1px padding on char rectangle to avoid pixel bleeding on MSAA filtering
                     #if defined(SUPPORT_MODULE_RSHAPES)
-                    SetShapesTexture(GetFontDefault().texture, (Rectangle){ rec.x + 1, rec.y + 1, rec.width - 2, rec.height - 2 });  // WARNING: Module required: rshapes
+                    SetShapesTexture(GetFontDefault().texture, (RlibRectangle){ rec.x + 1, rec.y + 1, rec.width - 2, rec.height - 2 });  // WARNING: Module required: rshapes
                     #endif
                 #endif
 

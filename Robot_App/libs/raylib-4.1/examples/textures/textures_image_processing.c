@@ -59,10 +59,10 @@ int main(void)
     int currentProcess = NONE;
     bool textureReload = false;
 
-    Rectangle toggleRecs[NUM_PROCESSES] = { 0 };
+    RlibRectangle toggleRecs[NUM_PROCESSES] = { 0 };
     int mouseHoverRec = -1;
 
-    for (int i = 0; i < NUM_PROCESSES; i++) toggleRecs[i] = (Rectangle){ 40.0f, (float)(50 + 32*i), 150.0f, 30.0f };
+    for (int i = 0; i < NUM_PROCESSES; i++) toggleRecs[i] = (RlibRectangle){ 40.0f, (float)(50 + 32*i), 150.0f, 30.0f };
 
     SetTargetFPS(60);
     //---------------------------------------------------------------------------------------
@@ -162,7 +162,7 @@ int main(void)
     UnloadImage(imOrigin);        // Unload image-origin from RAM
     UnloadImage(imCopy);          // Unload image-copy from RAM
 
-    CloseWindow();                // Close window and OpenGL context
+    RlibCloseWindow();                // Close window and OpenGL context
     //--------------------------------------------------------------------------------------
 
     return 0;

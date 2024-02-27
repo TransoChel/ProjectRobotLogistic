@@ -166,7 +166,7 @@ int main(void)
     UnloadTexture(whiteTex);            // Unload white texture
     UnloadShader(golRenderShader);      // Unload rendering fragment shader
 
-    CloseWindow();                      // Close window and OpenGL context
+    RlibCloseWindow();                      // Close window and OpenGL context
     //--------------------------------------------------------------------------------------
 
     return 0;

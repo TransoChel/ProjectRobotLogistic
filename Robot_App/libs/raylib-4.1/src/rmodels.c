@@ -460,7 +460,7 @@ void DrawCubeTexture(Texture2D texture, Vector3 position, float width, float hei
 }
 
 // Draw cube with texture piece applied to all faces
-void DrawCubeTextureRec(Texture2D texture, Rectangle source, Vector3 position, float width, float height, float length, Color color)
+void DrawCubeTextureRec(Texture2D texture, RlibRectangle source, Vector3 position, float width, float height, float length, Color color)
 {
     float x = position.x;
     float y = position.y;
@@ -2798,19 +2798,19 @@ Mesh GenMeshCubicmap(Image cubicmap, Vector3 cubeSize)
     Vector3 n6 = { 0.0f, 0.0f, 1.0f };
 
     // NOTE: We use texture rectangles to define different textures for top-bottom-front-back-right-left (6)
-    typedef struct RectangleF {
+    typedef struct RlibRectangleF {
         float x;
         float y;
         float width;
         float height;
-    } RectangleF;
+    } RlibRectangleF;
 
-    RectangleF rightTexUV = { 0.0f, 0.0f, 0.5f, 0.5f };
-    RectangleF leftTexUV = { 0.5f, 0.0f, 0.5f, 0.5f };
-    RectangleF frontTexUV = { 0.0f, 0.0f, 0.5f, 0.5f };
-    RectangleF backTexUV = { 0.5f, 0.0f, 0.5f, 0.5f };
-    RectangleF topTexUV = { 0.0f, 0.5f, 0.5f, 0.5f };
-    RectangleF bottomTexUV = { 0.5f, 0.5f, 0.5f, 0.5f };
+    RlibRectangleF rightTexUV = { 0.0f, 0.0f, 0.5f, 0.5f };
+    RlibRectangleF leftTexUV = { 0.5f, 0.0f, 0.5f, 0.5f };
+    RlibRectangleF frontTexUV = { 0.0f, 0.0f, 0.5f, 0.5f };
+    RlibRectangleF backTexUV = { 0.5f, 0.0f, 0.5f, 0.5f };
+    RlibRectangleF topTexUV = { 0.0f, 0.5f, 0.5f, 0.5f };
+    RlibRectangleF bottomTexUV = { 0.5f, 0.5f, 0.5f, 0.5f };
 
     for (int z = 0; z < mapHeight; ++z)
     {
@@ -3318,13 +3318,13 @@ void DrawModelWiresEx(Model model, Vector3 position, Vector3 rotationAxis, float
 // Draw a billboard
 void DrawBillboard(Camera camera, Texture2D texture, Vector3 position, float size, Color tint)
 {
-    Rectangle source = { 0.0f, 0.0f, (float)texture.width, (float)texture.height };
+    RlibRectangle source = { 0.0f, 0.0f, (float)texture.width, (float)texture.height };
 
     DrawBillboardRec(camera, texture, source, position, (Vector2){ size, size }, tint);
 }
 
 // Draw a billboard (part of a texture defined by a rectangle)
-void DrawBillboardRec(Camera camera, Texture2D texture, Rectangle source, Vector3 position, Vector2 size, Color tint)
+void DrawBillboardRec(Camera camera, Texture2D texture, RlibRectangle source, Vector3 position, Vector2 size, Color tint)
 {
     // NOTE: Billboard locked on axis-Y
     Vector3 up = { 0.0f, 1.0f, 0.0f };
@@ -3332,7 +3332,7 @@ void DrawBillboardRec(Camera camera, Texture2D texture, Rectangle source, Vector
     DrawBillboardPro(camera, texture, source, position, up, size, Vector2Zero(), 0.0f, tint);
 }
 
-void DrawBillboardPro(Camera camera, Texture2D texture, Rectangle source, Vector3 position, Vector3 up, Vector2 size, Vector2 origin, float rotation, Color tint)
+void DrawBillboardPro(Camera camera, Texture2D texture, RlibRectangle source, Vector3 position, Vector3 up, Vector2 size, Vector2 origin, float rotation, Color tint)
 {
     // NOTE: Billboard size will maintain source rectangle aspect ratio, size will represent billboard width
     Vector2 sizeRatio = { size.y, size.x*(float)source.height/source.width };
