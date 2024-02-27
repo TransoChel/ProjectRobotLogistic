@@ -1,4 +1,9 @@
 #include "App.h"
+#include "../../robot/robot.h"
+
+
+// Robot ;
+
 App::App(Graf* graf)
 {
     AB.buttons.push_back(&A);
@@ -49,6 +54,7 @@ void App::LeftMouseButtonPressed()
                     ShouldIDrawArrow = false;
                     InvalidRequest = false;
                     queue.addRequest({from, to, graf});
+                    // Robot queue.sendRequest();
                     AB.NullUpdate();
                     ABto.NullUpdate();
                 }
@@ -73,6 +79,7 @@ void App::drawGeneral(float screenWidth, float screenHeight)
         DrawTextureEx(fromTexture, {screenWidth - 710 - 180 - 175 - (52 * 5 / 2), 250}, 0, 5, WHITE);
         DrawTextureEx(toTexture, {radioButtonToX + 175 - (34 * 5 / 2), 250}, 0, 5, WHITE);
         DrawTextureEx(fromTo, {(screenWidth - 500 - fromTo.width * 3) / 2 + 500, 100 + 25}, 0, 3, WHITE);
+        //DrawLine(0, 996, 1500, 996, BLACK);
         send.Draw();
         AB.Draw();
         ABto.Draw();
@@ -84,7 +91,8 @@ void App::drawGeneral(float screenWidth, float screenHeight)
         }
         if (InvalidRequest) {
             if (errorTimer >= 0) {
-                DrawText("Invalid Request!", 1000, 945, 50, RED);
+                //DrawText("Invalid Request!", 1000, 945, 50, RED);
+                DrawTextureEx(invalidRequest, {1100, 915}, 0, 5, WHITE);
                 --errorTimer;
             }
             else {
