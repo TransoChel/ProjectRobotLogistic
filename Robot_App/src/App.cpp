@@ -1,10 +1,9 @@
 #include "App.h"
-#include "../../robot/robot.h"
 
 
 // Robot ;
 
-App::App(Graf* graf)
+App::App(Graf* graf, ceSerial* com, Robot* robot)
 {
     AB.buttons.push_back(&A);
     AB.buttons.push_back(&B);

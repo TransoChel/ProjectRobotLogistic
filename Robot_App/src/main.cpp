@@ -4,9 +4,14 @@
 #define RAYGUI_IMPLEMENTATION
 #include "extras/raygui.h"
 #include "App.h"
+#define CE_SERIAL_IMPLEMENTATION
+#include "../../robot/robot.h"
 
 int main()
 {
+    ceSerial com("\\\\.\\COM4", 9600, 8, 'N', 1);
+    Robot logist;
+    if (com.Open()) printf("NOT OK.\n");
     // Initialization
     //--------------------------------------------------------------------------------------
     const int screenWidth = 1920;
@@ -16,7 +21,7 @@ int main()
     graf.writeGraf();
 
     InitWindow(screenWidth, screenHeight, "RoboLogist");
-    App app(&graf);
+    App app(&graf, &com, &logist);
 
     int sentTimer = 180;
 
@@ -72,6 +77,6 @@ int main()
     //--------------------------------------------------------------------------------------
     RlibCloseWindow(); // Close window and OpenGL context
     //--------------------------------------------------------------------------------------
-
+    com.Close();
     return 0;
 }

@@ -2,8 +2,6 @@
 
 void Robot::send(std::vector<char> path, ceSerial* com)//ceSerial *com, 
 {
-    
-    if (!com->Open()) printf("OK.\n");
     bool successFlag;
     std::string s = "";
     for (short i = 0; i < path.size(); i++)
@@ -17,11 +15,11 @@ void Robot::send(std::vector<char> path, ceSerial* com)//ceSerial *com,
 }
 
 void Robot::read(ceSerial *com)
-{
+{ 
     bool successFlag;
     char status = com->ReadChar(successFlag); // read a char
     this->status = RobotStatus(status);
-    if(status != -1) std::cout << "read: " + std::to_string(status) + '\n'; 
+    if(status != 0) std::cout << "read: " + std::to_string(status) + '\n'; 
 }
 
 RobotStatus Robot::getStatus()

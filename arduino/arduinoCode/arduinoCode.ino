@@ -2,18 +2,23 @@
 
 enum St : char 
 {
-  READED = 5,
-  WAITING_FOR_TAKING = 1,
-  DOING_REQUEST = 2,
-  WAITING_FOR_RDOPPING = 3,
-  DONE = 4,
+  GOING_TO_START = 1
+  WAITING_FOR_TAKING = 2,
+  DOING_REQUEST = 3,
+  WAITING_FOR_RDOPPING = 4,
+  DONE = 5,
+  READED = 6;
 };
 
 St status;
 
 void sendStatus()
 {
-  Serial1.write(status);
+  Serial3.write(status);
+  Serial3.flush();
+  Serial.print("sent: ");
+  Serial.println(status);
+  delay(50);
 }
 
 void setup() 
@@ -30,7 +35,27 @@ void setup()
 String dataFromComputer = "";
 void loop() 
 {  // run over and over
-  if (status == DONE) 
+  if(status == GOING_TO_START)
+  {
+    
+  }
+  else if(status == WAITING_FOR_TAKING)
+  {
+    delay(5000);
+    status = DOING_REQUEST;
+    sendStatus();
+    Serial.println("took");
+  }
+  else if(status == DOING_REQUEST)
+  {
+
+  }
+  else if(status == WAITING__FOR_DROPPING)
+  {
+    delay(5000);
+    status = DONE;
+  }
+  else if (status == DONE) 
   {
     char c = Serial3.read();
     if (c != -1) 
@@ -45,17 +70,9 @@ void loop()
     sendStatus();
     Serial.println("reading");
   }
-  else if(status == WAITING_FOR_TAKING)
-  {
-    delay(5000);
-    status = DOING_REQUEST;
-    sendStatus();
-    Serial.println("took");
-  }
-  else
+  else if(status == READED)
   {
     sendStatus();
-    Serial.print("sent: ");
-    Serial.println(status);
+    
   }
 }

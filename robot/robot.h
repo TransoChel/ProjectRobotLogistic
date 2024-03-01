@@ -1,8 +1,10 @@
+#pragma once
+
 #include <vector>
 #include <stdio.h>
 #include <iostream>
-#define CE_SERIAL_IMPLEMENTATION
 #include "ceSerial.h"
+
 
 enum RobotStatus : char
 {

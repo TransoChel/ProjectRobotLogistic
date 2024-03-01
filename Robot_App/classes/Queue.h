@@ -2,6 +2,7 @@
 #include "Request.h"
 #include <vector>
 #include <raylib.h>
+#include "../../robot/robot.h"
 
 class Queue
 {
@@ -13,11 +14,7 @@ public:
     Request* getNext();
     void doneThis();
     void addRequest(Request request);
-    std::vector<char> sendRequest() {
-        std::vector<char> a = requests[0].path;
-        requests.erase(requests.begin());
-        return a;
-    }
+    void sendRequest(Robot* robot, ceSerial* com);
     Queue() {};
     Queue(std::vector<Request> requests);
     void draw(Vector2 coord, Color color);

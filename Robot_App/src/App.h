@@ -2,7 +2,7 @@
 #include "../classes/Queue.h"
 #include "../classes/RadioButtonControl.h"
 #include "../classes/TextureButton.h"
-
+#include "../../robot/robot.h"
 
 enum WindowStatus
 {
@@ -15,6 +15,8 @@ enum WindowStatus
 class App
 {
 private:
+    ceSerial* com; 
+    Robot* robot;
     Graf* graf;
     int from, to;
     Texture2D logo = LoadTexture("../Robot_App/textures/logo.png");
@@ -48,7 +50,7 @@ public:
     TextureButton send = TextureButton(Vector2({1425, 900}), 3, LoadTexture("../Robot_App/textures/send.png"));
     TextureButton toMenu = TextureButton(Vector2({1550, 900}), 3, LoadTexture("../Robot_App/textures/toMenu.png"));
     Queue queue;
-    App(Graf* graf);
+    App(Graf* graf, ceSerial* com, Robot* robot);
     void LeftMouseButtonPressed();
     void drawGeneral(float screenWidth, float screenHeight);
 };
