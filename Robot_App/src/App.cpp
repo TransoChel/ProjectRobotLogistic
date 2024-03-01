@@ -2,7 +2,7 @@
 #include "../../robot/robot.h"
 
 
-// Robot ;
+
 
 App::App(Graf* graf)
 {
@@ -54,7 +54,6 @@ void App::LeftMouseButtonPressed()
                     ShouldIDrawArrow = false;
                     InvalidRequest = false;
                     queue.addRequest({from, to, graf});
-                    // Robot queue.sendRequest();
                     AB.NullUpdate();
                     ABto.NullUpdate();
                 }
@@ -78,12 +77,11 @@ void App::drawGeneral(float screenWidth, float screenHeight)
         toMenu.Draw();
         DrawTextureEx(fromTexture, {screenWidth - 710 - 180 - 175 - (52 * 5 / 2), 250}, 0, 5, WHITE);
         DrawTextureEx(toTexture, {radioButtonToX + 175 - (34 * 5 / 2), 250}, 0, 5, WHITE);
-        DrawTextureEx(fromTo, {(screenWidth - 500 - fromTo.width * 3) / 2 + 500, 100 + 25}, 0, 3, WHITE);
-        //DrawLine(0, 996, 1500, 996, BLACK);
+        //DrawLine(0, 949, 1500, 949, BLACK);
         send.Draw();
         AB.Draw();
         ABto.Draw();
-        if (ShouldIDrawArrow) 
+        if (ShouldIDrawArrow)
         {
             DrawRectangleV({AB.buttons[AB.SendNum()]->coord.x + 350, AB.buttons[AB.SendNum()]->coord.y + 37}, {180, 10}, {200, 0, 0, 255});
             DrawRectangleV({(screenWidth - 500) / 2 - 5 + 500, std::min(AB.buttons[AB.SendNum()]->coord.y + 37, ABto.buttons[ABto.SendNum()]->coord.y + 37) + 10}, {10, std::abs(ABto.buttons[ABto.SendNum()]->coord.y - AB.buttons[AB.SendNum()]->coord.y)}, {200, 0, 0, 255});
@@ -92,11 +90,22 @@ void App::drawGeneral(float screenWidth, float screenHeight)
         if (InvalidRequest) {
             if (errorTimer >= 0) {
                 //DrawText("Invalid Request!", 1000, 945, 50, RED);
-                DrawTextureEx(invalidRequest, {1100, 915}, 0, 5, WHITE);
+                DrawTextureEx(invalidRequest, {inReqXpos, 909}, 0, 5, {255, 255, 255, inReqOpacity});
+                inReqXpos -= inReqMargin;
+                if (inReqOpacity <= 255 - 20) {
+                    inReqOpacity += 20;
+                }
+                else {
+                    inReqOpacity += 255 - inReqOpacity;
+                }
+                inReqMargin /= 2;
                 --errorTimer;
             }
             else {
                 errorTimer = 120;
+                inReqXpos = 1200;
+                inReqMargin = 50;
+                inReqOpacity = 0;
                 InvalidRequest = false;
             }
         }
