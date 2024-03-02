@@ -29,10 +29,10 @@ int main(void)
 
     // Define frame rectangle for drawing
     float frameHeight = (float)button.height/NUM_FRAMES;
-    RlibRectangle sourceRec = { 0, 0, (float)button.width, frameHeight };
+    rl_Rectangle sourceRec = { 0, 0, (float)button.width, frameHeight };
 
     // Define button bounds on screen
-    RlibRectangle btnBounds = { screenWidth/2.0f - button.width/2.0f, screenHeight/2.0f - button.height/NUM_FRAMES/2.0f, (float)button.width, frameHeight };
+    rl_Rectangle btnBounds = { screenWidth/2.0f - button.width/2.0f, screenHeight/2.0f - button.height/NUM_FRAMES/2.0f, (float)button.width, frameHeight };
 
     int btnState = 0;               // Button state: 0-NORMAL, 1-MOUSE_HOVER, 2-PRESSED
     bool btnAction = false;         // Button action should be activated
@@ -62,7 +62,7 @@ int main(void)
 
         if (btnAction)
         {
-            PlaySound(fxButton);
+            rl_PlaySound(fxButton);
 
             // TODO: Any desired action
         }
@@ -77,7 +77,7 @@ int main(void)
 
             ClearBackground(RAYWHITE);
 
-            DrawTextureRec(button, sourceRec, (Vector2){ btnBounds.x, btnBounds.y }, WHITE); // Draw button frame
+            rl_DrawTextureRec(button, sourceRec, (Vector2){ btnBounds.x, btnBounds.y }, WHITE); // Draw button frame
 
         EndDrawing();
         //----------------------------------------------------------------------------------
@@ -90,7 +90,7 @@ int main(void)
 
     CloseAudioDevice();     // Close audio device
 
-    RlibCloseWindow();          // Close window and OpenGL context
+    rl_CloseWindow();          // Close window and OpenGL context
     //--------------------------------------------------------------------------------------
 
     return 0;

@@ -150,7 +150,7 @@ int main(void)
             ClearBackground(BLACK);     // Clear the render texture
 
             // Draw a rectangle in shader mode to be used as shader canvas
-            // NOTE: RlibRectangle uses font white character texture coordinates,
+            // NOTE: rl_Rectangle uses font white character texture coordinates,
             // so shader can not be applied here directly because input vertexTexCoord
             // do not represent full screen coordinates (space where want to apply shader)
             DrawRectangle(0, 0, GetScreenWidth(), GetScreenHeight(), BLACK);
@@ -164,16 +164,16 @@ int main(void)
             BeginShaderMode(shader);
                 // WARNING: If FLAG_WINDOW_HIGHDPI is enabled, HighDPI monitor scaling should be considered
                 // when rendering the RenderTexture2D to fit in the HighDPI scaled Window
-                DrawTextureEx(target.texture, (Vector2){ 0.0f, 0.0f }, 0.0f, 1.0f, WHITE);
+                rl_DrawTextureEx(target.texture, (Vector2){ 0.0f, 0.0f }, 0.0f, 1.0f, WHITE);
             EndShaderMode();
 
             if (showControls)
             {
-                DrawText("Press Mouse buttons right/left to zoom in/out and move", 10, 15, 10, RAYWHITE);
-                DrawText("Press KEY_F1 to toggle these controls", 10, 30, 10, RAYWHITE);
-                DrawText("Press KEYS [1 - 6] to change point of interest", 10, 45, 10, RAYWHITE);
-                DrawText("Press KEY_LEFT | KEY_RIGHT to change speed", 10, 60, 10, RAYWHITE);
-                DrawText("Press KEY_SPACE to pause movement animation", 10, 75, 10, RAYWHITE);
+                rl_DrawText("Press Mouse buttons right/left to zoom in/out and move", 10, 15, 10, RAYWHITE);
+                rl_DrawText("Press KEY_F1 to toggle these controls", 10, 30, 10, RAYWHITE);
+                rl_DrawText("Press KEYS [1 - 6] to change point of interest", 10, 45, 10, RAYWHITE);
+                rl_DrawText("Press KEY_LEFT | KEY_RIGHT to change speed", 10, 60, 10, RAYWHITE);
+                rl_DrawText("Press KEY_SPACE to pause movement animation", 10, 75, 10, RAYWHITE);
             }
         EndDrawing();
         //----------------------------------------------------------------------------------
@@ -184,7 +184,7 @@ int main(void)
     UnloadShader(shader);               // Unload shader
     UnloadRenderTexture(target);        // Unload render texture
 
-    RlibCloseWindow();                      // Close window and OpenGL context
+    rl_CloseWindow();                      // Close window and OpenGL context
     //--------------------------------------------------------------------------------------
 
     return 0;

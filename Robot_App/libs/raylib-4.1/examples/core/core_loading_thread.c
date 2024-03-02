@@ -93,17 +93,17 @@ int main(void)
 
             switch (state)
             {
-                case STATE_WAITING: DrawText("PRESS ENTER to START LOADING DATA", 150, 170, 20, DARKGRAY); break;
+                case STATE_WAITING: rl_DrawText("PRESS ENTER to START LOADING DATA", 150, 170, 20, DARKGRAY); break;
                 case STATE_LOADING:
                 {
                     DrawRectangle(150, 200, dataProgress, 60, SKYBLUE);
-                    if ((framesCounter/15)%2) DrawText("LOADING DATA...", 240, 210, 40, DARKBLUE);
+                    if ((framesCounter/15)%2) rl_DrawText("LOADING DATA...", 240, 210, 40, DARKBLUE);
 
                 } break;
                 case STATE_FINISHED:
                 {
                     DrawRectangle(150, 200, 500, 60, LIME);
-                    DrawText("DATA LOADED!", 250, 210, 40, GREEN);
+                    rl_DrawText("DATA LOADED!", 250, 210, 40, GREEN);
 
                 } break;
                 default: break;
@@ -117,7 +117,7 @@ int main(void)
 
     // De-Initialization
     //--------------------------------------------------------------------------------------
-    RlibCloseWindow();        // Close window and OpenGL context
+    rl_CloseWindow();        // Close window and OpenGL context
     //--------------------------------------------------------------------------------------
 
     return 0;

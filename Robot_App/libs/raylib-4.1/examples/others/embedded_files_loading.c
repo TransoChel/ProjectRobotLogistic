@@ -46,7 +46,7 @@ int main(void)
     //UnloadWave(wave);             // Do not unload wave data!
 
     // Loaded in CPU memory (RAM) from header file (image_data.h)
-    // Same as: Image image = LoadImage("raylib_logo.png");
+    // Same as: Image image = rl_LoadImage("raylib_logo.png");
     Image image = {
         .data = IMAGE_DATA,
         .width = IMAGE_WIDTH,
@@ -71,7 +71,7 @@ int main(void)
     {
         // Update
         //----------------------------------------------------------------------------------
-        if (IsKeyPressed(KEY_SPACE)) PlaySound(sound);      // Play sound
+        if (IsKeyPressed(KEY_SPACE)) rl_PlaySound(sound);      // Play sound
         //----------------------------------------------------------------------------------
 
         // Draw
@@ -80,10 +80,10 @@ int main(void)
 
             ClearBackground(RAYWHITE);
 
-            DrawTexture(texture, screenWidth/2 - texture.width/2, 40, WHITE);
+            rl_DrawTexture(texture, screenWidth/2 - texture.width/2, 40, WHITE);
 
-            DrawText("raylib logo and sound loaded from header files", 65, 320, 20, LIGHTGRAY);
-            DrawText("Press SPACE to PLAY the sound!", 200, 360, 20, LIGHTGRAY);
+            rl_DrawText("raylib logo and sound loaded from header files", 65, 320, 20, LIGHTGRAY);
+            rl_DrawText("Press SPACE to PLAY the sound!", 200, 360, 20, LIGHTGRAY);
 
         EndDrawing();
         //----------------------------------------------------------------------------------
@@ -96,7 +96,7 @@ int main(void)
 
     CloseAudioDevice();     // Close audio device
 
-    RlibCloseWindow();          // Close window and OpenGL context
+    rl_CloseWindow();          // Close window and OpenGL context
     //--------------------------------------------------------------------------------------
 
     return 0;

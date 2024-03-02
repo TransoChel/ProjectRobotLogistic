@@ -29,11 +29,11 @@ int main() {
                 DrawCubeWires(cubePos, 2.f, 2.f, 2.f, MAROON);
                 DrawGrid(10, 1.f);
             EndMode3D();
-            DrawText("This is a raylib example", 10, 40, 20, DARKGRAY);
+            rl_DrawText("This is a raylib example", 10, 40, 20, DARKGRAY);
             DrawFPS(10, 10);
         EndDrawing();
     }
     
-    RlibCloseWindow();
+    rl_CloseWindow();
     return 0;
 }

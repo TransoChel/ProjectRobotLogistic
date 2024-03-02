@@ -89,8 +89,8 @@ int main(void)
 
             BeginShaderMode(shader);
 
-                DrawTexture(texture, 0, 0, WHITE);
-                DrawTexture(texture, texture.width, 0, WHITE);
+                rl_DrawTexture(texture, 0, 0, WHITE);
+                rl_DrawTexture(texture, texture.width, 0, WHITE);
 
             EndShaderMode();
 
@@ -103,7 +103,7 @@ int main(void)
     UnloadShader(shader);         // Unload shader
     UnloadTexture(texture);       // Unload texture
 
-    RlibCloseWindow();              // Close window and OpenGL context
+    rl_CloseWindow();              // Close window and OpenGL context
     //--------------------------------------------------------------------------------------
 
     return 0;

@@ -45,20 +45,20 @@ int main(void)
 
             ClearBackground(RAYWHITE);
 
-            if (count == 0) DrawText("Drop your files to this window!", 100, 40, 20, DARKGRAY);
+            if (count == 0) rl_DrawText("Drop your files to this window!", 100, 40, 20, DARKGRAY);
             else
             {
-                DrawText("Dropped files:", 100, 40, 20, DARKGRAY);
+                rl_DrawText("Dropped files:", 100, 40, 20, DARKGRAY);
 
                 for (int i = 0; i < count; i++)
                 {
                     if (i%2 == 0) DrawRectangle(0, 85 + 40*i, screenWidth, 40, Fade(LIGHTGRAY, 0.5f));
                     else DrawRectangle(0, 85 + 40*i, screenWidth, 40, Fade(LIGHTGRAY, 0.3f));
 
-                    DrawText(droppedFiles[i], 120, 100 + 40*i, 10, GRAY);
+                    rl_DrawText(droppedFiles[i], 120, 100 + 40*i, 10, GRAY);
                 }
 
-                DrawText("Drop new files...", 100, 110 + 40*count, 20, DARKGRAY);
+                rl_DrawText("Drop new files...", 100, 110 + 40*count, 20, DARKGRAY);
             }
 
         EndDrawing();
@@ -69,7 +69,7 @@ int main(void)
     //--------------------------------------------------------------------------------------
     ClearDroppedFiles();    // Clear internal buffers
 
-    RlibCloseWindow();          // Close window and OpenGL context
+    rl_CloseWindow();          // Close window and OpenGL context
     //--------------------------------------------------------------------------------------
 
     return 0;

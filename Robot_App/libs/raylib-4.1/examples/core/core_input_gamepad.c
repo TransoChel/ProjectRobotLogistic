@@ -60,11 +60,11 @@ int main(void)
 
             if (IsGamepadAvailable(0))
             {
-                DrawText(TextFormat("GP1: %s", GetGamepadName(0)), 10, 10, 10, BLACK);
+                rl_DrawText(TextFormat("GP1: %s", GetGamepadName(0)), 10, 10, 10, BLACK);
 
                 if (TextIsEqual(GetGamepadName(0), XBOX360_NAME_ID) || TextIsEqual(GetGamepadName(0), XBOX360_LEGACY_NAME_ID))
                 {
-                    DrawTexture(texXboxPad, 0, 0, DARKGRAY);
+                    rl_DrawTexture(texXboxPad, 0, 0, DARKGRAY);
 
                     // Draw buttons: xbox home
                     if (IsGamepadButtonDown(0, GAMEPAD_BUTTON_MIDDLE)) DrawCircle(394, 89, 19, RED);
@@ -107,12 +107,12 @@ int main(void)
                     DrawRectangle(170, 30, 15, (((1 + (int)GetGamepadAxisMovement(0, GAMEPAD_AXIS_LEFT_TRIGGER))/2)*70), RED);
                     DrawRectangle(604, 30, 15, (((1 + (int)GetGamepadAxisMovement(0, GAMEPAD_AXIS_RIGHT_TRIGGER))/2)*70), RED);
 
-                    //DrawText(TextFormat("Xbox axis LT: %02.02f", GetGamepadAxisMovement(0, GAMEPAD_AXIS_LEFT_TRIGGER)), 10, 40, 10, BLACK);
-                    //DrawText(TextFormat("Xbox axis RT: %02.02f", GetGamepadAxisMovement(0, GAMEPAD_AXIS_RIGHT_TRIGGER)), 10, 60, 10, BLACK);
+                    //rl_DrawText(TextFormat("Xbox axis LT: %02.02f", GetGamepadAxisMovement(0, GAMEPAD_AXIS_LEFT_TRIGGER)), 10, 40, 10, BLACK);
+                    //rl_DrawText(TextFormat("Xbox axis RT: %02.02f", GetGamepadAxisMovement(0, GAMEPAD_AXIS_RIGHT_TRIGGER)), 10, 60, 10, BLACK);
                 }
                 else if (TextIsEqual(GetGamepadName(0), PS3_NAME_ID))
                 {
-                    DrawTexture(texPs3Pad, 0, 0, DARKGRAY);
+                    rl_DrawTexture(texPs3Pad, 0, 0, DARKGRAY);
 
                     // Draw buttons: ps
                     if (IsGamepadButtonDown(0, GAMEPAD_BUTTON_MIDDLE)) DrawCircle(396, 222, 13, RED);
@@ -157,26 +157,26 @@ int main(void)
                 }
                 else
                 {
-                    DrawText("- GENERIC GAMEPAD -", 280, 180, 20, GRAY);
+                    rl_DrawText("- GENERIC GAMEPAD -", 280, 180, 20, GRAY);
 
                     // TODO: Draw generic gamepad
                 }
 
-                DrawText(TextFormat("DETECTED AXIS [%i]:", GetGamepadAxisCount(0)), 10, 50, 10, MAROON);
+                rl_DrawText(TextFormat("DETECTED AXIS [%i]:", GetGamepadAxisCount(0)), 10, 50, 10, MAROON);
 
                 for (int i = 0; i < GetGamepadAxisCount(0); i++)
                 {
-                    DrawText(TextFormat("AXIS %i: %.02f", i, GetGamepadAxisMovement(0, i)), 20, 70 + 20*i, 10, DARKGRAY);
+                    rl_DrawText(TextFormat("AXIS %i: %.02f", i, GetGamepadAxisMovement(0, i)), 20, 70 + 20*i, 10, DARKGRAY);
                 }
 
-                if (GetGamepadButtonPressed() != -1) DrawText(TextFormat("DETECTED BUTTON: %i", GetGamepadButtonPressed()), 10, 430, 10, RED);
-                else DrawText("DETECTED BUTTON: NONE", 10, 430, 10, GRAY);
+                if (GetGamepadButtonPressed() != -1) rl_DrawText(TextFormat("DETECTED BUTTON: %i", GetGamepadButtonPressed()), 10, 430, 10, RED);
+                else rl_DrawText("DETECTED BUTTON: NONE", 10, 430, 10, GRAY);
             }
             else
             {
-                DrawText("GP1: NOT DETECTED", 10, 10, 10, GRAY);
+                rl_DrawText("GP1: NOT DETECTED", 10, 10, 10, GRAY);
 
-                DrawTexture(texXboxPad, 0, 0, LIGHTGRAY);
+                rl_DrawTexture(texXboxPad, 0, 0, LIGHTGRAY);
             }
 
         EndDrawing();
@@ -188,7 +188,7 @@ int main(void)
     UnloadTexture(texPs3Pad);
     UnloadTexture(texXboxPad);
 
-    RlibCloseWindow();        // Close window and OpenGL context
+    rl_CloseWindow();        // Close window and OpenGL context
     //--------------------------------------------------------------------------------------
 
     return 0;

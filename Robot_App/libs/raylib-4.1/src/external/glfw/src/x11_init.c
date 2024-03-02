@@ -758,8 +758,8 @@ static GLFWbool initExtensions(void)
             _glfw_dlsym(_glfw.x11.xcursor.handle, "XcursorGetTheme");
         _glfw.x11.xcursor.GetDefaultSize = (PFN_XcursorGetDefaultSize)
             _glfw_dlsym(_glfw.x11.xcursor.handle, "XcursorGetDefaultSize");
-        _glfw.x11.xcursor.LibraryLoadImage = (PFN_XcursorLibraryLoadImage)
-            _glfw_dlsym(_glfw.x11.xcursor.handle, "XcursorLibraryLoadImage");
+        _glfw.x11.xcursor.Libraryrl_LoadImage = (PFN_XcursorLibraryrl_LoadImage)
+            _glfw_dlsym(_glfw.x11.xcursor.handle, "XcursorLibraryrl_LoadImage");
     }
 
 #if defined(__CYGWIN__)

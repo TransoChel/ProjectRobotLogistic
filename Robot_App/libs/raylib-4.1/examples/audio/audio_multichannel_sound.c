@@ -37,8 +37,8 @@ int main(void)
     {
         // Update
         //----------------------------------------------------------------------------------
-        if (IsKeyPressed(KEY_ENTER)) PlaySoundMulti(fxWav);     // Play a new wav sound instance
-        if (IsKeyPressed(KEY_SPACE)) PlaySoundMulti(fxOgg);     // Play a new ogg sound instance
+        if (IsKeyPressed(KEY_ENTER)) rl_PlaySoundMulti(fxWav);     // Play a new wav sound instance
+        if (IsKeyPressed(KEY_SPACE)) rl_PlaySoundMulti(fxOgg);     // Play a new ogg sound instance
         //----------------------------------------------------------------------------------
 
         // Draw
@@ -47,11 +47,11 @@ int main(void)
 
             ClearBackground(RAYWHITE);
 
-            DrawText("MULTICHANNEL SOUND PLAYING", 20, 20, 20, GRAY);
-            DrawText("Press SPACE to play new ogg instance!", 200, 120, 20, LIGHTGRAY);
-            DrawText("Press ENTER to play new wav instance!", 200, 180, 20, LIGHTGRAY);
+            rl_DrawText("MULTICHANNEL SOUND PLAYING", 20, 20, 20, GRAY);
+            rl_DrawText("Press SPACE to play new ogg instance!", 200, 120, 20, LIGHTGRAY);
+            rl_DrawText("Press ENTER to play new wav instance!", 200, 180, 20, LIGHTGRAY);
 
-            DrawText(TextFormat("CONCURRENT SOUNDS PLAYING: %02i", GetSoundsPlaying()), 220, 280, 20, RED);
+            rl_DrawText(TextFormat("CONCURRENT SOUNDS PLAYING: %02i", GetSoundsPlaying()), 220, 280, 20, RED);
 
         EndDrawing();
         //----------------------------------------------------------------------------------
@@ -66,7 +66,7 @@ int main(void)
 
     CloseAudioDevice();     // Close audio device
 
-    RlibCloseWindow();          // Close window and OpenGL context
+    rl_CloseWindow();          // Close window and OpenGL context
     //--------------------------------------------------------------------------------------
 
     return 0;

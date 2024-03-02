@@ -22,13 +22,13 @@ int main(void)
     InitWindow(screenWidth, screenHeight, "raylib [shapes] example - collision area");
 
     // Box A: Moving box
-    RlibRectangle boxA = { 10, GetScreenHeight()/2.0f - 50, 200, 100 };
+    rl_Rectangle boxA = { 10, GetScreenHeight()/2.0f - 50, 200, 100 };
     int boxASpeedX = 4;
 
     // Box B: Mouse moved box
-    RlibRectangle boxB = { GetScreenWidth()/2.0f - 30, GetScreenHeight()/2.0f - 30, 60, 60 };
+    rl_Rectangle boxB = { GetScreenWidth()/2.0f - 30, GetScreenHeight()/2.0f - 30, 60, 60 };
 
-    RlibRectangle boxCollision = { 0 }; // Collision rectangle
+    rl_Rectangle boxCollision = { 0 }; // Collision rectangle
 
     int screenUpperLimit = 40;      // Top menu limits
 
@@ -87,10 +87,10 @@ int main(void)
                 DrawRectangleRec(boxCollision, LIME);
 
                 // Draw collision message
-                DrawText("COLLISION!", GetScreenWidth()/2 - MeasureText("COLLISION!", 20)/2, screenUpperLimit/2 - 10, 20, BLACK);
+                rl_DrawText("COLLISION!", GetScreenWidth()/2 - MeasureText("COLLISION!", 20)/2, screenUpperLimit/2 - 10, 20, BLACK);
 
                 // Draw collision area
-                DrawText(TextFormat("Collision Area: %i", (int)boxCollision.width*(int)boxCollision.height), GetScreenWidth()/2 - 100, screenUpperLimit + 10, 20, BLACK);
+                rl_DrawText(TextFormat("Collision Area: %i", (int)boxCollision.width*(int)boxCollision.height), GetScreenWidth()/2 - 100, screenUpperLimit + 10, 20, BLACK);
             }
 
             DrawFPS(10, 10);
@@ -101,7 +101,7 @@ int main(void)
 
     // De-Initialization
     //---------------------------------------------------------
-    RlibCloseWindow();        // Close window and OpenGL context
+    rl_CloseWindow();        // Close window and OpenGL context
     //----------------------------------------------------------
 
     return 0;

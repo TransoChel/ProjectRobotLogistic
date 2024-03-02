@@ -1,6 +1,6 @@
 /*******************************************************************************************
 *
-*   raylib [textures] example - Retrieve image data from texture: LoadImageFromTexture()
+*   raylib [textures] example - Retrieve image data from texture: rl_LoadImageFromTexture()
 *
 *   NOTE: Images are loaded in CPU memory (RAM); textures are loaded in GPU memory (VRAM)
 *
@@ -24,11 +24,11 @@ int main(void)
 
     // NOTE: Textures MUST be loaded after Window initialization (OpenGL context is required)
 
-    Image image = LoadImage("resources/raylib_logo.png");  // Load image data into CPU memory (RAM)
+    Image image = rl_LoadImage("resources/raylib_logo.png");  // Load image data into CPU memory (RAM)
     Texture2D texture = LoadTextureFromImage(image);       // Image converted to texture, GPU memory (RAM -> VRAM)
     UnloadImage(image);                                    // Unload image data from CPU memory (RAM)
 
-    image = LoadImageFromTexture(texture);                 // Load image from GPU texture (VRAM -> RAM)
+    image = rl_LoadImageFromTexture(texture);                 // Load image from GPU texture (VRAM -> RAM)
     UnloadTexture(texture);                                // Unload texture from GPU memory (VRAM)
 
     texture = LoadTextureFromImage(image);                 // Recreate texture from retrieved image data (RAM -> VRAM)
@@ -49,9 +49,9 @@ int main(void)
 
             ClearBackground(RAYWHITE);
 
-            DrawTexture(texture, screenWidth/2 - texture.width/2, screenHeight/2 - texture.height/2, WHITE);
+            rl_DrawTexture(texture, screenWidth/2 - texture.width/2, screenHeight/2 - texture.height/2, WHITE);
 
-            DrawText("this IS a texture loaded from an image!", 300, 370, 10, GRAY);
+            rl_DrawText("this IS a texture loaded from an image!", 300, 370, 10, GRAY);
 
         EndDrawing();
         //----------------------------------------------------------------------------------
@@ -61,7 +61,7 @@ int main(void)
     //--------------------------------------------------------------------------------------
     UnloadTexture(texture);       // Texture unloading
 
-    RlibRlibCloseWindowndowndowndowndowndowndowndowndowndowndowndow();                // Close window and OpenGL context
+    Rlibrl_CloseWindowndowndowndowndowndowndowndowndowndowndowndow();                // Close window and OpenGL context
     //--------------------------------------------------------------------------------------
 
     return 0;

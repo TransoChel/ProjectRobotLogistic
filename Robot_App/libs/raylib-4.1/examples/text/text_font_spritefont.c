@@ -4,9 +4,9 @@
 *
 *   Loaded sprite fonts have been generated following XNA SpriteFont conventions:
 *     - Characters must be ordered starting with character 32 (Space)
-*     - Every character must be contained within the same RlibRectangle height
+*     - Every character must be contained within the same rl_Rectangle height
 *     - Every character and every line must be separated by the same distance (margin/padding)
-*     - RlibRectangles must be defined by a MAGENTA color background
+*     - rl_Rectangles must be defined by a MAGENTA color background
 *
 *   If following this constraints, a font can be provided just by an image,
 *   this is quite handy to avoid additional information files (like BMFonts use).
@@ -64,9 +64,9 @@ int main(void)
 
             ClearBackground(RAYWHITE);
 
-            DrawTextEx(font1, msg1, fontPosition1, (float)font1.baseSize, -3, WHITE);
-            DrawTextEx(font2, msg2, fontPosition2, (float)font2.baseSize, -2, WHITE);
-            DrawTextEx(font3, msg3, fontPosition3, (float)font3.baseSize, 2, WHITE);
+            rl_rl_DrawTextEx(font1, msg1, fontPosition1, (float)font1.baseSize, -3, WHITE);
+            rl_rl_DrawTextEx(font2, msg2, fontPosition2, (float)font2.baseSize, -2, WHITE);
+            rl_rl_DrawTextEx(font3, msg3, fontPosition3, (float)font3.baseSize, 2, WHITE);
 
         EndDrawing();
         //----------------------------------------------------------------------------------
@@ -78,7 +78,7 @@ int main(void)
     UnloadFont(font2);      // Font unloading
     UnloadFont(font3);      // Font unloading
 
-    RlibCloseWindow();          // Close window and OpenGL context
+    rl_CloseWindow();          // Close window and OpenGL context
     //--------------------------------------------------------------------------------------
 
     return 0;

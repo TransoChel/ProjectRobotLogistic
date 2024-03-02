@@ -92,10 +92,10 @@ STBRP_DEF int stbrp_pack_rects (stbrp_context *context, stbrp_rect *rects, int n
 // 'stbrp_rect' defined below, stored in the array 'rects', and there
 // are 'num_rects' many of them.
 //
-// RlibRectangles which are successfully packed have the 'was_packed' flag
+// rl_Rectangles which are successfully packed have the 'was_packed' flag
 // set to a non-zero value and 'x' and 'y' store the minimum location
 // on each axis (i.e. bottom-left in cartesian coordinates, top-left
-// if you imagine y increasing downwards). RlibRectangles which do not fit
+// if you imagine y increasing downwards). rl_Rectangles which do not fit
 // have the 'was_packed' flag set to 0.
 //
 // You should not try to access the 'rects' array from another thread

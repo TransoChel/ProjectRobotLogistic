@@ -1,7 +1,8 @@
-#pragma once
+#ifndef ROBOT_H
+#define ROBOT_H
 
-#include <vector>
 #include <stdio.h>
+#include <vector>
 #include <iostream>
 #include "ceSerial.h"
 
@@ -25,3 +26,5 @@ public:
     void read(ceSerial *com);
     RobotStatus getStatus();
 };
+
+#endif

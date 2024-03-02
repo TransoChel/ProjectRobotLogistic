@@ -140,12 +140,12 @@ int main(void)
             ClearBackground(BLANK);
 
             BeginShaderMode(golRenderShader);
-                DrawTexture(whiteTex, 0, 0, WHITE);
+                rl_DrawTexture(whiteTex, 0, 0, WHITE);
             EndShaderMode();
             
             DrawRectangleLines(GetMouseX() - brushSize/2, GetMouseY() - brushSize/2, brushSize, brushSize, RED);
 
-            DrawText("Use Mouse wheel to increase/decrease brush size", 10, 10, 20, WHITE);
+            rl_DrawText("Use Mouse wheel to increase/decrease brush size", 10, 10, 20, WHITE);
             DrawFPS(GetScreenWidth() - 100, 10);
 
         EndDrawing();
@@ -166,7 +166,7 @@ int main(void)
     UnloadTexture(whiteTex);            // Unload white texture
     UnloadShader(golRenderShader);      // Unload rendering fragment shader
 
-    RlibCloseWindow();                      // Close window and OpenGL context
+    rl_CloseWindow();                      // Close window and OpenGL context
     //--------------------------------------------------------------------------------------
 
     return 0;

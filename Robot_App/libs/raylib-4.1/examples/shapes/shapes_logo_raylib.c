@@ -39,9 +39,9 @@ int main(void)
 
             DrawRectangle(screenWidth/2 - 128, screenHeight/2 - 128, 256, 256, BLACK);
             DrawRectangle(screenWidth/2 - 112, screenHeight/2 - 112, 224, 224, RAYWHITE);
-            DrawText("raylib", screenWidth/2 - 44, screenHeight/2 + 48, 50, BLACK);
+            rl_DrawText("raylib", screenWidth/2 - 44, screenHeight/2 + 48, 50, BLACK);
 
-            DrawText("this is NOT a texture!", 350, 370, 10, GRAY);
+            rl_DrawText("this is NOT a texture!", 350, 370, 10, GRAY);
 
         EndDrawing();
         //----------------------------------------------------------------------------------
@@ -49,7 +49,7 @@ int main(void)
 
     // De-Initialization
     //--------------------------------------------------------------------------------------
-    RlibCloseWindow();        // Close window and OpenGL context
+    rl_CloseWindow();        // Close window and OpenGL context
     //--------------------------------------------------------------------------------------
 
     return 0;

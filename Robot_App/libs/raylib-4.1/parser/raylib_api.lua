@@ -2777,7 +2777,7 @@ return {
       }
     },
     {
-      name = "ShowCursor",
+      name = "rl_ShowCursor",
       description = "Shows cursor",
       returnType = "void"
     },
@@ -4338,7 +4338,7 @@ return {
       }
     },
     {
-      name = "LoadImage",
+      name = "rl_LoadImage",
       description = "Load image from file into CPU memory (RAM)",
       returnType = "Image",
       params = {
@@ -4346,7 +4346,7 @@ return {
       }
     },
     {
-      name = "LoadImageRaw",
+      name = "rl_LoadImageRaw",
       description = "Load image from RAW file data",
       returnType = "Image",
       params = {
@@ -4358,7 +4358,7 @@ return {
       }
     },
     {
-      name = "LoadImageAnim",
+      name = "rl_LoadImageAnim",
       description = "Load image sequence from file (frames appended to image.data)",
       returnType = "Image",
       params = {
@@ -4367,7 +4367,7 @@ return {
       }
     },
     {
-      name = "LoadImageFromMemory",
+      name = "rl_LoadImageFromMemory",
       description = "Load image from memory buffer, fileType refers to extension: i.e. '.png'",
       returnType = "Image",
       params = {
@@ -4377,7 +4377,7 @@ return {
       }
     },
     {
-      name = "LoadImageFromTexture",
+      name = "rl_LoadImageFromTexture",
       description = "Load image from GPU texture data",
       returnType = "Image",
       params = {
@@ -4385,7 +4385,7 @@ return {
       }
     },
     {
-      name = "LoadImageFromScreen",
+      name = "rl_LoadImageFromScreen",
       description = "Load image from screen buffer and (screenshot)",
       returnType = "Image"
     },
@@ -4733,7 +4733,7 @@ return {
       }
     },
     {
-      name = "LoadImageColors",
+      name = "rl_LoadImageColors",
       description = "Load color data from image as a Color array (RGBA - 32bit)",
       returnType = "Color *",
       params = {
@@ -4741,7 +4741,7 @@ return {
       }
     },
     {
-      name = "LoadImagePalette",
+      name = "rl_LoadImagePalette",
       description = "Load colors palette from image as a Color array (RGBA - 32bit)",
       returnType = "Color *",
       params = {
@@ -4752,7 +4752,7 @@ return {
     },
     {
       name = "UnloadImageColors",
-      description = "Unload color data loaded with LoadImageColors()",
+      description = "Unload color data loaded with rl_LoadImageColors()",
       returnType = "void",
       params = {
         {type = "Color *", name = "colors"}
@@ -4760,7 +4760,7 @@ return {
     },
     {
       name = "UnloadImagePalette",
-      description = "Unload colors palette loaded with LoadImagePalette()",
+      description = "Unload colors palette loaded with rl_LoadImagePalette()",
       returnType = "void",
       params = {
         {type = "Color *", name = "colors"}
@@ -4920,7 +4920,7 @@ return {
       }
     },
     {
-      name = "ImageDrawText",
+      name = "Imagerl_DrawText",
       description = "Draw text (using default font) within an image (destination)",
       returnType = "void",
       params = {
@@ -4933,7 +4933,7 @@ return {
       }
     },
     {
-      name = "ImageDrawTextEx",
+      name = "Imagerl_rl_DrawTextEx",
       description = "Draw text (custom sprite font) within an image (destination)",
       returnType = "void",
       params = {
@@ -5042,7 +5042,7 @@ return {
       }
     },
     {
-      name = "DrawTexture",
+      name = "rl_DrawTexture",
       description = "Draw a Texture2D",
       returnType = "void",
       params = {
@@ -5053,7 +5053,7 @@ return {
       }
     },
     {
-      name = "DrawTextureV",
+      name = "rl_DrawTextureV",
       description = "Draw a Texture2D with position defined as Vector2",
       returnType = "void",
       params = {
@@ -5063,7 +5063,7 @@ return {
       }
     },
     {
-      name = "DrawTextureEx",
+      name = "rl_DrawTextureEx",
       description = "Draw a Texture2D with extended parameters",
       returnType = "void",
       params = {
@@ -5075,7 +5075,7 @@ return {
       }
     },
     {
-      name = "DrawTextureRec",
+      name = "rl_DrawTextureRec",
       description = "Draw a part of a texture defined by a rectangle",
       returnType = "void",
       params = {
@@ -5086,7 +5086,7 @@ return {
       }
     },
     {
-      name = "DrawTextureQuad",
+      name = "rl_DrawTextureQuad",
       description = "Draw texture quad with tiling and offset parameters",
       returnType = "void",
       params = {
@@ -5098,7 +5098,7 @@ return {
       }
     },
     {
-      name = "DrawTextureTiled",
+      name = "rl_DrawTextureTiled",
       description = "Draw part of a texture (defined by a rectangle) with rotation and scale tiled into dest.",
       returnType = "void",
       params = {
@@ -5112,7 +5112,7 @@ return {
       }
     },
     {
-      name = "DrawTexturePro",
+      name = "rl_DrawTexturePro",
       description = "Draw a part of a texture defined by a rectangle with 'pro' parameters",
       returnType = "void",
       params = {
@@ -5125,7 +5125,7 @@ return {
       }
     },
     {
-      name = "DrawTextureNPatch",
+      name = "rl_DrawTextureNPatch",
       description = "Draws a texture (or part of it) that stretches or shrinks nicely",
       returnType = "void",
       params = {
@@ -5138,7 +5138,7 @@ return {
       }
     },
     {
-      name = "DrawTexturePoly",
+      name = "rl_DrawTexturePoly",
       description = "Draw a textured polygon",
       returnType = "void",
       params = {
@@ -5366,7 +5366,7 @@ return {
       }
     },
     {
-      name = "DrawText",
+      name = "rl_DrawText",
       description = "Draw text (using default font)",
       returnType = "void",
       params = {
@@ -5378,7 +5378,7 @@ return {
       }
     },
     {
-      name = "DrawTextEx",
+      name = "rl_rl_DrawTextEx",
       description = "Draw text using font and additional parameters",
       returnType = "void",
       params = {
@@ -5391,7 +5391,7 @@ return {
       }
     },
     {
-      name = "DrawTextPro",
+      name = "rl_DrawTextPro",
       description = "Draw text using Font and pro parameters (rotation)",
       returnType = "void",
       params = {
@@ -5406,7 +5406,7 @@ return {
       }
     },
     {
-      name = "DrawTextCodepoint",
+      name = "rl_DrawTextCodepoint",
       description = "Draw one character (codepoint)",
       returnType = "void",
       params = {
@@ -6500,7 +6500,7 @@ return {
       }
     },
     {
-      name = "PlaySound",
+      name = "rl_PlaySound",
       description = "Play a sound",
       returnType = "void",
       params = {
@@ -6532,7 +6532,7 @@ return {
       }
     },
     {
-      name = "PlaySoundMulti",
+      name = "rl_PlaySoundMulti",
       description = "Play a sound (using multichannel buffer pool)",
       returnType = "void",
       params = {

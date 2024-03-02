@@ -2973,7 +2973,7 @@ int _glfwPlatformCreateStandardCursor(_GLFWcursor* cursor, int shape)
                     break;
             }
 
-            XcursorImage* image = XcursorLibraryLoadImage(name, theme, size);
+            XcursorImage* image = XcursorLibraryrl_LoadImage(name, theme, size);
             if (image)
             {
                 cursor->x11.handle = XcursorImageLoadCursor(_glfw.x11.display, image);

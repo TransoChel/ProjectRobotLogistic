@@ -460,7 +460,7 @@ void DrawCubeTexture(Texture2D texture, Vector3 position, float width, float hei
 }
 
 // Draw cube with texture piece applied to all faces
-void DrawCubeTextureRec(Texture2D texture, RlibRectangle source, Vector3 position, float width, float height, float length, Color color)
+void DrawCubeTextureRec(Texture2D texture, rl_Rectangle source, Vector3 position, float width, float height, float length, Color color)
 {
     float x = position.x;
     float y = position.y;
@@ -2637,7 +2637,7 @@ Mesh GenMeshHeightmap(Image heightmap, Vector3 size)
     int mapX = heightmap.width;
     int mapZ = heightmap.height;
 
-    Color *pixels = LoadImageColors(heightmap);
+    Color *pixels = rl_LoadImageColors(heightmap);
 
     // NOTE: One vertex per pixel
     mesh.triangleCount = (mapX-1)*(mapZ-1)*2;    // One quad every four pixels
@@ -2769,7 +2769,7 @@ Mesh GenMeshCubicmap(Image cubicmap, Vector3 cubeSize)
 
     Mesh mesh = { 0 };
 
-    Color *pixels = LoadImageColors(cubicmap);
+    Color *pixels = rl_LoadImageColors(cubicmap);
 
     int mapWidth = cubicmap.width;
     int mapHeight = cubicmap.height;
@@ -2798,19 +2798,19 @@ Mesh GenMeshCubicmap(Image cubicmap, Vector3 cubeSize)
     Vector3 n6 = { 0.0f, 0.0f, 1.0f };
 
     // NOTE: We use texture rectangles to define different textures for top-bottom-front-back-right-left (6)
-    typedef struct RlibRectangleF {
+    typedef struct rl_RectangleF {
         float x;
         float y;
         float width;
         float height;
-    } RlibRectangleF;
+    } rl_RectangleF;
 
-    RlibRectangleF rightTexUV = { 0.0f, 0.0f, 0.5f, 0.5f };
-    RlibRectangleF leftTexUV = { 0.5f, 0.0f, 0.5f, 0.5f };
-    RlibRectangleF frontTexUV = { 0.0f, 0.0f, 0.5f, 0.5f };
-    RlibRectangleF backTexUV = { 0.5f, 0.0f, 0.5f, 0.5f };
-    RlibRectangleF topTexUV = { 0.0f, 0.5f, 0.5f, 0.5f };
-    RlibRectangleF bottomTexUV = { 0.5f, 0.5f, 0.5f, 0.5f };
+    rl_RectangleF rightTexUV = { 0.0f, 0.0f, 0.5f, 0.5f };
+    rl_RectangleF leftTexUV = { 0.5f, 0.0f, 0.5f, 0.5f };
+    rl_RectangleF frontTexUV = { 0.0f, 0.0f, 0.5f, 0.5f };
+    rl_RectangleF backTexUV = { 0.5f, 0.0f, 0.5f, 0.5f };
+    rl_RectangleF topTexUV = { 0.0f, 0.5f, 0.5f, 0.5f };
+    rl_RectangleF bottomTexUV = { 0.5f, 0.5f, 0.5f, 0.5f };
 
     for (int z = 0; z < mapHeight; ++z)
     {
@@ -3318,13 +3318,13 @@ void DrawModelWiresEx(Model model, Vector3 position, Vector3 rotationAxis, float
 // Draw a billboard
 void DrawBillboard(Camera camera, Texture2D texture, Vector3 position, float size, Color tint)
 {
-    RlibRectangle source = { 0.0f, 0.0f, (float)texture.width, (float)texture.height };
+    rl_Rectangle source = { 0.0f, 0.0f, (float)texture.width, (float)texture.height };
 
     DrawBillboardRec(camera, texture, source, position, (Vector2){ size, size }, tint);
 }
 
 // Draw a billboard (part of a texture defined by a rectangle)
-void DrawBillboardRec(Camera camera, Texture2D texture, RlibRectangle source, Vector3 position, Vector2 size, Color tint)
+void DrawBillboardRec(Camera camera, Texture2D texture, rl_Rectangle source, Vector3 position, Vector2 size, Color tint)
 {
     // NOTE: Billboard locked on axis-Y
     Vector3 up = { 0.0f, 1.0f, 0.0f };
@@ -3332,7 +3332,7 @@ void DrawBillboardRec(Camera camera, Texture2D texture, RlibRectangle source, Ve
     DrawBillboardPro(camera, texture, source, position, up, size, Vector2Zero(), 0.0f, tint);
 }
 
-void DrawBillboardPro(Camera camera, Texture2D texture, RlibRectangle source, Vector3 position, Vector3 up, Vector2 size, Vector2 origin, float rotation, Color tint)
+void DrawBillboardPro(Camera camera, Texture2D texture, rl_Rectangle source, Vector3 position, Vector3 up, Vector2 size, Vector2 origin, float rotation, Color tint)
 {
     // NOTE: Billboard size will maintain source rectangle aspect ratio, size will represent billboard width
     Vector2 sizeRatio = { size.y, size.x*(float)source.height/source.width };
@@ -4515,7 +4515,7 @@ static ModelAnimation* LoadModelAnimationsIQM(const char *fileName, unsigned int
 
 #if defined(SUPPORT_FILEFORMAT_GLTF)
 // Load image from different glTF provided methods (uri, path, buffer_view)
-static Image LoadImageFromCgltfImage(cgltf_image *cgltfImage, const char *texPath)
+static Image rl_LoadImageFromCgltfImage(cgltf_image *cgltfImage, const char *texPath)
 {
     Image image = { 0 };
 
@@ -4546,14 +4546,14 @@ static Image LoadImageFromCgltfImage(cgltf_image *cgltfImage, const char *texPat
                 
                 if (result == cgltf_result_success)
                 {
-                    image = LoadImageFromMemory(".png", (unsigned char *)data, outSize);
+                    image = rl_LoadImageFromMemory(".png", (unsigned char *)data, outSize);
                     cgltf_free((cgltf_data*)data);
                 }
             }
         }
         else     // Check if image is provided as image path
         {
-            image = LoadImage(TextFormat("%s/%s", texPath, cgltfImage->uri));
+            image = rl_LoadImage(TextFormat("%s/%s", texPath, cgltfImage->uri));
         }
     }
     else if (cgltfImage->buffer_view->buffer->data != NULL)    // Check if image is provided as data buffer
@@ -4572,9 +4572,9 @@ static Image LoadImageFromCgltfImage(cgltf_image *cgltfImage, const char *texPat
         // Check mime_type for image: (cgltfImage->mime_type == "image/png")
         // NOTE: Detected that some models define mime_type as "image\\/png"
         if ((strcmp(cgltfImage->mime_type, "image\\/png") == 0) || 
-            (strcmp(cgltfImage->mime_type, "image/png") == 0)) image = LoadImageFromMemory(".png", data, (int)cgltfImage->buffer_view->size);
+            (strcmp(cgltfImage->mime_type, "image/png") == 0)) image = rl_LoadImageFromMemory(".png", data, (int)cgltfImage->buffer_view->size);
         else if ((strcmp(cgltfImage->mime_type, "image\\/jpeg") == 0) ||
-                 (strcmp(cgltfImage->mime_type, "image/jpeg") == 0)) image = LoadImageFromMemory(".jpg", data, (int)cgltfImage->buffer_view->size);
+                 (strcmp(cgltfImage->mime_type, "image/jpeg") == 0)) image = rl_LoadImageFromMemory(".jpg", data, (int)cgltfImage->buffer_view->size);
         else TRACELOG(LOG_WARNING, "MODEL: glTF image data MIME type not recognized", TextFormat("%s/%s", texPath, cgltfImage->uri));
         
         RL_FREE(data);
@@ -4686,7 +4686,7 @@ static Model LoadGLTF(const char *fileName)
                 // Load base color texture (albedo)
                 if (data->materials[i].pbr_metallic_roughness.base_color_texture.texture)
                 {
-                    Image imAlbedo = LoadImageFromCgltfImage(data->materials[i].pbr_metallic_roughness.base_color_texture.texture->image, texPath);
+                    Image imAlbedo = rl_LoadImageFromCgltfImage(data->materials[i].pbr_metallic_roughness.base_color_texture.texture->image, texPath);
                     if (imAlbedo.data != NULL)
                     {
                         model.materials[j].maps[MATERIAL_MAP_ALBEDO].texture = LoadTextureFromImage(imAlbedo);
@@ -4702,7 +4702,7 @@ static Model LoadGLTF(const char *fileName)
                 // Load metallic/roughness texture
                 if (data->materials[i].pbr_metallic_roughness.metallic_roughness_texture.texture)
                 {
-                    Image imMetallicRoughness = LoadImageFromCgltfImage(data->materials[i].pbr_metallic_roughness.metallic_roughness_texture.texture->image, texPath);
+                    Image imMetallicRoughness = rl_LoadImageFromCgltfImage(data->materials[i].pbr_metallic_roughness.metallic_roughness_texture.texture->image, texPath);
                     if (imMetallicRoughness.data != NULL)
                     {
                         model.materials[j].maps[MATERIAL_MAP_ROUGHNESS].texture = LoadTextureFromImage(imMetallicRoughness);
@@ -4720,7 +4720,7 @@ static Model LoadGLTF(const char *fileName)
                 // Load normal texture
                 if (data->materials[i].normal_texture.texture)
                 {
-                    Image imNormal = LoadImageFromCgltfImage(data->materials[i].normal_texture.texture->image, texPath);
+                    Image imNormal = rl_LoadImageFromCgltfImage(data->materials[i].normal_texture.texture->image, texPath);
                     if (imNormal.data != NULL)
                     {
                         model.materials[j].maps[MATERIAL_MAP_NORMAL].texture = LoadTextureFromImage(imNormal);
@@ -4731,7 +4731,7 @@ static Model LoadGLTF(const char *fileName)
                 // Load ambient occlusion texture
                 if (data->materials[i].occlusion_texture.texture)
                 {
-                    Image imOcclusion = LoadImageFromCgltfImage(data->materials[i].occlusion_texture.texture->image, texPath);
+                    Image imOcclusion = rl_LoadImageFromCgltfImage(data->materials[i].occlusion_texture.texture->image, texPath);
                     if (imOcclusion.data != NULL)
                     {
                         model.materials[j].maps[MATERIAL_MAP_OCCLUSION].texture = LoadTextureFromImage(imOcclusion);
@@ -4742,7 +4742,7 @@ static Model LoadGLTF(const char *fileName)
                 // Load emissive texture
                 if (data->materials[i].emissive_texture.texture)
                 {
-                    Image imEmissive = LoadImageFromCgltfImage(data->materials[i].emissive_texture.texture->image, texPath);
+                    Image imEmissive = rl_LoadImageFromCgltfImage(data->materials[i].emissive_texture.texture->image, texPath);
                     if (imEmissive.data != NULL)
                     {
                         model.materials[j].maps[MATERIAL_MAP_EMISSION].texture = LoadTextureFromImage(imEmissive);

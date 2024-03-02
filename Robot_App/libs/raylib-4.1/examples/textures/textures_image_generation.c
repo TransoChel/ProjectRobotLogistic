@@ -68,20 +68,20 @@ int main(void)
 
             ClearBackground(RAYWHITE);
 
-            DrawTexture(textures[currentTexture], 0, 0, WHITE);
+            rl_DrawTexture(textures[currentTexture], 0, 0, WHITE);
 
             DrawRectangle(30, 400, 325, 30, Fade(SKYBLUE, 0.5f));
             DrawRectangleLines(30, 400, 325, 30, Fade(WHITE, 0.5f));
-            DrawText("MOUSE LEFT BUTTON to CYCLE PROCEDURAL TEXTURES", 40, 410, 10, WHITE);
+            rl_DrawText("MOUSE LEFT BUTTON to CYCLE PROCEDURAL TEXTURES", 40, 410, 10, WHITE);
 
             switch(currentTexture)
             {
-                case 0: DrawText("VERTICAL GRADIENT", 560, 10, 20, RAYWHITE); break;
-                case 1: DrawText("HORIZONTAL GRADIENT", 540, 10, 20, RAYWHITE); break;
-                case 2: DrawText("RADIAL GRADIENT", 580, 10, 20, LIGHTGRAY); break;
-                case 3: DrawText("CHECKED", 680, 10, 20, RAYWHITE); break;
-                case 4: DrawText("WHITE NOISE", 640, 10, 20, RED); break;
-                case 5: DrawText("CELLULAR", 670, 10, 20, RAYWHITE); break;
+                case 0: rl_DrawText("VERTICAL GRADIENT", 560, 10, 20, RAYWHITE); break;
+                case 1: rl_DrawText("HORIZONTAL GRADIENT", 540, 10, 20, RAYWHITE); break;
+                case 2: rl_DrawText("RADIAL GRADIENT", 580, 10, 20, LIGHTGRAY); break;
+                case 3: rl_DrawText("CHECKED", 680, 10, 20, RAYWHITE); break;
+                case 4: rl_DrawText("WHITE NOISE", 640, 10, 20, RED); break;
+                case 5: rl_DrawText("CELLULAR", 670, 10, 20, RAYWHITE); break;
                 default: break;
             }
 
@@ -95,7 +95,7 @@ int main(void)
     // Unload textures data (GPU VRAM)
     for (int i = 0; i < NUM_TEXTURES; i++) UnloadTexture(textures[i]);
 
-    RlibCloseWindow();                // Close window and OpenGL context
+    rl_CloseWindow();                // Close window and OpenGL context
     //--------------------------------------------------------------------------------------
 
     return 0;

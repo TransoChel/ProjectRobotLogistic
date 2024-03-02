@@ -107,11 +107,11 @@ int main(void)
                 }
             }
 
-            DrawText("Use 'ARROWS' to move player", 10, 10, 10, WHITE);
-            DrawText("Press 'R' to reset example", 10, 30, 10, WHITE);
+            rl_DrawText("Use 'ARROWS' to move player", 10, 10, 10, WHITE);
+            rl_DrawText("Press 'R' to reset example", 10, 30, 10, WHITE);
 
-            DrawText("Physac", logoX, logoY, 30, WHITE);
-            DrawText("Powered by", logoX + 50, logoY - 7, 10, WHITE);
+            rl_DrawText("Physac", logoX, logoY, 30, WHITE);
+            rl_DrawText("Powered by", logoX + 50, logoY - 7, 10, WHITE);
 
         EndDrawing();
         //----------------------------------------------------------------------------------
@@ -121,7 +121,7 @@ int main(void)
     //--------------------------------------------------------------------------------------
     ClosePhysics();       // Unitialize physics
 
-    RlibCloseWindow();        // Close window and OpenGL context
+    rl_CloseWindow();        // Close window and OpenGL context
     //--------------------------------------------------------------------------------------
 
     return 0;

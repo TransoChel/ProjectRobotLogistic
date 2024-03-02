@@ -94,8 +94,8 @@ int main(int argc, char *argv[])
     {
         if (kbhit()) key = getch();
 
-        if ((key == 's') || (key == 'S')) PlaySound(fxWav);
-        if ((key == 'd') || (key == 'D')) PlaySound(fxOgg);
+        if ((key == 's') || (key == 'S')) rl_PlaySound(fxWav);
+        if ((key == 'd') || (key == 'D')) rl_PlaySound(fxOgg);
 
         key = 0;
 

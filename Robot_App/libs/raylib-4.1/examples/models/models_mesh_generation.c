@@ -107,19 +107,19 @@ int main(void)
 
             DrawRectangle(30, 400, 310, 30, Fade(SKYBLUE, 0.5f));
             DrawRectangleLines(30, 400, 310, 30, Fade(DARKBLUE, 0.5f));
-            DrawText("MOUSE LEFT BUTTON to CYCLE PROCEDURAL MODELS", 40, 410, 10, BLUE);
+            rl_DrawText("MOUSE LEFT BUTTON to CYCLE PROCEDURAL MODELS", 40, 410, 10, BLUE);
 
             switch(currentModel)
             {
-                case 0: DrawText("PLANE", 680, 10, 20, DARKBLUE); break;
-                case 1: DrawText("CUBE", 680, 10, 20, DARKBLUE); break;
-                case 2: DrawText("SPHERE", 680, 10, 20, DARKBLUE); break;
-                case 3: DrawText("HEMISPHERE", 640, 10, 20, DARKBLUE); break;
-                case 4: DrawText("CYLINDER", 680, 10, 20, DARKBLUE); break;
-                case 5: DrawText("TORUS", 680, 10, 20, DARKBLUE); break;
-                case 6: DrawText("KNOT", 680, 10, 20, DARKBLUE); break;
-                case 7: DrawText("POLY", 680, 10, 20, DARKBLUE); break;
-                case 8: DrawText("Custom (triangle)", 580, 10, 20, DARKBLUE); break;
+                case 0: rl_DrawText("PLANE", 680, 10, 20, DARKBLUE); break;
+                case 1: rl_DrawText("CUBE", 680, 10, 20, DARKBLUE); break;
+                case 2: rl_DrawText("SPHERE", 680, 10, 20, DARKBLUE); break;
+                case 3: rl_DrawText("HEMISPHERE", 640, 10, 20, DARKBLUE); break;
+                case 4: rl_DrawText("CYLINDER", 680, 10, 20, DARKBLUE); break;
+                case 5: rl_DrawText("TORUS", 680, 10, 20, DARKBLUE); break;
+                case 6: rl_DrawText("KNOT", 680, 10, 20, DARKBLUE); break;
+                case 7: rl_DrawText("POLY", 680, 10, 20, DARKBLUE); break;
+                case 8: rl_DrawText("Custom (triangle)", 580, 10, 20, DARKBLUE); break;
                 default: break;
             }
 
@@ -134,7 +134,7 @@ int main(void)
     // Unload models data (GPU VRAM)
     for (int i = 0; i < NUM_MODELS; i++) UnloadModel(models[i]);
 
-    RlibCloseWindow();          // Close window and OpenGL context
+    rl_CloseWindow();          // Close window and OpenGL context
     //--------------------------------------------------------------------------------------
 
     return 0;

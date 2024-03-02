@@ -94,12 +94,12 @@ int main(void)
                 // Process of sending data is costly and it could happen that GPU data has not been completely
                 // processed for drawing while new data is tried to be sent (updating current in-use buffers)
                 // it could generates a stall and consequently a frame drop, limiting the number of drawn bunnies
-                DrawTexture(texBunny, (int)bunnies[i].position.x, (int)bunnies[i].position.y, bunnies[i].color);
+                rl_DrawTexture(texBunny, (int)bunnies[i].position.x, (int)bunnies[i].position.y, bunnies[i].color);
             }
 
             DrawRectangle(0, 0, screenWidth, 40, BLACK);
-            DrawText(TextFormat("bunnies: %i", bunniesCount), 120, 10, 20, GREEN);
-            DrawText(TextFormat("batched draw calls: %i", 1 + bunniesCount/MAX_BATCH_ELEMENTS), 320, 10, 20, MAROON);
+            rl_DrawText(TextFormat("bunnies: %i", bunniesCount), 120, 10, 20, GREEN);
+            rl_DrawText(TextFormat("batched draw calls: %i", 1 + bunniesCount/MAX_BATCH_ELEMENTS), 320, 10, 20, MAROON);
 
             DrawFPS(10, 10);
 
@@ -113,7 +113,7 @@ int main(void)
 
     UnloadTexture(texBunny);    // Unload bunny texture
 
-    RlibCloseWindowndowndowndowndowndowndowndowndowndowndowndowndowndowndowndowndowndow();              // Close window and OpenGL context
+    rl_CloseWindowndowndowndowndowndowndowndowndowndowndowndowndowndowndowndowndowndow();              // Close window and OpenGL context
     //--------------------------------------------------------------------------------------
 
     return 0;

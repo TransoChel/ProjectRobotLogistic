@@ -46,7 +46,7 @@ int main(void)
 
         // TODO: Draw everything that requires to be drawn at this point:
 
-        DrawText("Congrats! You created your first window!", 190, 200, 20, LIGHTGRAY);  // Example
+        rl_DrawText("Congrats! You created your first window!", 190, 200, 20, LIGHTGRAY);  // Example
 
         EndDrawing();
         //----------------------------------------------------------------------------------
@@ -57,7 +57,7 @@ int main(void)
 
     // TODO: Unload all loaded resources at this point
 
-    RlibCloseWindow();        // Close window and OpenGL context
+    rl_CloseWindow();        // Close window and OpenGL context
     //--------------------------------------------------------------------------------------
 
     return 0;

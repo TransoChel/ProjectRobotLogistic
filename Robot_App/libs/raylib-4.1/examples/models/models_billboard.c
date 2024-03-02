@@ -68,7 +68,7 @@ int main(void)
     //--------------------------------------------------------------------------------------
     UnloadTexture(bill);        // Unload texture
 
-    RlibCloseWindow();              // Close window and OpenGL context
+    rl_CloseWindow();              // Close window and OpenGL context
     //--------------------------------------------------------------------------------------
 
     return 0;

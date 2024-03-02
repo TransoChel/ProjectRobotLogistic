@@ -179,7 +179,7 @@
         </KeyWord>
 
         <!-- Cursor-related functions -->
-        <KeyWord name="ShowCursor" func="yes">
+        <KeyWord name="rl_ShowCursor" func="yes">
             <Overload retVal="void" descr="Shows cursor"></Overload>
         </KeyWord>
         <KeyWord name="HideCursor" func="yes">
@@ -1282,12 +1282,12 @@
 
         <!-- Image loading functions -->
         <!-- NOTE: This functions do not require GPU access -->
-        <KeyWord name="LoadImage" func="yes">
+        <KeyWord name="rl_LoadImage" func="yes">
             <Overload retVal="Image" descr="Load image from file into CPU memory (RAM)">
                 <Param name="const char *fileName" />
             </Overload>
         </KeyWord>
-        <KeyWord name="LoadImageRaw" func="yes">
+        <KeyWord name="rl_LoadImageRaw" func="yes">
             <Overload retVal="Image" descr="Load image from RAW file data">
                 <Param name="const char *fileName" />
                 <Param name="int width" />
@@ -1296,25 +1296,25 @@
                 <Param name="int headerSize" />
             </Overload>
         </KeyWord>
-        <KeyWord name="LoadImageAnim" func="yes">
+        <KeyWord name="rl_LoadImageAnim" func="yes">
             <Overload retVal="Image" descr="Load image sequence from file (frames appended to image.data)">
                 <Param name="const char *fileName" />
                 <Param name="int *frames" />
             </Overload>
         </KeyWord>
-        <KeyWord name="LoadImageFromMemory" func="yes">
+        <KeyWord name="rl_LoadImageFromMemory" func="yes">
             <Overload retVal="Image" descr="Load image from memory buffer, fileType refers to extension: i.e. '.png'">
                 <Param name="const char *fileType" />
                 <Param name="const unsigned char" />
                 <Param name="int dataSize" />
             </Overload>
         </KeyWord>
-        <KeyWord name="LoadImageFromTexture" func="yes">
+        <KeyWord name="rl_LoadImageFromTexture" func="yes">
             <Overload retVal="Image" descr="Load image from GPU texture data">
                 <Param name="Texture2D texture" />
             </Overload>
         </KeyWord>
-        <KeyWord name="LoadImageFromScreen" func="yes">
+        <KeyWord name="rl_LoadImageFromScreen" func="yes">
             <Overload retVal="Image" descr="Load image from screen buffer and (screenshot)"></Overload>
         </KeyWord>
         <KeyWord name="UnloadImage" func="yes">
@@ -1556,12 +1556,12 @@
                 <Param name="Color replace" />
             </Overload>
         </KeyWord>
-        <KeyWord name="LoadImageColors" func="yes">
+        <KeyWord name="rl_LoadImageColors" func="yes">
             <Overload retVal="Color" descr="Load color data from image as a Color array (RGBA - 32bit)">
                 <Param name="Image image" />
             </Overload>
         </KeyWord>
-        <KeyWord name="LoadImagePalette" func="yes">
+        <KeyWord name="rl_LoadImagePalette" func="yes">
             <Overload retVal="Color" descr="Load colors palette from image as a Color array (RGBA - 32bit)">
                 <Param name="Image image" />
                 <Param name="int maxPaletteSize" />
@@ -1569,12 +1569,12 @@
             </Overload>
         </KeyWord>
         <KeyWord name="UnloadImageColors" func="yes">
-            <Overload retVal="void" descr="Unload color data loaded with LoadImageColors()">
+            <Overload retVal="void" descr="Unload color data loaded with rl_LoadImageColors()">
                 <Param name="Color *colors" />
             </Overload>
         </KeyWord>
         <KeyWord name="UnloadImagePalette" func="yes">
-            <Overload retVal="void" descr="Unload colors palette loaded with LoadImagePalette()">
+            <Overload retVal="void" descr="Unload colors palette loaded with rl_LoadImagePalette()">
                 <Param name="Color *colors" />
             </Overload>
         </KeyWord>
@@ -1692,7 +1692,7 @@
                 <Param name="Color tint" />
             </Overload>
         </KeyWord>
-        <KeyWord name="ImageDrawText" func="yes">
+        <KeyWord name="Imagerl_DrawText" func="yes">
             <Overload retVal="void" descr="Draw text (using default font) within an image (destination)">
                 <Param name="Image *dst" />
                 <Param name="const char *text" />
@@ -1702,7 +1702,7 @@
                 <Param name="Color color" />
             </Overload>
         </KeyWord>
-        <KeyWord name="ImageDrawTextEx" func="yes">
+        <KeyWord name="Imagerl_rl_DrawTextEx" func="yes">
             <Overload retVal="void" descr="Draw text (custom sprite font) within an image (destination)">
                 <Param name="Image *dst" />
                 <Param name="Font font" />
@@ -1782,7 +1782,7 @@
         </KeyWord>
 
         <!-- Texture drawing functions -->
-        <KeyWord name="DrawTexture" func="yes">
+        <KeyWord name="rl_DrawTexture" func="yes">
             <Overload retVal="void" descr="Draw a Texture2D">
                 <Param name="Texture2D texture" />
                 <Param name="int posX" />
@@ -1790,14 +1790,14 @@
                 <Param name="Color tint" />
             </Overload>
         </KeyWord>
-        <KeyWord name="DrawTextureV" func="yes">
+        <KeyWord name="rl_DrawTextureV" func="yes">
             <Overload retVal="void" descr="Draw a Texture2D with position defined as Vector2">
                 <Param name="Texture2D texture" />
                 <Param name="Vector2 position" />
                 <Param name="Color tint" />
             </Overload>
         </KeyWord>
-        <KeyWord name="DrawTextureEx" func="yes">
+        <KeyWord name="rl_DrawTextureEx" func="yes">
             <Overload retVal="void" descr="Draw a Texture2D with extended parameters">
                 <Param name="Texture2D texture" />
                 <Param name="Vector2 position" />
@@ -1806,7 +1806,7 @@
                 <Param name="Color tint" />
             </Overload>
         </KeyWord>
-        <KeyWord name="DrawTextureRec" func="yes">
+        <KeyWord name="rl_DrawTextureRec" func="yes">
             <Overload retVal="void" descr="Draw a part of a texture defined by a rectangle">
                 <Param name="Texture2D texture" />
                 <Param name="Rectangle source" />
@@ -1814,7 +1814,7 @@
                 <Param name="Color tint" />
             </Overload>
         </KeyWord>
-        <KeyWord name="DrawTextureQuad" func="yes">
+        <KeyWord name="rl_DrawTextureQuad" func="yes">
             <Overload retVal="void" descr="Draw texture quad with tiling and offset parameters">
                 <Param name="Texture2D texture" />
                 <Param name="Vector2 tiling" />
@@ -1823,7 +1823,7 @@
                 <Param name="Color tint" />
             </Overload>
         </KeyWord>
-        <KeyWord name="DrawTextureTiled" func="yes">
+        <KeyWord name="rl_DrawTextureTiled" func="yes">
             <Overload retVal="void" descr="Draw part of a texture (defined by a rectangle) with rotation and scale tiled into dest.">
                 <Param name="Texture2D texture" />
                 <Param name="Rectangle source" />
@@ -1834,7 +1834,7 @@
                 <Param name="Color tint" />
             </Overload>
         </KeyWord>
-        <KeyWord name="DrawTexturePro" func="yes">
+        <KeyWord name="rl_DrawTexturePro" func="yes">
             <Overload retVal="void" descr="Draw a part of a texture defined by a rectangle with 'pro' parameters">
                 <Param name="Texture2D texture" />
                 <Param name="Rectangle source" />
@@ -1844,7 +1844,7 @@
                 <Param name="Color tint" />
             </Overload>
         </KeyWord>
-        <KeyWord name="DrawTextureNPatch" func="yes">
+        <KeyWord name="rl_DrawTextureNPatch" func="yes">
             <Overload retVal="void" descr="Draws a texture (or part of it) that stretches or shrinks nicely">
                 <Param name="Texture2D texture" />
                 <Param name="NPatchInfo nPatchInfo" />
@@ -1854,7 +1854,7 @@
                 <Param name="Color tint" />
             </Overload>
         </KeyWord>
-        <KeyWord name="DrawTexturePoly" func="yes">
+        <KeyWord name="rl_DrawTexturePoly" func="yes">
             <Overload retVal="void" descr="Draw a textured polygon">
                 <Param name="Texture2D texture" />
                 <Param name="Vector2 center" />
@@ -2008,7 +2008,7 @@
                 <Param name="int posY" />
             </Overload>
         </KeyWord>
-        <KeyWord name="DrawText" func="yes">
+        <KeyWord name="rl_DrawText" func="yes">
             <Overload retVal="void" descr="Draw text (using default font)">
                 <Param name="const char *text" />
                 <Param name="int posX" />
@@ -2017,7 +2017,7 @@
                 <Param name="Color color" />
             </Overload>
         </KeyWord>
-        <KeyWord name="DrawTextEx" func="yes">
+        <KeyWord name="rl_rl_DrawTextEx" func="yes">
             <Overload retVal="void" descr="Draw text using font and additional parameters">
                 <Param name="Font font" />
                 <Param name="const char *text" />
@@ -2027,7 +2027,7 @@
                 <Param name="Color tint" />
             </Overload>
         </KeyWord>
-        <KeyWord name="DrawTextPro" func="yes">
+        <KeyWord name="rl_DrawTextPro" func="yes">
             <Overload retVal="void" descr="Draw text using Font and pro parameters (rotation)">
                 <Param name="Font font" />
                 <Param name="const char *text" />
@@ -2039,7 +2039,7 @@
                 <Param name="Color tint" />
             </Overload>
         </KeyWord>
-        <KeyWord name="DrawTextCodepoint" func="yes">
+        <KeyWord name="rl_DrawTextCodepoint" func="yes">
             <Overload retVal="void" descr="Draw one character (codepoint)">
                 <Param name="Font font" />
                 <Param name="int codepoint" />
@@ -2835,7 +2835,7 @@
         </KeyWord>
 
         <!-- Wave/Sound management functions -->
-        <KeyWord name="PlaySound" func="yes">
+        <KeyWord name="rl_PlaySound" func="yes">
             <Overload retVal="void" descr="Play a sound">
                 <Param name="Sound sound" />
             </Overload>
@@ -2855,7 +2855,7 @@
                 <Param name="Sound sound" />
             </Overload>
         </KeyWord>
-        <KeyWord name="PlaySoundMulti" func="yes">
+        <KeyWord name="rl_PlaySoundMulti" func="yes">
             <Overload retVal="void" descr="Play a sound (using multichannel buffer pool)">
                 <Param name="Sound sound" />
             </Overload>

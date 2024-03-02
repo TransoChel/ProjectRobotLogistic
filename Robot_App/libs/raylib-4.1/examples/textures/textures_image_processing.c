@@ -50,7 +50,7 @@ int main(void)
 
     // NOTE: Textures MUST be loaded after Window initialization (OpenGL context is required)
 
-    Image imOrigin = LoadImage("resources/parrots.png");   // Loaded in CPU memory (RAM)
+    Image imOrigin = rl_LoadImage("resources/parrots.png");   // Loaded in CPU memory (RAM)
     ImageFormat(&imOrigin, PIXELFORMAT_UNCOMPRESSED_R8G8B8A8);         // Format image to RGBA 32bit (required for texture update) <-- ISSUE
     Texture2D texture = LoadTextureFromImage(imOrigin);    // Image converted to texture, GPU memory (VRAM)
 
@@ -59,10 +59,10 @@ int main(void)
     int currentProcess = NONE;
     bool textureReload = false;
 
-    RlibRectangle toggleRecs[NUM_PROCESSES] = { 0 };
+    rl_Rectangle toggleRecs[NUM_PROCESSES] = { 0 };
     int mouseHoverRec = -1;
 
-    for (int i = 0; i < NUM_PROCESSES; i++) toggleRecs[i] = (RlibRectangle){ 40.0f, (float)(50 + 32*i), 150.0f, 30.0f };
+    for (int i = 0; i < NUM_PROCESSES; i++) toggleRecs[i] = (rl_Rectangle){ 40.0f, (float)(50 + 32*i), 150.0f, 30.0f };
 
     SetTargetFPS(60);
     //---------------------------------------------------------------------------------------
@@ -125,7 +125,7 @@ int main(void)
                 default: break;
             }
 
-            Color *pixels = LoadImageColors(imCopy);    // Load pixel data from image (RGBA 32bit)
+            Color *pixels = rl_LoadImageColors(imCopy);    // Load pixel data from image (RGBA 32bit)
             UpdateTexture(texture, pixels);             // Update texture with new image data
             UnloadImageColors(pixels);                  // Unload pixels data from RAM
 
@@ -139,17 +139,17 @@ int main(void)
 
             ClearBackground(RAYWHITE);
 
-            DrawText("IMAGE PROCESSING:", 40, 30, 10, DARKGRAY);
+            rl_DrawText("IMAGE PROCESSING:", 40, 30, 10, DARKGRAY);
 
             // Draw rectangles
             for (int i = 0; i < NUM_PROCESSES; i++)
             {
                 DrawRectangleRec(toggleRecs[i], ((i == currentProcess) || (i == mouseHoverRec)) ? SKYBLUE : LIGHTGRAY);
                 DrawRectangleLines((int)toggleRecs[i].x, (int) toggleRecs[i].y, (int) toggleRecs[i].width, (int) toggleRecs[i].height, ((i == currentProcess) || (i == mouseHoverRec)) ? BLUE : GRAY);
-                DrawText( processText[i], (int)( toggleRecs[i].x + toggleRecs[i].width/2 - MeasureText(processText[i], 10)/2), (int) toggleRecs[i].y + 11, 10, ((i == currentProcess) || (i == mouseHoverRec)) ? DARKBLUE : DARKGRAY);
+                rl_DrawText( processText[i], (int)( toggleRecs[i].x + toggleRecs[i].width/2 - MeasureText(processText[i], 10)/2), (int) toggleRecs[i].y + 11, 10, ((i == currentProcess) || (i == mouseHoverRec)) ? DARKBLUE : DARKGRAY);
             }
 
-            DrawTexture(texture, screenWidth - texture.width - 60, screenHeight/2 - texture.height/2, WHITE);
+            rl_DrawTexture(texture, screenWidth - texture.width - 60, screenHeight/2 - texture.height/2, WHITE);
             DrawRectangleLines(screenWidth - texture.width - 60, screenHeight/2 - texture.height/2, texture.width, texture.height, BLACK);
 
         EndDrawing();
@@ -162,7 +162,7 @@ int main(void)
     UnloadImage(imOrigin);        // Unload image-origin from RAM
     UnloadImage(imCopy);          // Unload image-copy from RAM
 
-    RlibCloseWindow();                // Close window and OpenGL context
+    rl_CloseWindow();                // Close window and OpenGL context
     //--------------------------------------------------------------------------------------
 
     return 0;

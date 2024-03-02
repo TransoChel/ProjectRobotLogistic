@@ -95,7 +95,7 @@ int main(void)
             if (state >= 2) DrawRectangle(0, 0, screenWidth, screenHeight, GREEN);
             DrawCircle(ballPositionX, 200, (float)ballRadius, Fade(RED, 1.0f - ballAlpha));
 
-            if (state == 3) DrawText("PRESS [ENTER] TO PLAY AGAIN!", 240, 200, 20, BLACK);
+            if (state == 3) rl_DrawText("PRESS [ENTER] TO PLAY AGAIN!", 240, 200, 20, BLACK);
 
         EndDrawing();
         //----------------------------------------------------------------------------------
@@ -103,7 +103,7 @@ int main(void)
 
     // De-Initialization
     //--------------------------------------------------------------------------------------
-    RlibCloseWindow();        // Close window and OpenGL context
+    rl_CloseWindow();        // Close window and OpenGL context
     //--------------------------------------------------------------------------------------
 
     return 0;

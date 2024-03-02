@@ -26,7 +26,7 @@ GetMonitorPhysicalHeight|int|(int monitor);|
 GetMonitorName|const char *|(int monitor);|
 GetClipboardText|const char *|(void);|
 SetClipboardText|void|(const char *text);|
-ShowCursor|void|(void);|
+rl_ShowCursor|void|(void);|
 HideCursor|void|(void);|
 IsCursorHidden|bool|(void);|
 EnableCursor|void|(void);|
@@ -160,10 +160,10 @@ GetCollisionRec|Rectangle|(Rectangle rec1, Rectangle rec2);|
 CheckCollisionPointRec|bool|(Vector2 point, Rectangle rec);|
 CheckCollisionPointCircle|bool|(Vector2 point, Vector2 center, float radius);|
 CheckCollisionPointTriangle|bool|(Vector2 point, Vector2 p1, Vector2 p2, Vector2 p3);|
-LoadImage|Image|(const char *fileName);|
-LoadImageEx|Image|(Color *pixels, int width, int height);|
-LoadImagePro|Image|(void *data, int width, int height, int format);|
-LoadImageRaw|Image|(const char *fileName, int width, int height, int format, int headerSize);|
+rl_LoadImage|Image|(const char *fileName);|
+rl_LoadImageEx|Image|(Color *pixels, int width, int height);|
+rl_LoadImagePro|Image|(void *data, int width, int height, int format);|
+rl_LoadImageRaw|Image|(const char *fileName, int width, int height, int format, int headerSize);|
 ExportImage|void|(Image image, const char *fileName);|
 ExportImageAsCode|void|(Image image, const char *fileName);|
 LoadTexture|Texture2D|(const char *fileName);|
@@ -198,8 +198,8 @@ ImageTextEx|Image|(Font font, const char *text, float fontSize, float spacing, C
 ImageDraw|void|(Image *dst, Image src, Rectangle srcRec, Rectangle dstRec);|
 ImageDrawRectangle|void|(Image *dst, Rectangle rec, Color color);|
 ImageDrawRectangleLines|void|(Image *dst, Rectangle rec, int thick, Color color);|
-ImageDrawText|void|(Image *dst, Vector2 position, const char *text, int fontSize, Color color);|
-ImageDrawTextEx|void|(Image *dst, Vector2 position, Font font, const char *text, float fontSize, float spacing, Color color);|
+Imagerl_DrawText|void|(Image *dst, Vector2 position, const char *text, int fontSize, Color color);|
+Imagerl_rl_DrawTextEx|void|(Image *dst, Vector2 position, Font font, const char *text, float fontSize, float spacing, Color color);|
 ImageFlipVertical|void|(Image *image);|
 ImageFlipHorizontal|void|(Image *image);|
 ImageRotateCW|void|(Image *image);|
@@ -221,13 +221,13 @@ GenImageCellular|Image|(int width, int height, int tileSize);|
 GenTextureMipmaps|void|(Texture2D *texture);|
 SetTextureFilter|void|(Texture2D texture, int filterMode);|
 SetTextureWrap|void|(Texture2D texture, int wrapMode);|
-DrawTexture|void|(Texture2D texture, int posX, int posY, Color tint);|
-DrawTextureV|void|(Texture2D texture, Vector2 position, Color tint);|
-DrawTextureEx|void|(Texture2D texture, Vector2 position, float rotation, float scale, Color tint);|
-DrawTextureRec|void|(Texture2D texture, Rectangle sourceRec, Vector2 position, Color tint);|
-DrawTextureQuad|void|(Texture2D texture, Vector2 tiling, Vector2 offset, Rectangle quad, Color tint);|
-DrawTexturePro|void|(Texture2D texture, Rectangle sourceRec, Rectangle destRec, Vector2 origin, float rotation, Color tint);|
-DrawTextureNPatch|void|(Texture2D texture, NPatchInfo nPatchInfo, Rectangle destRec, Vector2 origin, float rotation, Color tint);|
+rl_DrawTexture|void|(Texture2D texture, int posX, int posY, Color tint);|
+rl_DrawTextureV|void|(Texture2D texture, Vector2 position, Color tint);|
+rl_DrawTextureEx|void|(Texture2D texture, Vector2 position, float rotation, float scale, Color tint);|
+rl_DrawTextureRec|void|(Texture2D texture, Rectangle sourceRec, Vector2 position, Color tint);|
+rl_DrawTextureQuad|void|(Texture2D texture, Vector2 tiling, Vector2 offset, Rectangle quad, Color tint);|
+rl_DrawTexturePro|void|(Texture2D texture, Rectangle sourceRec, Rectangle destRec, Vector2 origin, float rotation, Color tint);|
+rl_DrawTextureNPatch|void|(Texture2D texture, NPatchInfo nPatchInfo, Rectangle destRec, Vector2 origin, float rotation, Color tint);|
 GetFontDefault|Font|(void);|
 LoadFont|Font|(const char *fileName);|
 LoadFontEx|Font|(const char *fileName, int fontSize, int *fontChars, int charsCount);|
@@ -236,10 +236,10 @@ LoadFontData|CharInfo *|(const char *fileName, int fontSize, int *fontChars, int
 GenImageFontAtlas|Image|(CharInfo *chars, int charsCount, int fontSize, int padding, int packMethod);|
 UnloadFont|void|(Font font);|
 DrawFPS|void|(int posX, int posY);|
-DrawText|void|(const char *text, int posX, int posY, int fontSize, Color color);|
-DrawTextEx|void|(Font font, const char *text, Vector2 position, float fontSize, float spacing, Color tint);|
-DrawTextRec|void|(Font font, const char *text, Rectangle rec, float fontSize, float spacing, bool wordWrap, Color tint);|
-DrawTextRecEx|void|(Font font, const char *text, Rectangle rec, float fontSize, float spacing, bool wordWrap, Color tint, int selectStart, int selectLength, Color selectText, Color selectBack);|
+rl_DrawText|void|(const char *text, int posX, int posY, int fontSize, Color color);|
+rl_rl_DrawTextEx|void|(Font font, const char *text, Vector2 position, float fontSize, float spacing, Color tint);|
+rl_DrawTextRec|void|(Font font, const char *text, Rectangle rec, float fontSize, float spacing, bool wordWrap, Color tint);|
+rl_DrawTextRecEx|void|(Font font, const char *text, Rectangle rec, float fontSize, float spacing, bool wordWrap, Color tint, int selectStart, int selectLength, Color selectText, Color selectBack);|
 MeasureText|int|(const char *text, int fontSize);|
 MeasureTextEx|Vector2|(Font font, const char *text, float fontSize, float spacing);|
 GetGlyphIndex|int|(Font font, int character);|
@@ -358,7 +358,7 @@ UnloadWave|void|(Wave wave);|
 UnloadSound|void|(Sound sound);|
 ExportWave|void|(Wave wave, const char *fileName);|
 ExportWaveAsCode|void|(Wave wave, const char *fileName);|
-PlaySound|void|(Sound sound);|
+rl_PlaySound|void|(Sound sound);|
 PauseSound|void|(Sound sound);|
 ResumeSound|void|(Sound sound);|
 StopSound|void|(Sound sound);|

@@ -31,7 +31,7 @@ int main(void)
         LIGHTGRAY, GRAY, DARKGRAY, BLACK };
 
     // Define colorsRecs data (for every rectangle)
-    RlibRectangle colorsRecs[MAX_COLORS_COUNT] = { 0 };
+    rl_Rectangle colorsRecs[MAX_COLORS_COUNT] = { 0 };
 
     for (int i = 0; i < MAX_COLORS_COUNT; i++)
     {
@@ -47,7 +47,7 @@ int main(void)
     float brushSize = 20.0f;
     bool mouseWasPressed = false;
 
-    RlibRectangle btnSaveRec = { 750, 10, 40, 30 };
+    rl_Rectangle btnSaveRec = { 750, 10, 40, 30 };
     bool btnSaveMouseHover = false;
     bool showSaveMessage = false;
     int saveMessageCounter = 0;
@@ -146,7 +146,7 @@ int main(void)
         // NOTE: Saving painted texture to a default named image
         if ((btnSaveMouseHover && IsMouseButtonReleased(MOUSE_BUTTON_LEFT)) || IsKeyPressed(KEY_S))
         {
-            Image image = LoadImageFromTexture(target.texture);
+            Image image = rl_LoadImageFromTexture(target.texture);
             ImageFlipVertical(&image);
             ExportImage(image, "my_amazing_texture_painting.png");
             UnloadImage(image);
@@ -172,7 +172,7 @@ int main(void)
         ClearBackground(RAYWHITE);
 
         // NOTE: Render texture must be y-flipped due to default OpenGL coordinates (left-bottom)
-        DrawTextureRec(target.texture, (RlibRectangle) { 0, 0, (float)target.texture.width, (float)-target.texture.height }, (Vector2) { 0, 0 }, WHITE);
+        rl_DrawTextureRec(target.texture, (rl_Rectangle) { 0, 0, (float)target.texture.width, (float)-target.texture.height }, (Vector2) { 0, 0 }, WHITE);
 
         // Draw drawing circle for reference
         if (mousePos.y > 50)
@@ -191,19 +191,19 @@ int main(void)
 
         if (colorMouseHover >= 0) DrawRectangleRec(colorsRecs[colorMouseHover], Fade(WHITE, 0.6f));
 
-        DrawRectangleLinesEx((RlibRectangle){ colorsRecs[colorSelected].x - 2, colorsRecs[colorSelected].y - 2,
+        DrawRectangleLinesEx((rl_Rectangle){ colorsRecs[colorSelected].x - 2, colorsRecs[colorSelected].y - 2,
                              colorsRecs[colorSelected].width + 4, colorsRecs[colorSelected].height + 4 }, 2, BLACK);
 
         // Draw save image button
         DrawRectangleLinesEx(btnSaveRec, 2, btnSaveMouseHover ? RED : BLACK);
-        DrawText("SAVE!", 755, 20, 10, btnSaveMouseHover ? RED : BLACK);
+        rl_DrawText("SAVE!", 755, 20, 10, btnSaveMouseHover ? RED : BLACK);
 
         // Draw save image message
         if (showSaveMessage)
         {
             DrawRectangle(0, 0, GetScreenWidth(), GetScreenHeight(), Fade(RAYWHITE, 0.8f));
             DrawRectangle(0, 150, GetScreenWidth(), 80, BLACK);
-            DrawText("IMAGE SAVED:  my_amazing_texture_painting.png", 150, 180, 20, RAYWHITE);
+            rl_DrawText("IMAGE SAVED:  my_amazing_texture_painting.png", 150, 180, 20, RAYWHITE);
         }
 
         EndDrawing();
@@ -214,7 +214,7 @@ int main(void)
     //--------------------------------------------------------------------------------------
     UnloadRenderTexture(target);    // Unload render texture
 
-    RlibCloseWindow();                  // Close window and OpenGL context
+    rl_CloseWindow();                  // Close window and OpenGL context
     //--------------------------------------------------------------------------------------
 
     return 0;

@@ -109,13 +109,13 @@ int main(void)
 
             EndMode3D();
 
-            DrawText(TextFormat("%2.3f", v1.x), 20, 20, 20, (v1.x == v2.x)? GREEN: BLACK);
-            DrawText(TextFormat("%2.3f", v1.y), 20, 40, 20, (v1.y == v2.y)? GREEN: BLACK);
-            DrawText(TextFormat("%2.3f", v1.z), 20, 60, 20, (v1.z == v2.z)? GREEN: BLACK);
+            rl_DrawText(TextFormat("%2.3f", v1.x), 20, 20, 20, (v1.x == v2.x)? GREEN: BLACK);
+            rl_DrawText(TextFormat("%2.3f", v1.y), 20, 40, 20, (v1.y == v2.y)? GREEN: BLACK);
+            rl_DrawText(TextFormat("%2.3f", v1.z), 20, 60, 20, (v1.z == v2.z)? GREEN: BLACK);
 
-            DrawText(TextFormat("%2.3f", v2.x), 200, 20, 20, (v1.x == v2.x)? GREEN: BLACK);
-            DrawText(TextFormat("%2.3f", v2.y), 200, 40, 20, (v1.y == v2.y)? GREEN: BLACK);
-            DrawText(TextFormat("%2.3f", v2.z), 200, 60, 20, (v1.z == v2.z)? GREEN: BLACK);
+            rl_DrawText(TextFormat("%2.3f", v2.x), 200, 20, 20, (v1.x == v2.x)? GREEN: BLACK);
+            rl_DrawText(TextFormat("%2.3f", v2.y), 200, 40, 20, (v1.y == v2.y)? GREEN: BLACK);
+            rl_DrawText(TextFormat("%2.3f", v2.z), 200, 60, 20, (v1.z == v2.z)? GREEN: BLACK);
 
         EndDrawing();
         //----------------------------------------------------------------------------------
@@ -125,7 +125,7 @@ int main(void)
     //--------------------------------------------------------------------------------------
     UnloadModel(model);   // Unload model data (mesh and materials)
 
-    RlibCloseWindow();        // Close window and OpenGL context
+    rl_CloseWindow();        // Close window and OpenGL context
     //--------------------------------------------------------------------------------------
 
     return 0;
