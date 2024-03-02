@@ -59,7 +59,7 @@ int main(void)
 
             // Start drawing with default shader
 
-            DrawText("USING DEFAULT SHADER", 20, 40, 10, RED);
+            rl_DrawText("USING DEFAULT SHADER", 20, 40, 10, RED);
 
             DrawCircle(80, 120, 35, DARKBLUE);
             DrawCircleGradient(80, 220, 60, GREEN, SKYBLUE);
@@ -69,7 +69,7 @@ int main(void)
             // Activate our custom shader to be applied on next shapes/textures drawings
             BeginShaderMode(shader);
 
-                DrawText("USING CUSTOM SHADER", 190, 40, 10, RED);
+                rl_DrawText("USING CUSTOM SHADER", 190, 40, 10, RED);
 
                 DrawRectangle(250 - 60, 90, 120, 60, RED);
                 DrawRectangleGradientH(250 - 90, 170, 180, 130, MAROON, GOLD);
@@ -78,7 +78,7 @@ int main(void)
             // Activate our default shader for next drawings
             EndShaderMode();
 
-            DrawText("USING DEFAULT SHADER", 370, 40, 10, RED);
+            rl_DrawText("USING DEFAULT SHADER", 370, 40, 10, RED);
 
             DrawTriangle((Vector2){430, 80},
                          (Vector2){430 - 60, 150},
@@ -93,12 +93,12 @@ int main(void)
             // Activate our custom shader to be applied on next shapes/textures drawings
             BeginShaderMode(shader);
 
-                DrawTexture(fudesumi, 500, -30, WHITE);    // Using custom shader
+                rl_DrawTexture(fudesumi, 500, -30, WHITE);    // Using custom shader
 
             // Activate our default shader for next drawings
             EndShaderMode();
 
-            DrawText("(c) Fudesumi sprite by Eiden Marsal", 380, screenHeight - 20, 10, GRAY);
+            rl_DrawText("(c) Fudesumi sprite by Eiden Marsal", 380, screenHeight - 20, 10, GRAY);
 
         EndDrawing();
         //----------------------------------------------------------------------------------
@@ -109,7 +109,7 @@ int main(void)
     UnloadShader(shader);       // Unload shader
     UnloadTexture(fudesumi);    // Unload texture
 
-    RlibCloseWindow();              // Close window and OpenGL context
+    rl_CloseWindow();              // Close window and OpenGL context
     //--------------------------------------------------------------------------------------
 
     return 0;

@@ -24,16 +24,16 @@ int main(void)
 
     // NOTE: Textures MUST be loaded after Window initialization (OpenGL context is required)
 
-    Image cat = LoadImage("resources/cat.png");             // Load image in CPU memory (RAM)
-    ImageCrop(&cat, (RlibRectangle){ 100, 10, 280, 380 });      // Crop an image piece
+    Image cat = rl_LoadImage("resources/cat.png");             // Load image in CPU memory (RAM)
+    ImageCrop(&cat, (rl_Rectangle){ 100, 10, 280, 380 });      // Crop an image piece
     ImageFlipHorizontal(&cat);                              // Flip cropped image horizontally
     ImageResize(&cat, 150, 200);                            // Resize flipped-cropped image
 
-    Image parrots = LoadImage("resources/parrots.png");     // Load image in CPU memory (RAM)
+    Image parrots = rl_LoadImage("resources/parrots.png");     // Load image in CPU memory (RAM)
 
     // Draw one image over the other with a scaling of 1.5f
-    ImageDraw(&parrots, cat, (RlibRectangle){ 0, 0, (float)cat.width, (float)cat.height }, (RlibRectangle){ 30, 40, cat.width*1.5f, cat.height*1.5f }, WHITE);
-    ImageCrop(&parrots, (RlibRectangle){ 0, 50, (float)parrots.width, (float)parrots.height - 100 }); // Crop resulting image
+    ImageDraw(&parrots, cat, (rl_Rectangle){ 0, 0, (float)cat.width, (float)cat.height }, (rl_Rectangle){ 30, 40, cat.width*1.5f, cat.height*1.5f }, WHITE);
+    ImageCrop(&parrots, (rl_Rectangle){ 0, 50, (float)parrots.width, (float)parrots.height - 100 }); // Crop resulting image
 
     // Draw on the image with a few image draw methods
     ImageDrawPixel(&parrots, 10, 10, RAYWHITE);
@@ -46,7 +46,7 @@ int main(void)
     Font font = LoadFont("resources/custom_jupiter_crash.png");
 
     // Draw over image using custom font
-    ImageDrawTextEx(&parrots, font, "PARROTS & CAT", (Vector2){ 300, 230 }, (float)font.baseSize, -2, WHITE);
+    Imagerl_rl_DrawTextEx(&parrots, font, "PARROTS & CAT", (Vector2){ 300, 230 }, (float)font.baseSize, -2, WHITE);
 
     UnloadFont(font);       // Unload custom font (already drawn used on image)
 
@@ -70,11 +70,11 @@ int main(void)
 
             ClearBackground(RAYWHITE);
 
-            DrawTexture(texture, screenWidth/2 - texture.width/2, screenHeight/2 - texture.height/2 - 40, WHITE);
+            rl_DrawTexture(texture, screenWidth/2 - texture.width/2, screenHeight/2 - texture.height/2 - 40, WHITE);
             DrawRectangleLines(screenWidth/2 - texture.width/2, screenHeight/2 - texture.height/2 - 40, texture.width, texture.height, DARKGRAY);
 
-            DrawText("We are drawing only one texture from various images composed!", 240, 350, 10, DARKGRAY);
-            DrawText("Source images have been cropped, scaled, flipped and copied one over the other.", 190, 370, 10, DARKGRAY);
+            rl_DrawText("We are drawing only one texture from various images composed!", 240, 350, 10, DARKGRAY);
+            rl_DrawText("Source images have been cropped, scaled, flipped and copied one over the other.", 190, 370, 10, DARKGRAY);
 
         EndDrawing();
         //----------------------------------------------------------------------------------
@@ -84,7 +84,7 @@ int main(void)
     //--------------------------------------------------------------------------------------
     UnloadTexture(texture);       // Texture unloading
 
-    RlibCloseWindow();                // Close window and OpenGL context
+    rl_CloseWindow();                // Close window and OpenGL context
     //--------------------------------------------------------------------------------------
 
     return 0;

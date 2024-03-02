@@ -56,10 +56,10 @@ int main(void)
             ClearBackground(RAYWHITE);
 
             DrawCircleV(ballPosition, (float)ballRadius, MAROON);
-            DrawText("PRESS SPACE to PAUSE BALL MOVEMENT", 10, GetScreenHeight() - 25, 20, LIGHTGRAY);
+            rl_DrawText("PRESS SPACE to PAUSE BALL MOVEMENT", 10, GetScreenHeight() - 25, 20, LIGHTGRAY);
 
             // On pause, we draw a blinking message
-            if (pause && ((framesCounter/30)%2)) DrawText("PAUSED", 350, 200, 30, GRAY);
+            if (pause && ((framesCounter/30)%2)) rl_DrawText("PAUSED", 350, 200, 30, GRAY);
 
             DrawFPS(10, 10);
 
@@ -69,7 +69,7 @@ int main(void)
 
     // De-Initialization
     //---------------------------------------------------------
-    RlibCloseWindow();        // Close window and OpenGL context
+    rl_CloseWindow();        // Close window and OpenGL context
     //----------------------------------------------------------
 
     return 0;

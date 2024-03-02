@@ -2172,7 +2172,7 @@ int _glfwPlatformCreateStandardCursor(_GLFWcursor* cursor, int shape)
             return GLFW_FALSE;
     }
 
-    cursor->win32.handle = LoadImageW(NULL,
+    cursor->win32.handle = LoadImage(NULL,
                                       MAKEINTRESOURCEW(id), IMAGE_CURSOR, 0, 0,
                                       LR_DEFAULTSIZE | LR_SHARED);
     if (!cursor->win32.handle)

@@ -62,8 +62,8 @@ int main(void)
 
             EndMode3D();
 
-            DrawText("Enemy: 100 / 100", (int)cubeScreenPosition.x - MeasureText("Enemy: 100/100", 20)/2, (int)cubeScreenPosition.y, 20, BLACK);
-            DrawText("Text is always on top of the cube", (screenWidth - MeasureText("Text is always on top of the cube", 20))/2, 25, 20, GRAY);
+            rl_DrawText("Enemy: 100 / 100", (int)cubeScreenPosition.x - MeasureText("Enemy: 100/100", 20)/2, (int)cubeScreenPosition.y, 20, BLACK);
+            rl_DrawText("Text is always on top of the cube", (screenWidth - MeasureText("Text is always on top of the cube", 20))/2, 25, 20, GRAY);
 
         EndDrawing();
         //----------------------------------------------------------------------------------
@@ -71,7 +71,7 @@ int main(void)
 
     // De-Initialization
     //--------------------------------------------------------------------------------------
-    RlibCloseWindow();        // Close window and OpenGL context
+    rl_CloseWindow();        // Close window and OpenGL context
     //--------------------------------------------------------------------------------------
 
     return 0;

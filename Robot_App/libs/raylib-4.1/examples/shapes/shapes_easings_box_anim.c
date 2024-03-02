@@ -23,7 +23,7 @@ int main(void)
     InitWindow(screenWidth, screenHeight, "raylib [shapes] example - easings box anim");
 
     // Box variables to be animated with easings
-    RlibRectangle rec = { GetScreenWidth()/2.0f, -100, 100, 100 };
+    rl_Rectangle rec = { GetScreenWidth()/2.0f, -100, 100, 100 };
     float rotation = 0.0f;
     float alpha = 1.0f;
 
@@ -105,7 +105,7 @@ int main(void)
         // Reset animation at any moment
         if (IsKeyPressed(KEY_SPACE))
         {
-            rec = (RlibRectangle){ GetScreenWidth()/2.0f, -100, 100, 100 };
+            rec = (rl_Rectangle){ GetScreenWidth()/2.0f, -100, 100, 100 };
             rotation = 0.0f;
             alpha = 1.0f;
             state = 0;
@@ -121,7 +121,7 @@ int main(void)
 
             DrawRectanglePro(rec, (Vector2){ rec.width/2, rec.height/2 }, rotation, Fade(BLACK, alpha));
 
-            DrawText("PRESS [SPACE] TO RESET BOX ANIMATION!", 10, GetScreenHeight() - 25, 20, LIGHTGRAY);
+            rl_DrawText("PRESS [SPACE] TO RESET BOX ANIMATION!", 10, GetScreenHeight() - 25, 20, LIGHTGRAY);
 
         EndDrawing();
         //----------------------------------------------------------------------------------
@@ -129,7 +129,7 @@ int main(void)
 
     // De-Initialization
     //--------------------------------------------------------------------------------------
-    RlibCloseWindow();        // Close window and OpenGL context
+    rl_CloseWindow();        // Close window and OpenGL context
     //--------------------------------------------------------------------------------------
 
     return 0;

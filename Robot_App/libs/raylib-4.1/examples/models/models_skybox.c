@@ -77,7 +77,7 @@ int main(void)
     }
     else
     {
-        Image img = LoadImage("resources/skybox.png");
+        Image img = rl_LoadImage("resources/skybox.png");
         skybox.materials[0].maps[MATERIAL_MAP_CUBEMAP].texture = LoadTextureCubemap(img, CUBEMAP_LAYOUT_AUTO_DETECT);    // CUBEMAP_LAYOUT_PANORAMA
         UnloadImage(img);
     }
@@ -116,7 +116,7 @@ int main(void)
                     }
                     else
                     {
-                        Image img = LoadImage(droppedFiles[0]);
+                        Image img = rl_LoadImage(droppedFiles[0]);
                         skybox.materials[0].maps[MATERIAL_MAP_CUBEMAP].texture = LoadTextureCubemap(img, CUBEMAP_LAYOUT_AUTO_DETECT);
                         UnloadImage(img);
                     }
@@ -148,10 +148,10 @@ int main(void)
 
             EndMode3D();
             
-            //DrawTextureEx(panorama, (Vector2){ 0, 0 }, 0.0f, 0.5f, WHITE);
+            //rl_DrawTextureEx(panorama, (Vector2){ 0, 0 }, 0.0f, 0.5f, WHITE);
 
-            if (useHDR) DrawText(TextFormat("Panorama image from hdrihaven.com: %s", GetFileName(skyboxFileName)), 10, GetScreenHeight() - 20, 10, BLACK);
-            else DrawText(TextFormat(": %s", GetFileName(skyboxFileName)), 10, GetScreenHeight() - 20, 10, BLACK);
+            if (useHDR) rl_DrawText(TextFormat("Panorama image from hdrihaven.com: %s", GetFileName(skyboxFileName)), 10, GetScreenHeight() - 20, 10, BLACK);
+            else rl_DrawText(TextFormat(": %s", GetFileName(skyboxFileName)), 10, GetScreenHeight() - 20, 10, BLACK);
 
             DrawFPS(10, 10);
 
@@ -166,7 +166,7 @@ int main(void)
 
     UnloadModel(skybox);        // Unload skybox model
 
-    RlibCloseWindow();              // Close window and OpenGL context
+    rl_CloseWindow();              // Close window and OpenGL context
     //--------------------------------------------------------------------------------------
 
     return 0;

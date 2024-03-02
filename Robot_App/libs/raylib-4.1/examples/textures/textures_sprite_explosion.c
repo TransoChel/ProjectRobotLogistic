@@ -37,7 +37,7 @@ int main(void)
     int currentFrame = 0;
     int currentLine = 0;
 
-    RlibRectangle frameRec = { 0, 0, frameWidth, frameHeight };
+    rl_Rectangle frameRec = { 0, 0, frameWidth, frameHeight };
     Vector2 position = { 0.0f, 0.0f };
 
     bool active = false;
@@ -61,7 +61,7 @@ int main(void)
             position.x -= frameWidth/2.0f;
             position.y -= frameHeight/2.0f;
 
-            PlaySound(fxBoom);
+            rl_PlaySound(fxBoom);
         }
 
         // Compute explosion animation frames
@@ -100,7 +100,7 @@ int main(void)
             ClearBackground(RAYWHITE);
 
             // Draw explosion required frame rectangle
-            if (active) DrawTextureRec(explosion, frameRec, position, WHITE);
+            if (active) rl_DrawTextureRec(explosion, frameRec, position, WHITE);
 
         EndDrawing();
         //----------------------------------------------------------------------------------
@@ -113,7 +113,7 @@ int main(void)
 
     CloseAudioDevice();
 
-    RlibCloseWindow();              // Close window and OpenGL context
+    rl_CloseWindow();              // Close window and OpenGL context
     //--------------------------------------------------------------------------------------
 
     return 0;

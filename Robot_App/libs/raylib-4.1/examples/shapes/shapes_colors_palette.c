@@ -32,7 +32,7 @@ int main(void)
         "DARKBROWN", "GRAY", "RED", "GOLD", "LIME", "BLUE", "VIOLET", "BROWN",
         "LIGHTGRAY", "PINK", "YELLOW", "GREEN", "SKYBLUE", "PURPLE", "BEIGE" };
 
-    RlibRectangle colorsRecs[MAX_COLORS_COUNT] = { 0 };     // RlibRectangles array
+    rl_Rectangle colorsRecs[MAX_COLORS_COUNT] = { 0 };     // rl_Rectangles array
 
     // Fills colorsRecs data (for every rectangle)
     for (int i = 0; i < MAX_COLORS_COUNT; i++)
@@ -70,8 +70,8 @@ int main(void)
 
             ClearBackground(RAYWHITE);
 
-            DrawText("raylib colors palette", 28, 42, 20, BLACK);
-            DrawText("press SPACE to see all colors", GetScreenWidth() - 180, GetScreenHeight() - 40, 10, GRAY);
+            rl_DrawText("raylib colors palette", 28, 42, 20, BLACK);
+            rl_DrawText("press SPACE to see all colors", GetScreenWidth() - 180, GetScreenHeight() - 40, 10, GRAY);
 
             for (int i = 0; i < MAX_COLORS_COUNT; i++)    // Draw all rectangles
             {
@@ -81,7 +81,7 @@ int main(void)
                 {
                     DrawRectangle((int)colorsRecs[i].x, (int)(colorsRecs[i].y + colorsRecs[i].height - 26), (int)colorsRecs[i].width, 20, BLACK);
                     DrawRectangleLinesEx(colorsRecs[i], 6, Fade(BLACK, 0.3f));
-                    DrawText(colorNames[i], (int)(colorsRecs[i].x + colorsRecs[i].width - MeasureText(colorNames[i], 10) - 12),
+                    rl_DrawText(colorNames[i], (int)(colorsRecs[i].x + colorsRecs[i].width - MeasureText(colorNames[i], 10) - 12),
                         (int)(colorsRecs[i].y + colorsRecs[i].height - 20), 10, colors[i]);
                 }
             }
@@ -92,7 +92,7 @@ int main(void)
 
     // De-Initialization
     //--------------------------------------------------------------------------------------
-    RlibCloseWindow();                // Close window and OpenGL context
+    rl_CloseWindow();                // Close window and OpenGL context
     //--------------------------------------------------------------------------------------
 
     return 0;

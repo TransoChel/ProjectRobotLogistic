@@ -118,7 +118,7 @@ int main(void)
             EndMode3D();
 
             DrawRectangle(16, 698, MeasureText(TextFormat("Frame: %i", framesCounter), 20) + 8, 42, BLUE);
-            DrawText(TextFormat("Frame: %i", framesCounter), 20, 700, 20, WHITE);
+            rl_DrawText(TextFormat("Frame: %i", framesCounter), 20, 700, 20, WHITE);
 
             DrawFPS(10, 10);
 
@@ -137,7 +137,7 @@ int main(void)
 
     UnloadShader(shader);       // Unload shader
 
-    RlibCloseWindow();              // Close window and OpenGL context
+    rl_CloseWindow();              // Close window and OpenGL context
     //--------------------------------------------------------------------------------------
 
     return 0;

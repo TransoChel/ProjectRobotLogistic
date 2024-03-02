@@ -629,7 +629,7 @@ The different dithering modes include the following, in order of efficiency:
     | Type      | Enum Token               |
     +-----------+--------------------------+
     | None      | ma_dither_mode_none      |
-    | RlibRectangle | ma_dither_mode_rectangle |
+    | rl_Rectangle | ma_dither_mode_rectangle |
     | Triangle  | ma_dither_mode_triangle  |
     +-----------+--------------------------+
 

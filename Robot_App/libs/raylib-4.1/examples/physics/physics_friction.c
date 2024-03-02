@@ -118,14 +118,14 @@ int main(void)
 
             DrawRectangle(0, screenHeight - 49, screenWidth, 49, BLACK);
 
-            DrawText("Friction amount", (screenWidth - MeasureText("Friction amount", 30))/2.0f, 75, 30, WHITE);
-            DrawText("0.1", (int)bodyA->position.x - MeasureText("0.1", 20)/2, (int)bodyA->position.y - 7, 20, WHITE);
-            DrawText("1", (int)bodyB->position.x - MeasureText("1", 20)/2, (int)bodyB->position.y - 7, 20, WHITE);
+            rl_DrawText("Friction amount", (screenWidth - MeasureText("Friction amount", 30))/2.0f, 75, 30, WHITE);
+            rl_DrawText("0.1", (int)bodyA->position.x - MeasureText("0.1", 20)/2, (int)bodyA->position.y - 7, 20, WHITE);
+            rl_DrawText("1", (int)bodyB->position.x - MeasureText("1", 20)/2, (int)bodyB->position.y - 7, 20, WHITE);
 
-            DrawText("Press 'R' to reset example", 10, 10, 10, WHITE);
+            rl_DrawText("Press 'R' to reset example", 10, 10, 10, WHITE);
 
-            DrawText("Physac", logoX, logoY, 30, WHITE);
-            DrawText("Powered by", logoX + 50, logoY - 7, 10, WHITE);
+            rl_DrawText("Physac", logoX, logoY, 30, WHITE);
+            rl_DrawText("Powered by", logoX + 50, logoY - 7, 10, WHITE);
 
         EndDrawing();
         //----------------------------------------------------------------------------------
@@ -135,7 +135,7 @@ int main(void)
     //--------------------------------------------------------------------------------------
     ClosePhysics();       // Unitialize physics
 
-    RlibCloseWindow();        // Close window and OpenGL context
+    rl_CloseWindow();        // Close window and OpenGL context
     //--------------------------------------------------------------------------------------
 
     return 0;

@@ -55,16 +55,16 @@ Detailed changes:
 [shapes] ADDED: DrawLineBezierCubic() (#2021) by @SAOMDVN
 [textures] ADDED: GetImageColor() #2024
 [textures] REMOVED: GenImagePerlinNoise() 
-[textures] RENAMED: GetTextureData() to LoadImageFromTexture()
-[textures] RENAMED: GetScreenData() to LoadImageFromScreen()
+[textures] RENAMED: GetTextureData() to rl_LoadImageFromTexture()
+[textures] RENAMED: GetScreenData() to rl_LoadImageFromScreen()
 [textures] REVIEWED: ExportImage() to use SaveFileData() (#1779)
-[textures] REVIEWED: LoadImageAnim() #2005
+[textures] REVIEWED: rl_LoadImageAnim() #2005
 [text] ADDED: Security check in case of not valid font
 [text] ADDED: `GetGlyphInfo()` to get glyph info for a specific codepoint
 [text] ADDED: `GetGlyphAtlasRec()` to get glyph rectangle within the generated font atlas
-[text] ADDED: DrawTextPro() with text rotation support, WARNING: DrawTextPro() requires including `rlgl.h`, before it was only dependant on `textures` module.
+[text] ADDED: rl_DrawTextPro() with text rotation support, WARNING: rl_DrawTextPro() requires including `rlgl.h`, before it was only dependant on `textures` module.
 [text] ADDED: UnloadCodepoints() to safely free loaded codepoints
-[text] REMOVED: DrawTextRec() and DrawTextRecEx(), moved to example, those functions could be very specific depending on user needs so it's better to give the user the full source in case of special requirements instead of allowing a function with +10 input parameters.
+[text] REMOVED: rl_DrawTextRec() and rl_DrawTextRecEx(), moved to example, those functions could be very specific depending on user needs so it's better to give the user the full source in case of special requirements instead of allowing a function with +10 input parameters.
 [text] RENAMED: struct `CharInfo` to `GlyphInfo`, actually that's the correct naming for the data contained. It contains the character glyph metrics and the glyph image; in the past it also contained rectangle within the font atlas but that data has been moved to `Font` struct directly, so, `GlyphInfo` is a more correct name.
 [text] RENAMED: `CodepointToUtf8()` to `CodepointToUTF8()`, capitalization of UTF-8 is the correct form, it would also require de hyphen but it can be omitted in this case.
 [text] RENAMED: `TextToUtf8()` to `TextCodepointsToUTF8` for consistency and more detail on the functionality.
@@ -199,11 +199,11 @@ Detailed changes:
 [shapes] REDESIGNED: DrawCircleSectorLines(), to use float params
 [shapes] REDESIGNED: DrawRing(), to use float params
 [shapes] REDESIGNED: DrawRingLines(), to use float params
-[textures] ADDED: DrawTexturePoly() and example (#1677) by @chriscamacho
+[textures] ADDED: rl_DrawTexturePoly() and example (#1677) by @chriscamacho
 [textures] ADDED: UnloadImageColors() for allocs consistency
-[textures] RENAMED: GetImageData() to LoadImageColors()
+[textures] RENAMED: GetImageData() to rl_LoadImageColors()
 [textures] REVIEWED: ImageClearBackground() and ImageDrawRectangleRec() (#1487) by @JeffM2501
-[textures] REVIEWED: DrawTexturePro() and DrawRectanglePro() transformations (#1632) by @ChrisDill
+[textures] REVIEWED: rl_DrawTexturePro() and DrawRectanglePro() transformations (#1632) by @ChrisDill
 [text] REDESIGNED: DrawFPS()
 [models] ADDED: UploadMesh() (#1529)
 [models] ADDED: UpdateMeshBuffer()
@@ -308,30 +308,30 @@ Detailed changes:
 [text] REVIEWED: GenImageFontAtlas(), fixed offset (#1171) 
 [text] REDESIGNED: LoadFontData(), reviewed input parameters
 [text] REDESIGNED: LoadFontDefault(), some code simplifications
-[text] REDESIGNED: LoadFontFromImage(), avoid LoadImageEx()
+[text] REDESIGNED: LoadFontFromImage(), avoid rl_LoadImageEx()
 [text] REDESIGNED: LoadFontData(), avoid GenImageColor(), ImageFormat()
 [text] REDESIGNED: LoadBMFont(), avoid ImageCopy(), ImageFormat(), ImageAlphaMask()
 [textures] Move Color functions from [core] to [textures] module
 [textures] ADDED: ColorAlphaBlend()
 [textures] ADDED: GetPixelColor()
 [textures] ADDED: SetPixelColor()
-[textures] ADDED: LoadImageFromMemory() (#1327)
-[textures] ADDED: LoadImageAnim() to load animated sequence of images
-[textures] ADDED: DrawTextureTiled() (#1291) - @Demizdor
+[textures] ADDED: rl_LoadImageFromMemory() (#1327)
+[textures] ADDED: rl_LoadImageAnim() to load animated sequence of images
+[textures] ADDED: rl_DrawTextureTiled() (#1291) - @Demizdor
 [textures] ADDED: UpdateTextureRec()
 [textures] ADDED: UnloadImageColors(), UnloadImagePalette(), UnloadWaveSamples()
 [textures] REMOVED: Config flag: SUPPORT_IMAGE_DRAWING 
-[textures] REMOVED: LoadImageEx()
-[textures] REMOVED: LoadImagePro() 
+[textures] REMOVED: rl_LoadImageEx()
+[textures] REMOVED: rl_LoadImagePro() 
 [textures] REMOVED: GetImageDataNormalized(), not exposed in the API 
 [textures] RENAMED: ImageExtractPalette() to GetImagePalette()
 [textures] RENAMED: Fade() to ColorAlpha(), added #define for compatibility
-[textures] RENAMED: GetImageData() -> LoadImageColors()
-[textures] RENAMED: GetImagePalette() -> LoadImagePalette()
+[textures] RENAMED: GetImageData() -> rl_LoadImageColors()
+[textures] RENAMED: GetImagePalette() -> rl_LoadImagePalette()
 [textures] RENAMED: GetWaveData() -> LoadWaveSamples()
 [textures] REVIEWED: GetPixelDataSize() to consider compressed data properly
 [textures] REVIEWED: GetTextureData(), allow retrieving 32bit float data
-[textures] REVIEWED: ImageDrawText*() params order
+[textures] REVIEWED: Imagerl_DrawText*() params order
 [textures] REVIEWED: ColorAlphaBlend(), support tint color
 [textures] REVIEWED: ColorAlphaBlend(), integers-version, optimized (#1218)
 [textures] REVIEWED: ImageDraw(), consider negative source offset properly (#1283)
@@ -527,7 +527,7 @@ Detailed changes:
 [text] ADDED: TextCopy() - Copy one string to another, returns bytes copied
 [text] ADDED: GetCodepoints() - Get all codepoints in a string
 [text] ADDED: CodepointToUtf8() - Encode codepoint into utf8 text
-[text] ADDED: DrawTextCodepoint() - Draw one character (codepoint)
+[text] ADDED: rl_DrawTextCodepoint() - Draw one character (codepoint)
 [text] RENAMED: LoadDefaultFont() -> LoadFontDefault()
 [text] RENAMED: TextCountCodepoints() -> GetCodepointsCount()
 [text] REVIEWED: TextFormat(), to support caching, by @brankoku
@@ -647,8 +647,8 @@ Detailed changes:
 [textures] ADDED: LoadTextureCubemap() - Load cubemap from image, multiple image cubemap layouts supported
 [textures] ADDED: ImageExtractPalette() - Extract color palette from image to maximum size (memory should be freed)
 [textures] ADDED: ImageDrawRectangleLines() - Draw rectangle lines within an image
-[textures] ADDED: DrawTextureQuad() - Draw texture quad with tiling and offset parameters
-[textures] ADDED: DrawTextureNPatch() - Draws a texture (or part of it) that stretches or shrinks nicely
+[textures] ADDED: rl_DrawTextureQuad() - Draw texture quad with tiling and offset parameters
+[textures] ADDED: rl_DrawTextureNPatch() - Draws a texture (or part of it) that stretches or shrinks nicely
 [models] REVIEWED: LoadMesh() -> LoadMeshes() - Support multiple meshes loading
 [models] REVIEWED: LoadMaterial() -> LoadMaterials() - Support multiple materials loading
 [models] REVIEWED: ExportMesh() - Reorder parameters
@@ -676,8 +676,8 @@ Detailed changes:
 [text] RENAMED: FormatText() -> TextFormat()
 [text] RENAMED: SubText() -> TextSubtext()
 [text] ADDED: LoadFontFromImage() - Load font from Image (XNA style)
-[text] ADDED: DrawTextRec() - Draw text using font inside rectangle limits
-[text] ADDED: DrawTextRecEx() - Draw text using font inside rectangle limits with support for text selection
+[text] ADDED: rl_DrawTextRec() - Draw text using font inside rectangle limits
+[text] ADDED: rl_DrawTextRecEx() - Draw text using font inside rectangle limits with support for text selection
 [text] ADDED: TextIsEqual() - Check if two text string are equal
 [text] ADDED: TextLength() - Get text length, checks for '\0' ending
 [text] ADDED: TextReplace() - Replace text string (memory should be freed!)
@@ -822,7 +822,7 @@ Detailed changes:
 [text] ADDED: GenImageFontAtlas()
 [text] ADDED: LoadFontData() to load data from TTF file
 [text] REMOVED: LoadTTF() internal function
-[text] REVIEWED: DrawTextEx() - avoid rendering SPACE character!
+[text] REVIEWED: rl_rl_DrawTextEx() - avoid rendering SPACE character!
 [text] RENAMED: GetDefaultFont() to GetFontDefault()
 [rlgl] ADDED: rlCheckBufferLimit()
 [rlgl] ADDED: LoadShaderCode()
@@ -996,10 +996,10 @@ other changes:
 [shapes] Added function: DrawLineEx(), draw line with QUADS, supports custom line thick
 [shapes] Added function: DrawLineBezier(), draw a line using cubic-bezier curves in-out
 [shapes] Added function: DrawRectanglePro(), draw a color-filled rectangle with pro parameters
-[textures] Removed function: LoadImageFromRES(), redesigning custom RRES fileformat
+[textures] Removed function: rl_LoadImageFromRES(), redesigning custom RRES fileformat
 [textures] Removed function: LoadTextureFromRES(), redesigning custom RRES fileformat
-[textures] Removed function: LoadTextureEx(), use instead Image -> LoadImagePro(), LoadImageEx()
-[textures] Added function: LoadImagePro()), load image from raw data with parameters
+[textures] Removed function: LoadTextureEx(), use instead Image -> rl_LoadImagePro(), rl_LoadImageEx()
+[textures] Added function: rl_LoadImagePro()), load image from raw data with parameters
 [textures] Review TraceLog() message when image file not found
 [text] Renamed function: LoadSpriteFontTTF() to LoadSpriteFontEx(), for consistency
 [text] Removed rBMF fileformat support, replaced by .png
@@ -1073,7 +1073,7 @@ other changes:
 [rlgl] Added IsVrSimulator() to check for VR simulator
 [shapes] Corrected issue on DrawPolyEx()
 [textures] Simplified supported image formats support
-[textures] Improved text drawing within an image: ImageDrawText()
+[textures] Improved text drawing within an image: Imagerl_DrawText()
 [textures] Support image alpha mixing: ImageAlphaMask()
 [textures] Support textures filtering: SetTextureFilter()
 [textures] Support textures wrap modes: SetTextureWrap()
@@ -1158,8 +1158,8 @@ other changes:
           UpdateDefaultBuffers() - DrawDefaultBuffers()
 [shapes] Corrected bug on GetCollisionRec()
 [textures] Added support for Nearest-Neighbor image scaling
-[textures] Added functions to draw text on image: ImageDrawText(), ImageDrawTextEx()
-[text] Reorganized internal functions: Added LoadImageFont()
+[textures] Added functions to draw text on image: Imagerl_DrawText(), Imagerl_rl_DrawTextEx()
+[text] Reorganized internal functions: Added rl_LoadImageFont()
 [text] Security check for unsupported BMFonts
 [models] Split mesh creation from model loading on heightmap and cubicmap
 [models] Updated BoundingBox collision detections
@@ -1216,7 +1216,7 @@ other changes:
 [core] Android: Reviewed Android App cycle, paused if inactive
 [shaders] Implemented Blinn-Phong lighting shading model
 [textures] Implemented Floyd-Steinberg dithering - ImageDither()
-[text] Added line-break support to DrawText()
+[text] Added line-break support to rl_DrawText()
 [text] Added TrueType Fonts support (using stb_truetype)
 [models] Implement function: CalculateBoundingBox(Mesh mesh)
 [models] Added functions to check Ray collisions
@@ -1251,12 +1251,12 @@ other changes:
 [rlgl] Added check for OpenGL supported extensions
 [rlgl] Added function SetBlenMode() to select some predefined blending modes 
 [core] Added support for drop&drag of external files into running program
-[core] Added functions ShowCursor(), HideCursor(), IsCursorHidden()
+[core] Added functions rl_ShowCursor(), HideCursor(), IsCursorHidden()
 [core] Renamed function SetFlags() to SetConfigFlags()
 [shapes] Simplified some functions to improve performance
 [textures] Review of Image struct to support multiple data formats
-[textures] Added function LoadImageEx() 
-[textures] Added function LoadImageRaw()
+[textures] Added function rl_LoadImageEx() 
+[textures] Added function rl_LoadImageRaw()
 [textures] Added function LoadTextureEx()
 [textures] Simplified function parameters LoadTextureFromImage()
 [textures] Added function GetImageData()
@@ -1332,7 +1332,7 @@ NOTE:
 [rlgl] rlglLoadModel() stores vbo ids on new Model struct
 [textures] Added support for PKM files (ETC1, ETC2 compression support)
 [shapes] DrawRectangleV() - Modified, depending on OGL version uses TRIANGLES or QUADS
-[text] LoadSpriteFont() - Modified to use LoadImage()
+[text] LoadSpriteFont() - Modified to use rl_LoadImage()
 [models] Minor changes on models loading to accomodate to new Model struct
 [audio] PauseMusicStream(), ResumeMusicStream() - Added
 [audio] Reduced music buffer size to avoid stalls on Raspberry Pi
@@ -1375,7 +1375,7 @@ NOTE:
 [textures] Adapt texture GPU loading to use [rlgl]
 [textures] Added support for DDS images (compressed and uncompressed)
 [textures] CreateTexture() - Redesigned to add mipmap automatic generation
-[textures] DrawTexturePro() - Redesigned and corrected bugs
+[textures] rl_DrawTexturePro() - Redesigned and corrected bugs
 [models] Rewrite all 3d-shapes drawing functions to use [rlgl]
 [models] Adapt model loading and drawing to use [rlgl]
 [models] Model struct updated to include texture id
@@ -1400,8 +1400,8 @@ Release:     raylib 1.0.6 (16 March 2014)
 [core] Removed SetPerspective() function, calculated directly
 [core] Unload and reload default font on fullscreen toggle
 [core] Corrected bug gamepad buttons checking if no gamepad available 
-[texture] DrawTextureV() - Added, to draw using Vector2 for position
-[texture] LoadTexture() - Redesigned, now uses LoadImage() + CreateTexture()
+[texture] rl_DrawTextureV() - Added, to draw using Vector2 for position
+[texture] LoadTexture() - Redesigned, now uses rl_LoadImage() + CreateTexture()
 [text] FormatText() - Corrected memory leak bug
 [models] Added Matrix struct and related functions
 [models] DrawBillboard() - Reviewed, now it works!
@@ -1428,7 +1428,7 @@ Release:     raylib 1.0.4 (23 January 2014)
 [utils] New module created with utility functions
 [utils] WritePNG() - Write a PNG file (used by TakeScreenshot() on core)
 [utils] DecompressData() - Added, used for rRES resource data decompresion
-[textures] LoadImageFromRES() - Added, load an image from a rRES resource file
+[textures] rl_LoadImageFromRES() - Added, load an image from a rRES resource file
 [textures] LoadTextureFromRES() - Added, load a texture from a rRES resource file
 [audio] LoadSoundFromRES() - Added, load a sound from a rRES resource file
 [audio] IsPlaying() - Added, check if a sound is currently playing
@@ -1457,7 +1457,7 @@ Release:     raylib 1.0.3 (19 December 2013)
 -----------------------------------------------
 Release:     raylib 1.0.2 (1 December 2013)
 -----------------------------------------------
-[text] GetDefaultFont() - Added, get default SpriteFont to be used on DrawTextEx()
+[text] GetDefaultFont() - Added, get default SpriteFont to be used on rl_rl_DrawTextEx()
 [shapes] CheckCollisionRecs() - Added, check collision between rectangles
 [shapes] CheckCollisionCircles() - Added, check collision between circles
 [shapes] CheckCollisionCircleRec() - Added, check collision circle-rectangle
@@ -1468,7 +1468,7 @@ Release:     raylib 1.0.2 (1 December 2013)
 -----------------------------------------------
 Update:     raylib 1.0.1 (28 November 2013)
 -----------------------------------------------
-[text] DrawText() - Removed spacing parameter
+[text] rl_DrawText() - Removed spacing parameter
 [text] MeasureText() - Removed spacing parameter
 [text] DrawFps() - Renamed to DrawFPS() for coherence with similar function
 [core] IsKeyPressed() - Change functionality, check if key pressed once
@@ -1479,7 +1479,7 @@ Update:     raylib 1.0.1 (28 November 2013)
 [core] IsMouseButtonPressed() - Change functionality, check if mouse button pressed once
 [core] IsMouseButtonUp() - Added, check if mouse button is NOT being pressed
 [core] IsMouseButtonReleased() - Change functionality, check if mouse button released once
-[textures] DrawTexturePro() - Added, texture drawing with 'pro' parameters
+[textures] rl_DrawTexturePro() - Added, texture drawing with 'pro' parameters
 [examples] Function changes applied to ALL examples
 
 -----------------------------------------------

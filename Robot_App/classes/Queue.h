@@ -1,4 +1,5 @@
-#pragma once
+#ifndef QUEUE_H
+#define QUEUE_H
 #include "Request.h"
 #include <vector>
 #include <raylib.h>
@@ -19,3 +20,4 @@ public:
     Queue(std::vector<Request> requests);
     void draw(Vector2 coord, Color color);
 };
+#endif

@@ -65,14 +65,14 @@ int main(void)
 
             ClearBackground(RAYWHITE);
 
-            DrawText(TextFormat("SCORE: %i", score), 280, 130, 40, MAROON);
-            DrawText(TextFormat("HI-SCORE: %i", hiscore), 210, 200, 50, BLACK);
+            rl_DrawText(TextFormat("SCORE: %i", score), 280, 130, 40, MAROON);
+            rl_DrawText(TextFormat("HI-SCORE: %i", hiscore), 210, 200, 50, BLACK);
 
-            DrawText(TextFormat("frames: %i", framesCounter), 10, 10, 20, LIME);
+            rl_DrawText(TextFormat("frames: %i", framesCounter), 10, 10, 20, LIME);
 
-            DrawText("Press R to generate random numbers", 220, 40, 20, LIGHTGRAY);
-            DrawText("Press ENTER to SAVE values", 250, 310, 20, LIGHTGRAY);
-            DrawText("Press SPACE to LOAD values", 252, 350, 20, LIGHTGRAY);
+            rl_DrawText("Press R to generate random numbers", 220, 40, 20, LIGHTGRAY);
+            rl_DrawText("Press ENTER to SAVE values", 250, 310, 20, LIGHTGRAY);
+            rl_DrawText("Press SPACE to LOAD values", 252, 350, 20, LIGHTGRAY);
 
         EndDrawing();
         //----------------------------------------------------------------------------------
@@ -80,7 +80,7 @@ int main(void)
 
     // De-Initialization
     //--------------------------------------------------------------------------------------
-    RlibCloseWindow();        // Close window and OpenGL context
+    rl_CloseWindow();        // Close window and OpenGL context
     //--------------------------------------------------------------------------------------
 
     return 0;

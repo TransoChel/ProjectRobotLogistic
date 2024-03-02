@@ -2,7 +2,6 @@
 #include "../classes/Queue.h"
 #include "../classes/RadioButtonControl.h"
 #include "../classes/TextureButton.h"
-#include "../../robot/robot.h"
 
 enum WindowStatus
 {

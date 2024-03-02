@@ -20,13 +20,13 @@ int main(void)
 
     InitWindow(screenWidth, screenHeight, "raylib [texture] example - image text drawing");
 
-    Image parrots = LoadImage("resources/parrots.png"); // Load image in CPU memory (RAM)
+    Image parrots = rl_LoadImage("resources/parrots.png"); // Load image in CPU memory (RAM)
 
     // TTF Font loading with custom generation parameters
     Font font = LoadFontEx("resources/KAISG.ttf", 64, 0, 0);
 
     // Draw over image using custom font
-    ImageDrawTextEx(&parrots, font, "[Parrots font drawing]", (Vector2){ 20.0f, 20.0f }, (float)font.baseSize, 0.0f, RED);
+    Imagerl_rl_DrawTextEx(&parrots, font, "[Parrots font drawing]", (Vector2){ 20.0f, 20.0f }, (float)font.baseSize, 0.0f, RED);
 
     Texture2D texture = LoadTextureFromImage(parrots);  // Image converted to texture, uploaded to GPU memory (VRAM)
     UnloadImage(parrots);   // Once image has been converted to texture and uploaded to VRAM, it can be unloaded from RAM
@@ -56,15 +56,15 @@ int main(void)
             if (!showFont)
             {
                 // Draw texture with text already drawn inside
-                DrawTextureV(texture, position, WHITE);
+                rl_DrawTextureV(texture, position, WHITE);
 
                 // Draw text directly using sprite font
-                DrawTextEx(font, "[Parrots font drawing]", (Vector2){ position.x + 20,
+                rl_rl_DrawTextEx(font, "[Parrots font drawing]", (Vector2){ position.x + 20,
                            position.y + 20 + 280 }, (float)font.baseSize, 0.0f, WHITE);
             }
-            else DrawTexture(font.texture, screenWidth/2 - font.texture.width/2, 50, BLACK);
+            else rl_DrawTexture(font.texture, screenWidth/2 - font.texture.width/2, 50, BLACK);
 
-            DrawText("PRESS SPACE to SHOW FONT ATLAS USED", 290, 420, 10, DARKGRAY);
+            rl_DrawText("PRESS SPACE to SHOW FONT ATLAS USED", 290, 420, 10, DARKGRAY);
 
         EndDrawing();
         //----------------------------------------------------------------------------------
@@ -76,7 +76,7 @@ int main(void)
 
     UnloadFont(font);           // Unload custom font
 
-    RlibCloseWindow();              // Close window and OpenGL context
+    rl_CloseWindow();              // Close window and OpenGL context
     //--------------------------------------------------------------------------------------
 
     return 0;

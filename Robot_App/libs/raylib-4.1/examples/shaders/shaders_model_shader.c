@@ -82,7 +82,7 @@ int main(void)
 
             EndMode3D();
 
-            DrawText("(c) Watermill 3D model by Alberto Cano", screenWidth - 210, screenHeight - 20, 10, GRAY);
+            rl_DrawText("(c) Watermill 3D model by Alberto Cano", screenWidth - 210, screenHeight - 20, 10, GRAY);
 
             DrawFPS(10, 10);
 
@@ -96,7 +96,7 @@ int main(void)
     UnloadTexture(texture);     // Unload texture
     UnloadModel(model);         // Unload model
 
-    RlibCloseWindow();              // Close window and OpenGL context
+    rl_CloseWindow();              // Close window and OpenGL context
     //--------------------------------------------------------------------------------------
 
     return 0;

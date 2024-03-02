@@ -34,12 +34,12 @@ void Queue::draw(Vector2 coord, Color color)
     {
         DrawRectangleV({coord.x, coord.y + 75 * i}, {200, 50}, color);
         const char text[5] = {char(requests[i].from + 65), '-', '>', char(requests[i].to + 65), 0};
-        DrawText(&text[0], coord.x + 65, 10 + coord.y + 75 * i, 30, WHITE);
+        rl_DrawText(&text[0], coord.x + 65, 10 + coord.y + 75 * i, 30, WHITE);
     }
 }
 
 void Queue::sendRequest(Robot* robot, ceSerial* com)
 {
-    robot->send(requests.begin()->path, com);
+    robot->send(requests[0].path, com);
     requests.erase(requests.begin());
 }

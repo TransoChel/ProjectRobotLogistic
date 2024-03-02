@@ -80,9 +80,9 @@ int main(void)
 
             ClearBackground(RAYWHITE);
 
-            DrawText("textured polygon", 20, 20, 20, DARKGRAY);
+            rl_DrawText("textured polygon", 20, 20, 20, DARKGRAY);
 
-            DrawTexturePoly(texture, (Vector2){ GetScreenWidth()/2, GetScreenHeight()/2 },
+            rl_DrawTexturePoly(texture, (Vector2){ GetScreenWidth()/2, GetScreenHeight()/2 },
                             positions, texcoords, MAX_POINTS, WHITE);
 
         EndDrawing();
@@ -93,7 +93,7 @@ int main(void)
     //--------------------------------------------------------------------------------------
     UnloadTexture(texture); // Unload texture
 
-    RlibCloseWindow();          // Close window and OpenGL context
+    rl_CloseWindow();          // Close window and OpenGL context
     //--------------------------------------------------------------------------------------
 
     return 0;

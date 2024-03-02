@@ -88,9 +88,9 @@ int main(void)
 
             EndMode3D();
 
-            DrawText("Try selecting the box with mouse!", 240, 10, 20, DARKGRAY);
+            rl_DrawText("Try selecting the box with mouse!", 240, 10, 20, DARKGRAY);
 
-            if (collision.hit) DrawText("BOX SELECTED", (screenWidth - MeasureText("BOX SELECTED", 30)) / 2, (int)(screenHeight * 0.1f), 30, GREEN);
+            if (collision.hit) rl_DrawText("BOX SELECTED", (screenWidth - MeasureText("BOX SELECTED", 30)) / 2, (int)(screenHeight * 0.1f), 30, GREEN);
 
             DrawFPS(10, 10);
 
@@ -100,7 +100,7 @@ int main(void)
 
     // De-Initialization
     //--------------------------------------------------------------------------------------
-    RlibCloseWindow();        // Close window and OpenGL context
+    rl_CloseWindow();        // Close window and OpenGL context
     //--------------------------------------------------------------------------------------
 
     return 0;

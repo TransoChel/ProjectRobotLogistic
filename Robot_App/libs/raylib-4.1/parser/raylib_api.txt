@@ -827,8 +827,8 @@ Function 045: WaitTime() (1 input parameters)
   Return type: void
   Description: Wait for some milliseconds (halt program execution)
   Param[1]: ms (type: float)
-Function 046: ShowCursor() (0 input parameters)
-  Name: ShowCursor
+Function 046: rl_ShowCursor() (0 input parameters)
+  Name: rl_ShowCursor
   Return type: void
   Description: Shows cursor
   No input parameters
@@ -1953,13 +1953,13 @@ Function 229: GetCollisionRec() (2 input parameters)
   Description: Get collision rectangle for two rectangles collision
   Param[1]: rec1 (type: Rectangle)
   Param[2]: rec2 (type: Rectangle)
-Function 230: LoadImage() (1 input parameters)
-  Name: LoadImage
+Function 230: rl_LoadImage() (1 input parameters)
+  Name: rl_LoadImage
   Return type: Image
   Description: Load image from file into CPU memory (RAM)
   Param[1]: fileName (type: const char *)
-Function 231: LoadImageRaw() (5 input parameters)
-  Name: LoadImageRaw
+Function 231: rl_LoadImageRaw() (5 input parameters)
+  Name: rl_LoadImageRaw
   Return type: Image
   Description: Load image from RAW file data
   Param[1]: fileName (type: const char *)
@@ -1967,26 +1967,26 @@ Function 231: LoadImageRaw() (5 input parameters)
   Param[3]: height (type: int)
   Param[4]: format (type: int)
   Param[5]: headerSize (type: int)
-Function 232: LoadImageAnim() (2 input parameters)
-  Name: LoadImageAnim
+Function 232: rl_LoadImageAnim() (2 input parameters)
+  Name: rl_LoadImageAnim
   Return type: Image
   Description: Load image sequence from file (frames appended to image.data)
   Param[1]: fileName (type: const char *)
   Param[2]: frames (type: int *)
-Function 233: LoadImageFromMemory() (3 input parameters)
-  Name: LoadImageFromMemory
+Function 233: rl_LoadImageFromMemory() (3 input parameters)
+  Name: rl_LoadImageFromMemory
   Return type: Image
   Description: Load image from memory buffer, fileType refers to extension: i.e. '.png'
   Param[1]: fileType (type: const char *)
   Param[2]: fileData (type: const unsigned char *)
   Param[3]: dataSize (type: int)
-Function 234: LoadImageFromTexture() (1 input parameters)
-  Name: LoadImageFromTexture
+Function 234: rl_LoadImageFromTexture() (1 input parameters)
+  Name: rl_LoadImageFromTexture
   Return type: Image
   Description: Load image from GPU texture data
   Param[1]: texture (type: Texture2D)
-Function 235: LoadImageFromScreen() (0 input parameters)
-  Name: LoadImageFromScreen
+Function 235: rl_LoadImageFromScreen() (0 input parameters)
+  Name: rl_LoadImageFromScreen
   Return type: Image
   Description: Load image from screen buffer and (screenshot)
   No input parameters
@@ -2225,13 +2225,13 @@ Function 271: ImageColorReplace() (3 input parameters)
   Param[1]: image (type: Image *)
   Param[2]: color (type: Color)
   Param[3]: replace (type: Color)
-Function 272: LoadImageColors() (1 input parameters)
-  Name: LoadImageColors
+Function 272: rl_LoadImageColors() (1 input parameters)
+  Name: rl_LoadImageColors
   Return type: Color *
   Description: Load color data from image as a Color array (RGBA - 32bit)
   Param[1]: image (type: Image)
-Function 273: LoadImagePalette() (3 input parameters)
-  Name: LoadImagePalette
+Function 273: rl_LoadImagePalette() (3 input parameters)
+  Name: rl_LoadImagePalette
   Return type: Color *
   Description: Load colors palette from image as a Color array (RGBA - 32bit)
   Param[1]: image (type: Image)
@@ -2240,12 +2240,12 @@ Function 273: LoadImagePalette() (3 input parameters)
 Function 274: UnloadImageColors() (1 input parameters)
   Name: UnloadImageColors
   Return type: void
-  Description: Unload color data loaded with LoadImageColors()
+  Description: Unload color data loaded with rl_LoadImageColors()
   Param[1]: colors (type: Color *)
 Function 275: UnloadImagePalette() (1 input parameters)
   Name: UnloadImagePalette
   Return type: void
-  Description: Unload colors palette loaded with LoadImagePalette()
+  Description: Unload colors palette loaded with rl_LoadImagePalette()
   Param[1]: colors (type: Color *)
 Function 276: GetImageAlphaBorder() (2 input parameters)
   Name: GetImageAlphaBorder
@@ -2358,8 +2358,8 @@ Function 289: ImageDraw() (5 input parameters)
   Param[3]: srcRec (type: Rectangle)
   Param[4]: dstRec (type: Rectangle)
   Param[5]: tint (type: Color)
-Function 290: ImageDrawText() (6 input parameters)
-  Name: ImageDrawText
+Function 290: Imagerl_DrawText() (6 input parameters)
+  Name: Imagerl_DrawText
   Return type: void
   Description: Draw text (using default font) within an image (destination)
   Param[1]: dst (type: Image *)
@@ -2368,8 +2368,8 @@ Function 290: ImageDrawText() (6 input parameters)
   Param[4]: posY (type: int)
   Param[5]: fontSize (type: int)
   Param[6]: color (type: Color)
-Function 291: ImageDrawTextEx() (7 input parameters)
-  Name: ImageDrawTextEx
+Function 291: Imagerl_rl_DrawTextEx() (7 input parameters)
+  Name: Imagerl_rl_DrawTextEx
   Return type: void
   Description: Draw text (custom sprite font) within an image (destination)
   Param[1]: dst (type: Image *)
@@ -2441,23 +2441,23 @@ Function 302: SetTextureWrap() (2 input parameters)
   Description: Set texture wrapping mode
   Param[1]: texture (type: Texture2D)
   Param[2]: wrap (type: int)
-Function 303: DrawTexture() (4 input parameters)
-  Name: DrawTexture
+Function 303: rl_DrawTexture() (4 input parameters)
+  Name: rl_DrawTexture
   Return type: void
   Description: Draw a Texture2D
   Param[1]: texture (type: Texture2D)
   Param[2]: posX (type: int)
   Param[3]: posY (type: int)
   Param[4]: tint (type: Color)
-Function 304: DrawTextureV() (3 input parameters)
-  Name: DrawTextureV
+Function 304: rl_DrawTextureV() (3 input parameters)
+  Name: rl_DrawTextureV
   Return type: void
   Description: Draw a Texture2D with position defined as Vector2
   Param[1]: texture (type: Texture2D)
   Param[2]: position (type: Vector2)
   Param[3]: tint (type: Color)
-Function 305: DrawTextureEx() (5 input parameters)
-  Name: DrawTextureEx
+Function 305: rl_DrawTextureEx() (5 input parameters)
+  Name: rl_DrawTextureEx
   Return type: void
   Description: Draw a Texture2D with extended parameters
   Param[1]: texture (type: Texture2D)
@@ -2465,16 +2465,16 @@ Function 305: DrawTextureEx() (5 input parameters)
   Param[3]: rotation (type: float)
   Param[4]: scale (type: float)
   Param[5]: tint (type: Color)
-Function 306: DrawTextureRec() (4 input parameters)
-  Name: DrawTextureRec
+Function 306: rl_DrawTextureRec() (4 input parameters)
+  Name: rl_DrawTextureRec
   Return type: void
   Description: Draw a part of a texture defined by a rectangle
   Param[1]: texture (type: Texture2D)
   Param[2]: source (type: Rectangle)
   Param[3]: position (type: Vector2)
   Param[4]: tint (type: Color)
-Function 307: DrawTextureQuad() (5 input parameters)
-  Name: DrawTextureQuad
+Function 307: rl_DrawTextureQuad() (5 input parameters)
+  Name: rl_DrawTextureQuad
   Return type: void
   Description: Draw texture quad with tiling and offset parameters
   Param[1]: texture (type: Texture2D)
@@ -2482,8 +2482,8 @@ Function 307: DrawTextureQuad() (5 input parameters)
   Param[3]: offset (type: Vector2)
   Param[4]: quad (type: Rectangle)
   Param[5]: tint (type: Color)
-Function 308: DrawTextureTiled() (7 input parameters)
-  Name: DrawTextureTiled
+Function 308: rl_DrawTextureTiled() (7 input parameters)
+  Name: rl_DrawTextureTiled
   Return type: void
   Description: Draw part of a texture (defined by a rectangle) with rotation and scale tiled into dest.
   Param[1]: texture (type: Texture2D)
@@ -2493,8 +2493,8 @@ Function 308: DrawTextureTiled() (7 input parameters)
   Param[5]: rotation (type: float)
   Param[6]: scale (type: float)
   Param[7]: tint (type: Color)
-Function 309: DrawTexturePro() (6 input parameters)
-  Name: DrawTexturePro
+Function 309: rl_DrawTexturePro() (6 input parameters)
+  Name: rl_DrawTexturePro
   Return type: void
   Description: Draw a part of a texture defined by a rectangle with 'pro' parameters
   Param[1]: texture (type: Texture2D)
@@ -2503,8 +2503,8 @@ Function 309: DrawTexturePro() (6 input parameters)
   Param[4]: origin (type: Vector2)
   Param[5]: rotation (type: float)
   Param[6]: tint (type: Color)
-Function 310: DrawTextureNPatch() (6 input parameters)
-  Name: DrawTextureNPatch
+Function 310: rl_DrawTextureNPatch() (6 input parameters)
+  Name: rl_DrawTextureNPatch
   Return type: void
   Description: Draws a texture (or part of it) that stretches or shrinks nicely
   Param[1]: texture (type: Texture2D)
@@ -2513,8 +2513,8 @@ Function 310: DrawTextureNPatch() (6 input parameters)
   Param[4]: origin (type: Vector2)
   Param[5]: rotation (type: float)
   Param[6]: tint (type: Color)
-Function 311: DrawTexturePoly() (6 input parameters)
-  Name: DrawTexturePoly
+Function 311: rl_DrawTexturePoly() (6 input parameters)
+  Name: rl_DrawTexturePoly
   Return type: void
   Description: Draw a textured polygon
   Param[1]: texture (type: Texture2D)
@@ -2672,8 +2672,8 @@ Function 334: DrawFPS() (2 input parameters)
   Description: Draw current FPS
   Param[1]: posX (type: int)
   Param[2]: posY (type: int)
-Function 335: DrawText() (5 input parameters)
-  Name: DrawText
+Function 335: rl_DrawText() (5 input parameters)
+  Name: rl_DrawText
   Return type: void
   Description: Draw text (using default font)
   Param[1]: text (type: const char *)
@@ -2681,8 +2681,8 @@ Function 335: DrawText() (5 input parameters)
   Param[3]: posY (type: int)
   Param[4]: fontSize (type: int)
   Param[5]: color (type: Color)
-Function 336: DrawTextEx() (6 input parameters)
-  Name: DrawTextEx
+Function 336: rl_rl_DrawTextEx() (6 input parameters)
+  Name: rl_rl_DrawTextEx
   Return type: void
   Description: Draw text using font and additional parameters
   Param[1]: font (type: Font)
@@ -2691,8 +2691,8 @@ Function 336: DrawTextEx() (6 input parameters)
   Param[4]: fontSize (type: float)
   Param[5]: spacing (type: float)
   Param[6]: tint (type: Color)
-Function 337: DrawTextPro() (8 input parameters)
-  Name: DrawTextPro
+Function 337: rl_DrawTextPro() (8 input parameters)
+  Name: rl_DrawTextPro
   Return type: void
   Description: Draw text using Font and pro parameters (rotation)
   Param[1]: font (type: Font)
@@ -2703,8 +2703,8 @@ Function 337: DrawTextPro() (8 input parameters)
   Param[6]: fontSize (type: float)
   Param[7]: spacing (type: float)
   Param[8]: tint (type: Color)
-Function 338: DrawTextCodepoint() (5 input parameters)
-  Name: DrawTextCodepoint
+Function 338: rl_DrawTextCodepoint() (5 input parameters)
+  Name: rl_DrawTextCodepoint
   Return type: void
   Description: Draw one character (codepoint)
   Param[1]: font (type: Font)
@@ -3470,8 +3470,8 @@ Function 450: ExportWaveAsCode() (2 input parameters)
   Description: Export wave sample data to code (.h), returns true on success
   Param[1]: wave (type: Wave)
   Param[2]: fileName (type: const char *)
-Function 451: PlaySound() (1 input parameters)
-  Name: PlaySound
+Function 451: rl_PlaySound() (1 input parameters)
+  Name: rl_PlaySound
   Return type: void
   Description: Play a sound
   Param[1]: sound (type: Sound)
@@ -3490,8 +3490,8 @@ Function 454: ResumeSound() (1 input parameters)
   Return type: void
   Description: Resume a paused sound
   Param[1]: sound (type: Sound)
-Function 455: PlaySoundMulti() (1 input parameters)
-  Name: PlaySoundMulti
+Function 455: rl_PlaySoundMulti() (1 input parameters)
+  Name: rl_PlaySoundMulti
   Return type: void
   Description: Play a sound (using multichannel buffer pool)
   Param[1]: sound (type: Sound)

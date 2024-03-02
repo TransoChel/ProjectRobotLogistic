@@ -79,10 +79,10 @@ int main(void)
 
             EndMode3D();
 
-            DrawText("Press Spacebar to switch camera type", 10, GetScreenHeight() - 30, 20, DARKGRAY);
+            rl_DrawText("Press Spacebar to switch camera type", 10, GetScreenHeight() - 30, 20, DARKGRAY);
 
-            if (camera.projection == CAMERA_ORTHOGRAPHIC) DrawText("ORTHOGRAPHIC", 10, 40, 20, BLACK);
-            else if (camera.projection == CAMERA_PERSPECTIVE) DrawText("PERSPECTIVE", 10, 40, 20, BLACK);
+            if (camera.projection == CAMERA_ORTHOGRAPHIC) rl_DrawText("ORTHOGRAPHIC", 10, 40, 20, BLACK);
+            else if (camera.projection == CAMERA_PERSPECTIVE) rl_DrawText("PERSPECTIVE", 10, 40, 20, BLACK);
 
             DrawFPS(10, 10);
 
@@ -92,7 +92,7 @@ int main(void)
 
     // De-Initialization
     //--------------------------------------------------------------------------------------
-    RlibCloseWindow();        // Close window and OpenGL context
+    rl_CloseWindow();        // Close window and OpenGL context
     //--------------------------------------------------------------------------------------
 
     return 0;

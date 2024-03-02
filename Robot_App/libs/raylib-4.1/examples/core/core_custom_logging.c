@@ -69,7 +69,7 @@ int main(int argc, char* argv[])
 
         ClearBackground(RAYWHITE);
 
-        DrawText("Check out the console output to see the custom logger in action!", 60, 200, 20, LIGHTGRAY);
+        rl_DrawText("Check out the console output to see the custom logger in action!", 60, 200, 20, LIGHTGRAY);
 
         EndDrawing();
         //----------------------------------------------------------------------------------
@@ -77,7 +77,7 @@ int main(int argc, char* argv[])
 
     // De-Initialization
     //--------------------------------------------------------------------------------------
-    RlibCloseWindow();        // Close window and OpenGL context
+    rl_CloseWindow();        // Close window and OpenGL context
     //--------------------------------------------------------------------------------------
 
     return 0;

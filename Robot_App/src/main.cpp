@@ -1,11 +1,10 @@
 #include <string>
 #include <vector>
-#include <raylib.h>
 #define RAYGUI_IMPLEMENTATION
 #include "extras/raygui.h"
-#include "App.h"
+
 #define CE_SERIAL_IMPLEMENTATION
-#include "../../robot/robot.h"
+#include "App.h"
 
 int main()
 {
@@ -75,7 +74,7 @@ int main()
 
     // De-Initialization
     //--------------------------------------------------------------------------------------
-    RlibCloseWindow(); // Close window and OpenGL context
+    rl_CloseWindow(); // Close window and OpenGL context
     //--------------------------------------------------------------------------------------
     com.Close();
     return 0;

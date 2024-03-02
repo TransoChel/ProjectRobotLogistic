@@ -42,7 +42,7 @@ int main(void)
 
             ClearBackground(RAYWHITE);
 
-            DrawText("move the ball with arrow keys", 10, 10, 20, DARKGRAY);
+            rl_DrawText("move the ball with arrow keys", 10, 10, 20, DARKGRAY);
 
             DrawCircleV(ballPosition, 50, MAROON);
 
@@ -52,7 +52,7 @@ int main(void)
 
     // De-Initialization
     //--------------------------------------------------------------------------------------
-    RlibCloseWindow();        // Close window and OpenGL context
+    rl_CloseWindow();        // Close window and OpenGL context
     //--------------------------------------------------------------------------------------
 
     return 0;

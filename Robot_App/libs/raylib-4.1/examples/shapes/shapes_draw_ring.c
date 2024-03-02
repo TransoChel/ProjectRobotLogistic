@@ -65,21 +65,21 @@ int main(void)
 
             // Draw GUI controls
             //------------------------------------------------------------------------------
-            startAngle = GuiSliderBar((RlibRectangle){ 600, 40, 120, 20 }, "StartAngle", NULL, startAngle, -450, 450);
-            endAngle = GuiSliderBar((RlibRectangle){ 600, 70, 120, 20 }, "EndAngle", NULL, endAngle, -450, 450);
+            startAngle = GuiSliderBar((rl_Rectangle){ 600, 40, 120, 20 }, "StartAngle", NULL, startAngle, -450, 450);
+            endAngle = GuiSliderBar((rl_Rectangle){ 600, 70, 120, 20 }, "EndAngle", NULL, endAngle, -450, 450);
 
-            innerRadius = GuiSliderBar((RlibRectangle){ 600, 140, 120, 20 }, "InnerRadius", NULL, innerRadius, 0, 100);
-            outerRadius = GuiSliderBar((RlibRectangle){ 600, 170, 120, 20 }, "OuterRadius", NULL, outerRadius, 0, 200);
+            innerRadius = GuiSliderBar((rl_Rectangle){ 600, 140, 120, 20 }, "InnerRadius", NULL, innerRadius, 0, 100);
+            outerRadius = GuiSliderBar((rl_Rectangle){ 600, 170, 120, 20 }, "OuterRadius", NULL, outerRadius, 0, 200);
 
-            segments = (int)GuiSliderBar((RlibRectangle){ 600, 240, 120, 20 }, "Segments", NULL, (float)segments, 0, 100);
+            segments = (int)GuiSliderBar((rl_Rectangle){ 600, 240, 120, 20 }, "Segments", NULL, (float)segments, 0, 100);
 
-            drawRing = GuiCheckBox((RlibRectangle){ 600, 320, 20, 20 }, "Draw Ring", drawRing);
-            drawRingLines = GuiCheckBox((RlibRectangle){ 600, 350, 20, 20 }, "Draw RingLines", drawRingLines);
-            drawCircleLines = GuiCheckBox((RlibRectangle){ 600, 380, 20, 20 }, "Draw CircleLines", drawCircleLines);
+            drawRing = GuiCheckBox((rl_Rectangle){ 600, 320, 20, 20 }, "Draw Ring", drawRing);
+            drawRingLines = GuiCheckBox((rl_Rectangle){ 600, 350, 20, 20 }, "Draw RingLines", drawRingLines);
+            drawCircleLines = GuiCheckBox((rl_Rectangle){ 600, 380, 20, 20 }, "Draw CircleLines", drawCircleLines);
             //------------------------------------------------------------------------------
 
             int minSegments = (int)ceilf((endAngle - startAngle) / 90);
-            DrawText(TextFormat("MODE: %s", (segments >= minSegments)? "MANUAL" : "AUTO"), 600, 270, 10, (segments >= minSegments)? MAROON : DARKGRAY);
+            rl_DrawText(TextFormat("MODE: %s", (segments >= minSegments)? "MANUAL" : "AUTO"), 600, 270, 10, (segments >= minSegments)? MAROON : DARKGRAY);
 
             DrawFPS(10, 10);
 
@@ -89,7 +89,7 @@ int main(void)
 
     // De-Initialization
     //--------------------------------------------------------------------------------------
-    RlibCloseWindow();        // Close window and OpenGL context
+    rl_CloseWindow();        // Close window and OpenGL context
     //--------------------------------------------------------------------------------------
 
     return 0;

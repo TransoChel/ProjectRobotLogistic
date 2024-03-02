@@ -75,7 +75,7 @@ int main(void)
     RenderTexture screenPlayer2 = LoadRenderTexture(screenWidth / 2, screenHeight);
 
     // Build a flipped rectangle the size of the split view to use for drawing later
-    RlibRectangle splitScreenRect = { 0.0f, 0.0f, (float)screenPlayer1.texture.width, (float)-screenPlayer1.texture.height };
+    rl_Rectangle splitScreenRect = { 0.0f, 0.0f, (float)screenPlayer1.texture.width, (float)-screenPlayer1.texture.height };
 
     SetTargetFPS(60);               // Set our game to run at 60 frames-per-second
     //--------------------------------------------------------------------------------------
@@ -122,7 +122,7 @@ int main(void)
             BeginMode3D(cameraPlayer1);
                 DrawScene();
             EndMode3D();
-            DrawText("PLAYER1 W/S to move", 10, 10, 20, RED);
+            rl_DrawText("PLAYER1 W/S to move", 10, 10, 20, RED);
         EndTextureMode();
 
         // Draw Player2 view to the render texture
@@ -131,14 +131,14 @@ int main(void)
             BeginMode3D(cameraPlayer2);
                 DrawScene();
             EndMode3D();
-            DrawText("PLAYER2 UP/DOWN to move", 10, 10, 20, BLUE);
+            rl_DrawText("PLAYER2 UP/DOWN to move", 10, 10, 20, BLUE);
         EndTextureMode();
 
         // Draw both views render textures to the screen side by side
         BeginDrawing();
             ClearBackground(BLACK);
-            DrawTextureRec(screenPlayer1.texture, splitScreenRect, (Vector2){ 0, 0 }, WHITE);
-            DrawTextureRec(screenPlayer2.texture, splitScreenRect, (Vector2){ screenWidth/2.0f, 0 }, WHITE);
+            rl_DrawTextureRec(screenPlayer1.texture, splitScreenRect, (Vector2){ 0, 0 }, WHITE);
+            rl_DrawTextureRec(screenPlayer2.texture, splitScreenRect, (Vector2){ screenWidth/2.0f, 0 }, WHITE);
         EndDrawing();
     }
 
@@ -148,7 +148,7 @@ int main(void)
     UnloadRenderTexture(screenPlayer2); // Unload render texture
     UnloadTexture(textureGrid);         // Unload texture
 
-    RlibCloseWindow();                      // Close window and OpenGL context
+    rl_CloseWindow();                      // Close window and OpenGL context
     //--------------------------------------------------------------------------------------
 
     return 0;

@@ -43,7 +43,7 @@ int main(void)
     {
         // Update
         //----------------------------------------------------------------------------------
-        RlibRectangle rec = { ((float)GetScreenWidth() - width - 250)/2, (GetScreenHeight() - height)/2.0f, (float)width, (float)height };
+        rl_Rectangle rec = { ((float)GetScreenWidth() - width - 250)/2, (GetScreenHeight() - height)/2.0f, (float)width, (float)height };
         //----------------------------------------------------------------------------------
 
         // Draw
@@ -61,18 +61,18 @@ int main(void)
 
             // Draw GUI controls
             //------------------------------------------------------------------------------
-            width = (int)GuiSliderBar((RlibRectangle){ 640, 40, 105, 20 }, "Width", NULL, (float)width, 0, (float)GetScreenWidth() - 300);
-            height = (int)GuiSliderBar((RlibRectangle){ 640, 70, 105, 20 }, "Height", NULL, (float)height, 0, (float)GetScreenHeight() - 50);
-            roundness = GuiSliderBar((RlibRectangle){ 640, 140, 105, 20 }, "Roundness", NULL, roundness, 0.0f, 1.0f);
-            lineThick = (int)GuiSliderBar((RlibRectangle){ 640, 170, 105, 20 }, "Thickness", NULL, (float)lineThick, 0, 20);
-            segments = (int)GuiSliderBar((RlibRectangle){ 640, 240, 105, 20}, "Segments", NULL, (float)segments, 0, 60);
+            width = (int)GuiSliderBar((rl_Rectangle){ 640, 40, 105, 20 }, "Width", NULL, (float)width, 0, (float)GetScreenWidth() - 300);
+            height = (int)GuiSliderBar((rl_Rectangle){ 640, 70, 105, 20 }, "Height", NULL, (float)height, 0, (float)GetScreenHeight() - 50);
+            roundness = GuiSliderBar((rl_Rectangle){ 640, 140, 105, 20 }, "Roundness", NULL, roundness, 0.0f, 1.0f);
+            lineThick = (int)GuiSliderBar((rl_Rectangle){ 640, 170, 105, 20 }, "Thickness", NULL, (float)lineThick, 0, 20);
+            segments = (int)GuiSliderBar((rl_Rectangle){ 640, 240, 105, 20}, "Segments", NULL, (float)segments, 0, 60);
 
-            drawRoundedRect = GuiCheckBox((RlibRectangle){ 640, 320, 20, 20 }, "DrawRoundedRect", drawRoundedRect);
-            drawRoundedLines = GuiCheckBox((RlibRectangle){ 640, 350, 20, 20 }, "DrawRoundedLines", drawRoundedLines);
-            drawRect = GuiCheckBox((RlibRectangle){ 640, 380, 20, 20}, "DrawRect", drawRect);
+            drawRoundedRect = GuiCheckBox((rl_Rectangle){ 640, 320, 20, 20 }, "DrawRoundedRect", drawRoundedRect);
+            drawRoundedLines = GuiCheckBox((rl_Rectangle){ 640, 350, 20, 20 }, "DrawRoundedLines", drawRoundedLines);
+            drawRect = GuiCheckBox((rl_Rectangle){ 640, 380, 20, 20}, "DrawRect", drawRect);
             //------------------------------------------------------------------------------
 
-            DrawText(TextFormat("MODE: %s", (segments >= 4)? "MANUAL" : "AUTO"), 640, 280, 10, (segments >= 4)? MAROON : DARKGRAY);
+            rl_DrawText(TextFormat("MODE: %s", (segments >= 4)? "MANUAL" : "AUTO"), 640, 280, 10, (segments >= 4)? MAROON : DARKGRAY);
 
             DrawFPS(10, 10);
 
@@ -82,7 +82,7 @@ int main(void)
 
     // De-Initialization
     //--------------------------------------------------------------------------------------
-    RlibCloseWindow();        // Close window and OpenGL context
+    rl_CloseWindow();        // Close window and OpenGL context
     //--------------------------------------------------------------------------------------
 
     return 0;

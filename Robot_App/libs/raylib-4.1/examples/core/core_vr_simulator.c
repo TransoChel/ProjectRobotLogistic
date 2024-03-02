@@ -121,7 +121,7 @@ int main(void)
         BeginDrawing();
             ClearBackground(RAYWHITE);
             BeginShaderMode(distortion);
-                DrawTextureRec(target.texture, (RlibRectangle){ 0, 0, (float)target.texture.width,
+                rl_DrawTextureRec(target.texture, (rl_Rectangle){ 0, 0, (float)target.texture.width,
                               (float)-target.texture.height }, (Vector2){ 0.0f, 0.0f }, WHITE);
             EndShaderMode();
             DrawFPS(10, 10);
@@ -136,7 +136,7 @@ int main(void)
     UnloadRenderTexture(target);    // Unload stereo render fbo
     UnloadShader(distortion);       // Unload distortion shader
 
-    RlibCloseWindow();                  // Close window and OpenGL context
+    rl_CloseWindow();                  // Close window and OpenGL context
     //--------------------------------------------------------------------------------------
 
     return 0;

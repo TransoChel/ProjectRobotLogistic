@@ -30,19 +30,19 @@ int main(int argc, char **argv)
     SetTextureFilter(texPattern, TEXTURE_FILTER_TRILINEAR); // Makes the texture smoother when upscaled
 
     // Coordinates for all patterns inside the texture
-    const RlibRectangle recPattern[] = {
-        (RlibRectangle){ 3, 3, 66, 66 },
-        (RlibRectangle){ 75, 3, 100, 100 },
-        (RlibRectangle){ 3, 75, 66, 66 },
-        (RlibRectangle){ 7, 156, 50, 50 },
-        (RlibRectangle){ 85, 106, 90, 45 },
-        (RlibRectangle){ 75, 154, 100, 60}
+    const rl_Rectangle recPattern[] = {
+        (rl_Rectangle){ 3, 3, 66, 66 },
+        (rl_Rectangle){ 75, 3, 100, 100 },
+        (rl_Rectangle){ 3, 75, 66, 66 },
+        (rl_Rectangle){ 7, 156, 50, 50 },
+        (rl_Rectangle){ 85, 106, 90, 45 },
+        (rl_Rectangle){ 75, 154, 100, 60}
     };
 
     // Setup colors
     const Color colors[] = { BLACK, MAROON, ORANGE, BLUE, PURPLE, BEIGE, LIME, RED, DARKGRAY, SKYBLUE };
     enum { MAX_COLORS = SIZEOF(colors) };
-    RlibRectangle colorRec[MAX_COLORS] = { 0 };
+    rl_Rectangle colorRec[MAX_COLORS] = { 0 };
 
     // Calculate rectangle for each color
     for (int i = 0, x = 0, y = 0; i < MAX_COLORS; i++)
@@ -82,7 +82,7 @@ int main(int argc, char **argv)
             // Check which pattern was clicked and set it as the active pattern
             for (int i = 0; i < SIZEOF(recPattern); i++)
             {
-                if (CheckCollisionPointRec(mouse, (RlibRectangle){ 2 + MARGIN_SIZE + recPattern[i].x, 40 + MARGIN_SIZE + recPattern[i].y, recPattern[i].width, recPattern[i].height }))
+                if (CheckCollisionPointRec(mouse, (rl_Rectangle){ 2 + MARGIN_SIZE + recPattern[i].x, 40 + MARGIN_SIZE + recPattern[i].y, recPattern[i].width, recPattern[i].height }))
                 {
                     activePattern = i;
                     break;
@@ -122,33 +122,33 @@ int main(int argc, char **argv)
             ClearBackground(RAYWHITE);
 
             // Draw the tiled area
-            DrawTextureTiled(texPattern, recPattern[activePattern], (RlibRectangle){(float)OPT_WIDTH+MARGIN_SIZE, (float)MARGIN_SIZE, screenWidth - OPT_WIDTH - 2.0f*MARGIN_SIZE, screenHeight - 2.0f*MARGIN_SIZE},
+            rl_DrawTextureTiled(texPattern, recPattern[activePattern], (rl_Rectangle){(float)OPT_WIDTH+MARGIN_SIZE, (float)MARGIN_SIZE, screenWidth - OPT_WIDTH - 2.0f*MARGIN_SIZE, screenHeight - 2.0f*MARGIN_SIZE},
                 (Vector2){0.0f, 0.0f}, rotation, scale, colors[activeCol]);
 
             // Draw options
             DrawRectangle(MARGIN_SIZE, MARGIN_SIZE, OPT_WIDTH - MARGIN_SIZE, screenHeight - 2*MARGIN_SIZE, ColorAlpha(LIGHTGRAY, 0.5f));
 
-            DrawText("Select Pattern", 2 + MARGIN_SIZE, 30 + MARGIN_SIZE, 10, BLACK);
-            DrawTexture(texPattern, 2 + MARGIN_SIZE, 40 + MARGIN_SIZE, BLACK);
+            rl_DrawText("Select Pattern", 2 + MARGIN_SIZE, 30 + MARGIN_SIZE, 10, BLACK);
+            rl_DrawTexture(texPattern, 2 + MARGIN_SIZE, 40 + MARGIN_SIZE, BLACK);
             DrawRectangle(2 + MARGIN_SIZE + (int)recPattern[activePattern].x, 40 + MARGIN_SIZE + (int)recPattern[activePattern].y, (int)recPattern[activePattern].width, (int)recPattern[activePattern].height, ColorAlpha(DARKBLUE, 0.3f));
 
-            DrawText("Select Color", 2+MARGIN_SIZE, 10+256+MARGIN_SIZE, 10, BLACK);
+            rl_DrawText("Select Color", 2+MARGIN_SIZE, 10+256+MARGIN_SIZE, 10, BLACK);
             for (int i = 0; i < MAX_COLORS; i++)
             {
                 DrawRectangleRec(colorRec[i], colors[i]);
                 if (activeCol == i) DrawRectangleLinesEx(colorRec[i], 3, ColorAlpha(WHITE, 0.5f));
             }
 
-            DrawText("Scale (UP/DOWN to change)", 2 + MARGIN_SIZE, 80 + 256 + MARGIN_SIZE, 10, BLACK);
-            DrawText(TextFormat("%.2fx", scale), 2 + MARGIN_SIZE, 92 + 256 + MARGIN_SIZE, 20, BLACK);
+            rl_DrawText("Scale (UP/DOWN to change)", 2 + MARGIN_SIZE, 80 + 256 + MARGIN_SIZE, 10, BLACK);
+            rl_DrawText(TextFormat("%.2fx", scale), 2 + MARGIN_SIZE, 92 + 256 + MARGIN_SIZE, 20, BLACK);
 
-            DrawText("Rotation (LEFT/RIGHT to change)", 2 + MARGIN_SIZE, 122 + 256 + MARGIN_SIZE, 10, BLACK);
-            DrawText(TextFormat("%.0f degrees", rotation), 2 + MARGIN_SIZE, 134 + 256 + MARGIN_SIZE, 20, BLACK);
+            rl_DrawText("Rotation (LEFT/RIGHT to change)", 2 + MARGIN_SIZE, 122 + 256 + MARGIN_SIZE, 10, BLACK);
+            rl_DrawText(TextFormat("%.0f degrees", rotation), 2 + MARGIN_SIZE, 134 + 256 + MARGIN_SIZE, 20, BLACK);
 
-            DrawText("Press [SPACE] to reset", 2 + MARGIN_SIZE, 164 + 256 + MARGIN_SIZE, 10, DARKBLUE);
+            rl_DrawText("Press [SPACE] to reset", 2 + MARGIN_SIZE, 164 + 256 + MARGIN_SIZE, 10, DARKBLUE);
 
             // Draw FPS
-            DrawText(TextFormat("%i FPS", GetFPS()), 2 + MARGIN_SIZE, 2 + MARGIN_SIZE, 20, BLACK);
+            rl_DrawText(TextFormat("%i FPS", GetFPS()), 2 + MARGIN_SIZE, 2 + MARGIN_SIZE, 20, BLACK);
         EndDrawing();
         //----------------------------------------------------------------------------------
     }
@@ -157,7 +157,7 @@ int main(int argc, char **argv)
     //--------------------------------------------------------------------------------------
     UnloadTexture(texPattern);        // Unload texture
 
-    RlibCloseWindow();              // Close window and OpenGL context
+    rl_CloseWindow();              // Close window and OpenGL context
     //--------------------------------------------------------------------------------------
 
     return 0;

@@ -3,7 +3,7 @@
 void Button::Draw()
 {
     DrawRectangleV(coord, size, color);
-    DrawText(text.c_str(), coord.x + size.x/2 - 50 * text.size()/2, coord.y + size.y/2 - 25, 50, WHITE);
+    rl_DrawText(text.c_str(), coord.x + size.x/2 - 50 * text.size()/2, coord.y + size.y/2 - 25, 50, WHITE);
 }
 bool Button::CheckButtonPressed()
 {

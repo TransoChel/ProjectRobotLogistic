@@ -145,11 +145,11 @@ bool ExportWave(Wave wave, const char *fileName);               // Export wave d
 bool ExportWaveAsCode(Wave wave, const char *fileName);         // Export wave sample data to code (.h), returns true on success
 
 // Wave/Sound management functions
-void PlaySound(Sound sound);                                    // Play a sound
+void rl_PlaySound(Sound sound);                                    // Play a sound
 void StopSound(Sound sound);                                    // Stop playing a sound
 void PauseSound(Sound sound);                                   // Pause a sound
 void ResumeSound(Sound sound);                                  // Resume a paused sound
-void PlaySoundMulti(Sound sound);                               // Play a sound (using multichannel buffer pool)
+void rl_PlaySoundMulti(Sound sound);                               // Play a sound (using multichannel buffer pool)
 void StopSoundMulti(void);                                      // Stop any sound playing (using multichannel buffer pool)
 int GetSoundsPlaying(void);                                     // Get number of sounds playing in the multichannel
 bool IsSoundPlaying(Sound sound);                               // Check if a sound is currently playing

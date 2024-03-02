@@ -109,8 +109,8 @@ int main(void)
             // Display info
             DrawRectangle(10, 400, 310, 30, Fade(SKYBLUE, 0.5f));
             DrawRectangleLines(10, 400, 310, 30, Fade(DARKBLUE, 0.5f));
-            DrawText("MOUSE LEFT BUTTON to CYCLE VOX MODELS", 40, 410, 10, BLUE);
-            DrawText(TextFormat("File: %s", GetFileName(voxFileNames[currentModel])), 10, 10, 20, GRAY);
+            rl_DrawText("MOUSE LEFT BUTTON to CYCLE VOX MODELS", 40, 410, 10, BLUE);
+            rl_DrawText(TextFormat("File: %s", GetFileName(voxFileNames[currentModel])), 10, 10, 20, GRAY);
 
         EndDrawing();
         //----------------------------------------------------------------------------------
@@ -121,7 +121,7 @@ int main(void)
     // Unload models data (GPU VRAM)
     for (int i = 0; i < MAX_VOX_FILES; i++) UnloadModel(models[i]);
 
-    RlibCloseWindow();          // Close window and OpenGL context
+    rl_CloseWindow();          // Close window and OpenGL context
     //--------------------------------------------------------------------------------------
 
     return 0;

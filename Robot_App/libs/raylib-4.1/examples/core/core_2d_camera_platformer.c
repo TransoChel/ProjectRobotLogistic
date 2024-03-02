@@ -25,7 +25,7 @@ typedef struct Player {
 } Player;
 
 typedef struct EnvItem {
-    RlibRectangle rect;
+    rl_Rectangle rect;
     int blocking;
     Color color;
 } EnvItem;
@@ -128,18 +128,18 @@ int main(void)
 
                 for (int i = 0; i < envItemsLength; i++) DrawRectangleRec(envItems[i].rect, envItems[i].color);
 
-                RlibRectangle playerRect = { player.position.x - 20, player.position.y - 40, 40, 40 };
+                rl_Rectangle playerRect = { player.position.x - 20, player.position.y - 40, 40, 40 };
                 DrawRectangleRec(playerRect, RED);
 
             EndMode2D();
 
-            DrawText("Controls:", 20, 20, 10, BLACK);
-            DrawText("- Right/Left to move", 40, 40, 10, DARKGRAY);
-            DrawText("- Space to jump", 40, 60, 10, DARKGRAY);
-            DrawText("- Mouse Wheel to Zoom in-out, R to reset zoom", 40, 80, 10, DARKGRAY);
-            DrawText("- C to change camera mode", 40, 100, 10, DARKGRAY);
-            DrawText("Current camera mode:", 20, 120, 10, BLACK);
-            DrawText(cameraDescriptions[cameraOption], 40, 140, 10, DARKGRAY);
+            rl_DrawText("Controls:", 20, 20, 10, BLACK);
+            rl_DrawText("- Right/Left to move", 40, 40, 10, DARKGRAY);
+            rl_DrawText("- Space to jump", 40, 60, 10, DARKGRAY);
+            rl_DrawText("- Mouse Wheel to Zoom in-out, R to reset zoom", 40, 80, 10, DARKGRAY);
+            rl_DrawText("- C to change camera mode", 40, 100, 10, DARKGRAY);
+            rl_DrawText("Current camera mode:", 20, 120, 10, BLACK);
+            rl_DrawText(cameraDescriptions[cameraOption], 40, 140, 10, DARKGRAY);
 
         EndDrawing();
         //----------------------------------------------------------------------------------
@@ -147,7 +147,7 @@ int main(void)
 
     // De-Initialization
     //--------------------------------------------------------------------------------------
-    RlibCloseWindow();        // Close window and OpenGL context
+    rl_CloseWindow();        // Close window and OpenGL context
     //--------------------------------------------------------------------------------------
 
     return 0;

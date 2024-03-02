@@ -71,13 +71,13 @@ int main(void)
 
             BeginShaderMode(shdrOutline);
             
-                DrawTexture(texture, GetScreenWidth()/2 - texture.width/2, -30, WHITE);
+                rl_DrawTexture(texture, GetScreenWidth()/2 - texture.width/2, -30, WHITE);
                 
             EndShaderMode();
 
-            DrawText("Shader-based\ntexture\noutline", 10, 10, 20, GRAY);
+            rl_DrawText("Shader-based\ntexture\noutline", 10, 10, 20, GRAY);
             
-            DrawText(TextFormat("Outline size: %i px", (int)outlineSize), 10, 120, 20, MAROON);
+            rl_DrawText(TextFormat("Outline size: %i px", (int)outlineSize), 10, 120, 20, MAROON);
 
             DrawFPS(710, 10);
 
@@ -90,7 +90,7 @@ int main(void)
     UnloadTexture(texture);
     UnloadShader(shdrOutline);
 
-    RlibCloseWindow();        // Close window and OpenGL context
+    rl_CloseWindow();        // Close window and OpenGL context
     //--------------------------------------------------------------------------------------
 
     return 0;

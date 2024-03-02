@@ -51,11 +51,11 @@ int main(void)
                 {
                     // Draw circle and touch index number
                     DrawCircleV(touchPositions[i], 34, ORANGE);
-                    DrawText(TextFormat("%d", i), (int)touchPositions[i].x - 10, (int)touchPositions[i].y - 70, 40, BLACK);
+                    rl_DrawText(TextFormat("%d", i), (int)touchPositions[i].x - 10, (int)touchPositions[i].y - 70, 40, BLACK);
                 }
             }
 
-            DrawText("touch the screen at multiple locations to get multiple balls", 10, 10, 20, DARKGRAY);
+            rl_DrawText("touch the screen at multiple locations to get multiple balls", 10, 10, 20, DARKGRAY);
 
         EndDrawing();
         //----------------------------------------------------------------------------------
@@ -63,7 +63,7 @@ int main(void)
 
     // De-Initialization
     //--------------------------------------------------------------------------------------
-    RlibCloseWindow();        // Close window and OpenGL context
+    rl_CloseWindow();        // Close window and OpenGL context
     //--------------------------------------------------------------------------------------
 
     return 0;

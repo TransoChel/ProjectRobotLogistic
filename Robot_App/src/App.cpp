@@ -65,8 +65,8 @@ void App::drawGeneral(float screenWidth, float screenHeight)
 {
     DrawRectangleV({0, 100}, {500, 935}, {255, 0, 0, 255});
     DrawRectangleV({0, 0}, {screenWidth, 100}, {200, 0, 0, 255});
-    DrawTextureEx(logo, {18, 18}, 0, 2, WHITE);
-    DrawTextureEx(queueTexture, {100, 125}, 0, 5, WHITE);
+    rl_DrawTextureEx(logo, {18, 18}, 0, 2, WHITE);
+    rl_DrawTextureEx(queueTexture, {100, 125}, 0, 5, WHITE);
     if (status == STARTING)
     {
         doRequest.Draw();
@@ -74,8 +74,8 @@ void App::drawGeneral(float screenWidth, float screenHeight)
     else if (status == ORDERING)
     {
         toMenu.Draw();
-        DrawTextureEx(fromTexture, {screenWidth - 710 - 180 - 175 - (52 * 5 / 2), 250}, 0, 5, WHITE);
-        DrawTextureEx(toTexture, {radioButtonToX + 175 - (34 * 5 / 2), 250}, 0, 5, WHITE);
+        rl_DrawTextureEx(fromTexture, {screenWidth - 710 - 180 - 175 - (52 * 5 / 2), 250}, 0, 5, WHITE);
+        rl_DrawTextureEx(toTexture, {radioButtonToX + 175 - (34 * 5 / 2), 250}, 0, 5, WHITE);
         //DrawLine(0, 949, 1500, 949, BLACK);
         send.Draw();
         AB.Draw();
@@ -88,8 +88,8 @@ void App::drawGeneral(float screenWidth, float screenHeight)
         }
         if (InvalidRequest) {
             if (errorTimer >= 0) {
-                //DrawText("Invalid Request!", 1000, 945, 50, RED);
-                DrawTextureEx(invalidRequest, {inReqXpos, 909}, 0, 5, {255, 255, 255, inReqOpacity});
+                //rl_DrawText("Invalid Request!", 1000, 945, 50, RED);
+                rl_DrawTextureEx(invalidRequest, {inReqXpos, 909}, 0, 5, {255, 255, 255, inReqOpacity});
                 inReqXpos -= inReqMargin;
                 if (inReqOpacity <= 255 - 20) {
                     inReqOpacity += 20;
@@ -111,6 +111,6 @@ void App::drawGeneral(float screenWidth, float screenHeight)
     }
     else if (status == SENT) 
     {
-        DrawTextureEx(Sent, {(screenWidth - 500 - Sent.width * 10) / 2 + 500, (screenHeight - 100 - Sent.height * 10) / 2 + 100}, 0, 10, WHITE);
+        rl_DrawTextureEx(Sent, {(screenWidth - 500 - Sent.width * 10) / 2 + 500, (screenHeight - 100 - Sent.height * 10) / 2 + 100}, 0, 10, WHITE);
     }
 }

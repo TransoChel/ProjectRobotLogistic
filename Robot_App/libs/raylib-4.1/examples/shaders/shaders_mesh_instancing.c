@@ -178,36 +178,36 @@ int main(void)
                 DrawMeshInstanced(cube, material, transforms, MAX_INSTANCES);
             EndMode3D();
 
-            DrawText("A CUBE OF DANCING CUBES!", 490, 10, 20, MAROON);
-            DrawText("PRESS KEYS:", 10, textPositionY, 20, BLACK);
+            rl_DrawText("A CUBE OF DANCING CUBES!", 490, 10, 20, MAROON);
+            rl_DrawText("PRESS KEYS:", 10, textPositionY, 20, BLACK);
 
-            DrawText("1 - 9", 10, textPositionY += 25, 10, BLACK);
-            DrawText(": Number of groups", 50, textPositionY , 10, BLACK);
-            DrawText(TextFormat(": %d", groups), 160, textPositionY , 10, BLACK);
+            rl_DrawText("1 - 9", 10, textPositionY += 25, 10, BLACK);
+            rl_DrawText(": Number of groups", 50, textPositionY , 10, BLACK);
+            rl_DrawText(TextFormat(": %d", groups), 160, textPositionY , 10, BLACK);
 
-            DrawText("UP", 10, textPositionY += 15, 10, BLACK);
-            DrawText(": increase amplitude", 50, textPositionY, 10, BLACK);
-            DrawText(TextFormat(": %.2f", amp), 160, textPositionY , 10, BLACK);
+            rl_DrawText("UP", 10, textPositionY += 15, 10, BLACK);
+            rl_DrawText(": increase amplitude", 50, textPositionY, 10, BLACK);
+            rl_DrawText(TextFormat(": %.2f", amp), 160, textPositionY , 10, BLACK);
 
-            DrawText("DOWN", 10, textPositionY += 15, 10, BLACK);
-            DrawText(": decrease amplitude", 50, textPositionY, 10, BLACK);
+            rl_DrawText("DOWN", 10, textPositionY += 15, 10, BLACK);
+            rl_DrawText(": decrease amplitude", 50, textPositionY, 10, BLACK);
 
-            DrawText("LEFT", 10, textPositionY += 15, 10, BLACK);
-            DrawText(": decrease variance", 50, textPositionY, 10, BLACK);
-            DrawText(TextFormat(": %.2f", variance), 160, textPositionY , 10, BLACK);
+            rl_DrawText("LEFT", 10, textPositionY += 15, 10, BLACK);
+            rl_DrawText(": decrease variance", 50, textPositionY, 10, BLACK);
+            rl_DrawText(TextFormat(": %.2f", variance), 160, textPositionY , 10, BLACK);
 
-            DrawText("RIGHT", 10, textPositionY += 15, 10, BLACK);
-            DrawText(": increase variance", 50, textPositionY, 10, BLACK);
+            rl_DrawText("RIGHT", 10, textPositionY += 15, 10, BLACK);
+            rl_DrawText(": increase variance", 50, textPositionY, 10, BLACK);
 
-            DrawText("+/=", 10, textPositionY += 15, 10, BLACK);
-            DrawText(": increase speed", 50, textPositionY, 10, BLACK);
-            DrawText(TextFormat(": %d = %f loops/sec", speed, ((float)fps / speed)), 160, textPositionY , 10, BLACK);
+            rl_DrawText("+/=", 10, textPositionY += 15, 10, BLACK);
+            rl_DrawText(": increase speed", 50, textPositionY, 10, BLACK);
+            rl_DrawText(TextFormat(": %d = %f loops/sec", speed, ((float)fps / speed)), 160, textPositionY , 10, BLACK);
 
-            DrawText("-", 10, textPositionY += 15, 10, BLACK);
-            DrawText(": decrease speed", 50, textPositionY, 10, BLACK);
+            rl_DrawText("-", 10, textPositionY += 15, 10, BLACK);
+            rl_DrawText(": decrease speed", 50, textPositionY, 10, BLACK);
 
-            DrawText("W", 10, textPositionY += 15, 10, BLACK);
-            DrawText(": Wild setup!", 50, textPositionY, 10, BLACK);
+            rl_DrawText("W", 10, textPositionY += 15, 10, BLACK);
+            rl_DrawText(": Wild setup!", 50, textPositionY, 10, BLACK);
 
             DrawFPS(10, 10);
 
@@ -217,7 +217,7 @@ int main(void)
 
     // De-Initialization
     //--------------------------------------------------------------------------------------
-    RlibCloseWindow();        // Close window and OpenGL context
+    rl_CloseWindow();        // Close window and OpenGL context
     //--------------------------------------------------------------------------------------
 
     return 0;

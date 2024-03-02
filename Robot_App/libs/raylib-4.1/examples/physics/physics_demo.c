@@ -106,12 +106,12 @@ int main(void)
                 }
             }
 
-            DrawText("Left mouse button to create a polygon", 10, 10, 10, WHITE);
-            DrawText("Right mouse button to create a circle", 10, 25, 10, WHITE);
-            DrawText("Press 'R' to reset example", 10, 40, 10, WHITE);
+            rl_DrawText("Left mouse button to create a polygon", 10, 10, 10, WHITE);
+            rl_DrawText("Right mouse button to create a circle", 10, 25, 10, WHITE);
+            rl_DrawText("Press 'R' to reset example", 10, 40, 10, WHITE);
 
-            DrawText("Physac", logoX, logoY, 30, WHITE);
-            DrawText("Powered by", logoX + 50, logoY - 7, 10, WHITE);
+            rl_DrawText("Physac", logoX, logoY, 30, WHITE);
+            rl_DrawText("Powered by", logoX + 50, logoY - 7, 10, WHITE);
 
         EndDrawing();
         //----------------------------------------------------------------------------------
@@ -121,7 +121,7 @@ int main(void)
     //--------------------------------------------------------------------------------------
     ClosePhysics();       // Unitialize physics
 
-    RlibCloseWindow();        // Close window and OpenGL context
+    rl_CloseWindow();        // Close window and OpenGL context
     //--------------------------------------------------------------------------------------
 
     return 0;

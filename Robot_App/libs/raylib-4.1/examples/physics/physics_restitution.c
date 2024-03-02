@@ -99,15 +99,15 @@ int main(void)
                 }
             }
 
-            DrawText("Restitution amount", (screenWidth - MeasureText("Restitution amount", 30))/2, 75, 30, WHITE);
-            DrawText("0", (int)circleA->position.x - MeasureText("0", 20)/2, circleA->position.y - 7, 20, WHITE);
-            DrawText("0.5", (int)circleB->position.x - MeasureText("0.5", 20)/2, circleB->position.y - 7, 20, WHITE);
-            DrawText("1", (int)circleC->position.x - MeasureText("1", 20)/2, circleC->position.y - 7, 20, WHITE);
+            rl_DrawText("Restitution amount", (screenWidth - MeasureText("Restitution amount", 30))/2, 75, 30, WHITE);
+            rl_DrawText("0", (int)circleA->position.x - MeasureText("0", 20)/2, circleA->position.y - 7, 20, WHITE);
+            rl_DrawText("0.5", (int)circleB->position.x - MeasureText("0.5", 20)/2, circleB->position.y - 7, 20, WHITE);
+            rl_DrawText("1", (int)circleC->position.x - MeasureText("1", 20)/2, circleC->position.y - 7, 20, WHITE);
 
-            DrawText("Press 'R' to reset example", 10, 10, 10, WHITE);
+            rl_DrawText("Press 'R' to reset example", 10, 10, 10, WHITE);
 
-            DrawText("Physac", logoX, logoY, 30, WHITE);
-            DrawText("Powered by", logoX + 50, logoY - 7, 10, WHITE);
+            rl_DrawText("Physac", logoX, logoY, 30, WHITE);
+            rl_DrawText("Powered by", logoX + 50, logoY - 7, 10, WHITE);
 
         EndDrawing();
         //----------------------------------------------------------------------------------
@@ -122,7 +122,7 @@ int main(void)
 
     ClosePhysics();       // Unitialize physics
 
-    RlibCloseWindow();        // Close window and OpenGL context
+    rl_CloseWindow();        // Close window and OpenGL context
     //--------------------------------------------------------------------------------------
 
     return 0;

@@ -658,7 +658,7 @@
         <Function name="WaitTime" retType="void" paramCount="1" desc="Wait for some milliseconds (halt program execution)">
             <Param type="float" name="ms" desc="" />
         </Function>
-        <Function name="ShowCursor" retType="void" paramCount="0" desc="Shows cursor">
+        <Function name="rl_ShowCursor" retType="void" paramCount="0" desc="Shows cursor">
         </Function>
         <Function name="HideCursor" retType="void" paramCount="0" desc="Hides cursor">
         </Function>
@@ -1377,29 +1377,29 @@
             <Param type="Rectangle" name="rec1" desc="" />
             <Param type="Rectangle" name="rec2" desc="" />
         </Function>
-        <Function name="LoadImage" retType="Image" paramCount="1" desc="Load image from file into CPU memory (RAM)">
+        <Function name="rl_LoadImage" retType="Image" paramCount="1" desc="Load image from file into CPU memory (RAM)">
             <Param type="const char *" name="fileName" desc="" />
         </Function>
-        <Function name="LoadImageRaw" retType="Image" paramCount="5" desc="Load image from RAW file data">
+        <Function name="rl_LoadImageRaw" retType="Image" paramCount="5" desc="Load image from RAW file data">
             <Param type="const char *" name="fileName" desc="" />
             <Param type="int" name="width" desc="" />
             <Param type="int" name="height" desc="" />
             <Param type="int" name="format" desc="" />
             <Param type="int" name="headerSize" desc="" />
         </Function>
-        <Function name="LoadImageAnim" retType="Image" paramCount="2" desc="Load image sequence from file (frames appended to image.data)">
+        <Function name="rl_LoadImageAnim" retType="Image" paramCount="2" desc="Load image sequence from file (frames appended to image.data)">
             <Param type="const char *" name="fileName" desc="" />
             <Param type="int *" name="frames" desc="" />
         </Function>
-        <Function name="LoadImageFromMemory" retType="Image" paramCount="3" desc="Load image from memory buffer, fileType refers to extension: i.e. '.png'">
+        <Function name="rl_LoadImageFromMemory" retType="Image" paramCount="3" desc="Load image from memory buffer, fileType refers to extension: i.e. '.png'">
             <Param type="const char *" name="fileType" desc="" />
             <Param type="const unsigned char *" name="fileData" desc="" />
             <Param type="int" name="dataSize" desc="" />
         </Function>
-        <Function name="LoadImageFromTexture" retType="Image" paramCount="1" desc="Load image from GPU texture data">
+        <Function name="rl_LoadImageFromTexture" retType="Image" paramCount="1" desc="Load image from GPU texture data">
             <Param type="Texture2D" name="texture" desc="" />
         </Function>
-        <Function name="LoadImageFromScreen" retType="Image" paramCount="0" desc="Load image from screen buffer and (screenshot)">
+        <Function name="rl_LoadImageFromScreen" retType="Image" paramCount="0" desc="Load image from screen buffer and (screenshot)">
         </Function>
         <Function name="UnloadImage" retType="void" paramCount="1" desc="Unload image from CPU memory (RAM)">
             <Param type="Image" name="image" desc="" />
@@ -1564,18 +1564,18 @@
             <Param type="Color" name="color" desc="" />
             <Param type="Color" name="replace" desc="" />
         </Function>
-        <Function name="LoadImageColors" retType="Color *" paramCount="1" desc="Load color data from image as a Color array (RGBA - 32bit)">
+        <Function name="rl_LoadImageColors" retType="Color *" paramCount="1" desc="Load color data from image as a Color array (RGBA - 32bit)">
             <Param type="Image" name="image" desc="" />
         </Function>
-        <Function name="LoadImagePalette" retType="Color *" paramCount="3" desc="Load colors palette from image as a Color array (RGBA - 32bit)">
+        <Function name="rl_LoadImagePalette" retType="Color *" paramCount="3" desc="Load colors palette from image as a Color array (RGBA - 32bit)">
             <Param type="Image" name="image" desc="" />
             <Param type="int" name="maxPaletteSize" desc="" />
             <Param type="int *" name="colorCount" desc="" />
         </Function>
-        <Function name="UnloadImageColors" retType="void" paramCount="1" desc="Unload color data loaded with LoadImageColors()">
+        <Function name="UnloadImageColors" retType="void" paramCount="1" desc="Unload color data loaded with rl_LoadImageColors()">
             <Param type="Color *" name="colors" desc="" />
         </Function>
-        <Function name="UnloadImagePalette" retType="void" paramCount="1" desc="Unload colors palette loaded with LoadImagePalette()">
+        <Function name="UnloadImagePalette" retType="void" paramCount="1" desc="Unload colors palette loaded with rl_LoadImagePalette()">
             <Param type="Color *" name="colors" desc="" />
         </Function>
         <Function name="GetImageAlphaBorder" retType="Rectangle" paramCount="2" desc="Get image alpha border rectangle">
@@ -1661,7 +1661,7 @@
             <Param type="Rectangle" name="dstRec" desc="" />
             <Param type="Color" name="tint" desc="" />
         </Function>
-        <Function name="ImageDrawText" retType="void" paramCount="6" desc="Draw text (using default font) within an image (destination)">
+        <Function name="Imagerl_DrawText" retType="void" paramCount="6" desc="Draw text (using default font) within an image (destination)">
             <Param type="Image *" name="dst" desc="" />
             <Param type="const char *" name="text" desc="" />
             <Param type="int" name="posX" desc="" />
@@ -1669,7 +1669,7 @@
             <Param type="int" name="fontSize" desc="" />
             <Param type="Color" name="color" desc="" />
         </Function>
-        <Function name="ImageDrawTextEx" retType="void" paramCount="7" desc="Draw text (custom sprite font) within an image (destination)">
+        <Function name="Imagerl_rl_DrawTextEx" retType="void" paramCount="7" desc="Draw text (custom sprite font) within an image (destination)">
             <Param type="Image *" name="dst" desc="" />
             <Param type="Font" name="font" desc="" />
             <Param type="const char *" name="text" desc="" />
@@ -1718,38 +1718,38 @@
             <Param type="Texture2D" name="texture" desc="" />
             <Param type="int" name="wrap" desc="" />
         </Function>
-        <Function name="DrawTexture" retType="void" paramCount="4" desc="Draw a Texture2D">
+        <Function name="rl_DrawTexture" retType="void" paramCount="4" desc="Draw a Texture2D">
             <Param type="Texture2D" name="texture" desc="" />
             <Param type="int" name="posX" desc="" />
             <Param type="int" name="posY" desc="" />
             <Param type="Color" name="tint" desc="" />
         </Function>
-        <Function name="DrawTextureV" retType="void" paramCount="3" desc="Draw a Texture2D with position defined as Vector2">
+        <Function name="rl_DrawTextureV" retType="void" paramCount="3" desc="Draw a Texture2D with position defined as Vector2">
             <Param type="Texture2D" name="texture" desc="" />
             <Param type="Vector2" name="position" desc="" />
             <Param type="Color" name="tint" desc="" />
         </Function>
-        <Function name="DrawTextureEx" retType="void" paramCount="5" desc="Draw a Texture2D with extended parameters">
+        <Function name="rl_DrawTextureEx" retType="void" paramCount="5" desc="Draw a Texture2D with extended parameters">
             <Param type="Texture2D" name="texture" desc="" />
             <Param type="Vector2" name="position" desc="" />
             <Param type="float" name="rotation" desc="" />
             <Param type="float" name="scale" desc="" />
             <Param type="Color" name="tint" desc="" />
         </Function>
-        <Function name="DrawTextureRec" retType="void" paramCount="4" desc="Draw a part of a texture defined by a rectangle">
+        <Function name="rl_DrawTextureRec" retType="void" paramCount="4" desc="Draw a part of a texture defined by a rectangle">
             <Param type="Texture2D" name="texture" desc="" />
             <Param type="Rectangle" name="source" desc="" />
             <Param type="Vector2" name="position" desc="" />
             <Param type="Color" name="tint" desc="" />
         </Function>
-        <Function name="DrawTextureQuad" retType="void" paramCount="5" desc="Draw texture quad with tiling and offset parameters">
+        <Function name="rl_DrawTextureQuad" retType="void" paramCount="5" desc="Draw texture quad with tiling and offset parameters">
             <Param type="Texture2D" name="texture" desc="" />
             <Param type="Vector2" name="tiling" desc="" />
             <Param type="Vector2" name="offset" desc="" />
             <Param type="Rectangle" name="quad" desc="" />
             <Param type="Color" name="tint" desc="" />
         </Function>
-        <Function name="DrawTextureTiled" retType="void" paramCount="7" desc="Draw part of a texture (defined by a rectangle) with rotation and scale tiled into dest.">
+        <Function name="rl_DrawTextureTiled" retType="void" paramCount="7" desc="Draw part of a texture (defined by a rectangle) with rotation and scale tiled into dest.">
             <Param type="Texture2D" name="texture" desc="" />
             <Param type="Rectangle" name="source" desc="" />
             <Param type="Rectangle" name="dest" desc="" />
@@ -1758,7 +1758,7 @@
             <Param type="float" name="scale" desc="" />
             <Param type="Color" name="tint" desc="" />
         </Function>
-        <Function name="DrawTexturePro" retType="void" paramCount="6" desc="Draw a part of a texture defined by a rectangle with 'pro' parameters">
+        <Function name="rl_DrawTexturePro" retType="void" paramCount="6" desc="Draw a part of a texture defined by a rectangle with 'pro' parameters">
             <Param type="Texture2D" name="texture" desc="" />
             <Param type="Rectangle" name="source" desc="" />
             <Param type="Rectangle" name="dest" desc="" />
@@ -1766,7 +1766,7 @@
             <Param type="float" name="rotation" desc="" />
             <Param type="Color" name="tint" desc="" />
         </Function>
-        <Function name="DrawTextureNPatch" retType="void" paramCount="6" desc="Draws a texture (or part of it) that stretches or shrinks nicely">
+        <Function name="rl_DrawTextureNPatch" retType="void" paramCount="6" desc="Draws a texture (or part of it) that stretches or shrinks nicely">
             <Param type="Texture2D" name="texture" desc="" />
             <Param type="NPatchInfo" name="nPatchInfo" desc="" />
             <Param type="Rectangle" name="dest" desc="" />
@@ -1774,7 +1774,7 @@
             <Param type="float" name="rotation" desc="" />
             <Param type="Color" name="tint" desc="" />
         </Function>
-        <Function name="DrawTexturePoly" retType="void" paramCount="6" desc="Draw a textured polygon">
+        <Function name="rl_DrawTexturePoly" retType="void" paramCount="6" desc="Draw a textured polygon">
             <Param type="Texture2D" name="texture" desc="" />
             <Param type="Vector2" name="center" desc="" />
             <Param type="Vector2 *" name="points" desc="" />
@@ -1884,14 +1884,14 @@
             <Param type="int" name="posX" desc="" />
             <Param type="int" name="posY" desc="" />
         </Function>
-        <Function name="DrawText" retType="void" paramCount="5" desc="Draw text (using default font)">
+        <Function name="rl_DrawText" retType="void" paramCount="5" desc="Draw text (using default font)">
             <Param type="const char *" name="text" desc="" />
             <Param type="int" name="posX" desc="" />
             <Param type="int" name="posY" desc="" />
             <Param type="int" name="fontSize" desc="" />
             <Param type="Color" name="color" desc="" />
         </Function>
-        <Function name="DrawTextEx" retType="void" paramCount="6" desc="Draw text using font and additional parameters">
+        <Function name="rl_rl_DrawTextEx" retType="void" paramCount="6" desc="Draw text using font and additional parameters">
             <Param type="Font" name="font" desc="" />
             <Param type="const char *" name="text" desc="" />
             <Param type="Vector2" name="position" desc="" />
@@ -1899,7 +1899,7 @@
             <Param type="float" name="spacing" desc="" />
             <Param type="Color" name="tint" desc="" />
         </Function>
-        <Function name="DrawTextPro" retType="void" paramCount="8" desc="Draw text using Font and pro parameters (rotation)">
+        <Function name="rl_DrawTextPro" retType="void" paramCount="8" desc="Draw text using Font and pro parameters (rotation)">
             <Param type="Font" name="font" desc="" />
             <Param type="const char *" name="text" desc="" />
             <Param type="Vector2" name="position" desc="" />
@@ -1909,7 +1909,7 @@
             <Param type="float" name="spacing" desc="" />
             <Param type="Color" name="tint" desc="" />
         </Function>
-        <Function name="DrawTextCodepoint" retType="void" paramCount="5" desc="Draw one character (codepoint)">
+        <Function name="rl_DrawTextCodepoint" retType="void" paramCount="5" desc="Draw one character (codepoint)">
             <Param type="Font" name="font" desc="" />
             <Param type="int" name="codepoint" desc="" />
             <Param type="Vector2" name="position" desc="" />
@@ -2446,7 +2446,7 @@
             <Param type="Wave" name="wave" desc="" />
             <Param type="const char *" name="fileName" desc="" />
         </Function>
-        <Function name="PlaySound" retType="void" paramCount="1" desc="Play a sound">
+        <Function name="rl_PlaySound" retType="void" paramCount="1" desc="Play a sound">
             <Param type="Sound" name="sound" desc="" />
         </Function>
         <Function name="StopSound" retType="void" paramCount="1" desc="Stop playing a sound">
@@ -2458,7 +2458,7 @@
         <Function name="ResumeSound" retType="void" paramCount="1" desc="Resume a paused sound">
             <Param type="Sound" name="sound" desc="" />
         </Function>
-        <Function name="PlaySoundMulti" retType="void" paramCount="1" desc="Play a sound (using multichannel buffer pool)">
+        <Function name="rl_PlaySoundMulti" retType="void" paramCount="1" desc="Play a sound (using multichannel buffer pool)">
             <Param type="Sound" name="sound" desc="" />
         </Function>
         <Function name="StopSoundMulti" retType="void" paramCount="0" desc="Stop any sound playing (using multichannel buffer pool)">

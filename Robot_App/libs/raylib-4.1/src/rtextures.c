@@ -74,7 +74,7 @@
 #include "rlgl.h"               // OpenGL abstraction layer to OpenGL 1.1, 3.3 or ES2
 
 #include <stdlib.h>             // Required for: malloc(), free()
-#include <string.h>             // Required for: strlen() [Used in ImageTextEx()], strcmp() [Used in LoadImageFromMemory()]
+#include <string.h>             // Required for: strlen() [Used in ImageTextEx()], strcmp() [Used in rl_LoadImageFromMemory()]
 #include <math.h>               // Required for: fabsf()
 #include <stdio.h>              // Required for: sprintf() [Used in ExportImageAsCode()]
 
@@ -197,14 +197,14 @@ static Image LoadPVR(const unsigned char *fileData, unsigned int fileSize);   //
 static Image LoadASTC(const unsigned char *fileData, unsigned int fileSize);  // Load ASTC file data
 #endif
 
-static Vector4 *LoadImageDataNormalized(Image image);       // Load pixel data from image as Vector4 array (float normalized)
+static Vector4 *rl_LoadImageDataNormalized(Image image);       // Load pixel data from image as Vector4 array (float normalized)
 
 //----------------------------------------------------------------------------------
 // Module Functions Definition
 //----------------------------------------------------------------------------------
 
 // Load image from file into CPU memory (RAM)
-Image LoadImage(const char *fileName)
+Image rl_LoadImage(const char *fileName)
 {
     Image image = { 0 };
 
@@ -225,7 +225,7 @@ Image LoadImage(const char *fileName)
     unsigned char *fileData = LoadFileData(fileName, &fileSize);
 
     // Loading image from memory data
-    if (fileData != NULL) image = LoadImageFromMemory(GetFileExtension(fileName), fileData, fileSize);
+    if (fileData != NULL) image = rl_LoadImageFromMemory(GetFileExtension(fileName), fileData, fileSize);
 
     RL_FREE(fileData);
 
@@ -233,7 +233,7 @@ Image LoadImage(const char *fileName)
 }
 
 // Load an image from RAW file data
-Image LoadImageRaw(const char *fileName, int width, int height, int format, int headerSize)
+Image rl_LoadImageRaw(const char *fileName, int width, int height, int format, int headerSize)
 {
     Image image = { 0 };
 
@@ -265,7 +265,7 @@ Image LoadImageRaw(const char *fileName, int width, int height, int format, int 
 //  - Number of frames is returned through 'frames' parameter
 //  - All frames are returned in RGBA format
 //  - Frames delay data is discarded
-Image LoadImageAnim(const char *fileName, int *frames)
+Image rl_LoadImageAnim(const char *fileName, int *frames)
 {
     Image image = { 0 };
     int frameCount = 1;
@@ -292,7 +292,7 @@ Image LoadImageAnim(const char *fileName, int *frames)
 #else
     if (false) { }
 #endif
-    else image = LoadImage(fileName);
+    else image = rl_LoadImage(fileName);
 
     // TODO: Support APNG animated images
 
@@ -302,7 +302,7 @@ Image LoadImageAnim(const char *fileName, int *frames)
 
 // Load image from memory buffer, fileType refers to extension: i.e. ".png"
 // WARNING: File extension must be provided in lower-case
-Image LoadImageFromMemory(const char *fileType, const unsigned char *fileData, int dataSize)
+Image rl_LoadImageFromMemory(const char *fileType, const unsigned char *fileData, int dataSize)
 {
     Image image = { 0 };
 
@@ -410,7 +410,7 @@ Image LoadImageFromMemory(const char *fileType, const unsigned char *fileData, i
 
 // Load image from GPU texture data
 // NOTE: Compressed texture formats not supported
-Image LoadImageFromTexture(Texture2D texture)
+Image rl_LoadImageFromTexture(Texture2D texture)
 {
     Image image = { 0 };
 
@@ -441,7 +441,7 @@ Image LoadImageFromTexture(Texture2D texture)
 }
 
 // Load image from screen buffer and (screenshot)
-Image LoadImageFromScreen(void)
+Image rl_LoadImageFromScreen(void)
 {
     Image image = { 0 };
 
@@ -478,7 +478,7 @@ bool ExportImage(Image image, const char *fileName)
     else
     {
         // NOTE: Getting Color array as RGBA unsigned char values
-        imgData = (unsigned char *)LoadImageColors(image);
+        imgData = (unsigned char *)rl_LoadImageColors(image);
         allocatedData = true;
     }
 
@@ -868,7 +868,7 @@ Image ImageCopy(Image image)
 }
 
 // Create an image from another image piece
-Image ImageFromImage(Image image, RlibRectangle rec)
+Image ImageFromImage(Image image, rl_Rectangle rec)
 {
     Image result = { 0 };
 
@@ -890,7 +890,7 @@ Image ImageFromImage(Image image, RlibRectangle rec)
 
 // Crop an image to area defined by a rectangle
 // NOTE: Security checks are performed in case rectangle goes out of bounds
-void ImageCrop(Image *image, RlibRectangle crop)
+void ImageCrop(Image *image, rl_Rectangle crop)
 {
     // Security check to avoid program crash
     if ((image->data == NULL) || (image->width == 0) || (image->height == 0)) return;
@@ -950,7 +950,7 @@ void ImageFormat(Image *image, int newFormat)
     {
         if ((image->format < PIXELFORMAT_COMPRESSED_DXT1_RGB) && (newFormat < PIXELFORMAT_COMPRESSED_DXT1_RGB))
         {
-            Vector4 *pixels = LoadImageDataNormalized(*image);     // Supports 8 to 32 bit per channel
+            Vector4 *pixels = rl_LoadImageDataNormalized(*image);     // Supports 8 to 32 bit per channel
 
             RL_FREE(image->data);      // WARNING! We loose mipmaps data --> Regenerated at the end...
             image->data = NULL;
@@ -1187,8 +1187,8 @@ Image ImageTextEx(Font font, const char *text, float fontSize, float spacing, Co
         {
             if ((codepoint != ' ') && (codepoint != '\t'))
             {
-                RlibRectangle rec = { (float)(textOffsetX + font.glyphs[index].offsetX), (float)(textOffsetY + font.glyphs[index].offsetY), (float)font.recs[index].width, (float)font.recs[index].height };
-                ImageDraw(&imText, font.glyphs[index].image, (RlibRectangle){ 0, 0, (float)font.glyphs[index].image.width, (float)font.glyphs[index].image.height }, rec, tint);
+                rl_Rectangle rec = { (float)(textOffsetX + font.glyphs[index].offsetX), (float)(textOffsetY + font.glyphs[index].offsetY), (float)font.recs[index].width, (float)font.recs[index].height };
+                ImageDraw(&imText, font.glyphs[index].image, (rl_Rectangle){ 0, 0, (float)font.glyphs[index].image.width, (float)font.glyphs[index].image.height }, rec, tint);
             }
 
             if (font.glyphs[index].advanceX == 0) textOffsetX += (int)(font.recs[index].width + spacing);
@@ -1223,7 +1223,7 @@ void ImageAlphaCrop(Image *image, float threshold)
     // Security check to avoid program crash
     if ((image->data == NULL) || (image->width == 0) || (image->height == 0)) return;
 
-    RlibRectangle crop = GetImageAlphaBorder(*image, threshold);
+    rl_Rectangle crop = GetImageAlphaBorder(*image, threshold);
 
     // Crop if rectangle is valid
     if (((int)crop.width != 0) && ((int)crop.height != 0)) ImageCrop(image, crop);
@@ -1378,7 +1378,7 @@ void ImageAlphaPremultiply(Image *image)
     if ((image->data == NULL) || (image->width == 0) || (image->height == 0)) return;
 
     float alpha = 0.0f;
-    Color *pixels = LoadImageColors(*image);
+    Color *pixels = rl_LoadImageColors(*image);
 
     for (int i = 0; i < image->width*image->height; i++)
     {
@@ -1440,7 +1440,7 @@ void ImageResize(Image *image, int newWidth, int newHeight)
     else
     {
         // Get data as Color pixels array to work with it
-        Color *pixels = LoadImageColors(*image);
+        Color *pixels = rl_LoadImageColors(*image);
         Color *output = (Color *)RL_MALLOC(newWidth*newHeight*sizeof(Color));
 
         // NOTE: Color data is casted to (unsigned char *), there shouldn't been any problem...
@@ -1466,7 +1466,7 @@ void ImageResizeNN(Image *image,int newWidth,int newHeight)
     // Security check to avoid program crash
     if ((image->data == NULL) || (image->width == 0) || (image->height == 0)) return;
 
-    Color *pixels = LoadImageColors(*image);
+    Color *pixels = rl_LoadImageColors(*image);
     Color *output = (Color *)RL_MALLOC(newWidth*newHeight*sizeof(Color));
 
     // EDIT: added +1 to account for an early rounding problem
@@ -1510,7 +1510,7 @@ void ImageResizeCanvas(Image *image, int newWidth, int newHeight, int offsetX, i
     if (image->format >= PIXELFORMAT_COMPRESSED_DXT1_RGB) TRACELOG(LOG_WARNING, "Image manipulation not supported for compressed formats");
     else if ((newWidth != image->width) || (newHeight != image->height))
     {
-        RlibRectangle srcRec = { 0, 0, (float)image->width, (float)image->height };
+        rl_Rectangle srcRec = { 0, 0, (float)image->width, (float)image->height };
         Vector2 dstPos = { (float)offsetX, (float)offsetY };
 
         if (offsetX < 0)
@@ -1642,7 +1642,7 @@ void ImageDither(Image *image, int rBpp, int gBpp, int bBpp, int aBpp)
     }
     else
     {
-        Color *pixels = LoadImageColors(*image);
+        Color *pixels = rl_LoadImageColors(*image);
 
         RL_FREE(image->data);      // free old image data
 
@@ -1873,7 +1873,7 @@ void ImageColorTint(Image *image, Color color)
     // Security check to avoid program crash
     if ((image->data == NULL) || (image->width == 0) || (image->height == 0)) return;
 
-    Color *pixels = LoadImageColors(*image);
+    Color *pixels = rl_LoadImageColors(*image);
 
     float cR = (float)color.r/255;
     float cG = (float)color.g/255;
@@ -1912,7 +1912,7 @@ void ImageColorInvert(Image *image)
     // Security check to avoid program crash
     if ((image->data == NULL) || (image->width == 0) || (image->height == 0)) return;
 
-    Color *pixels = LoadImageColors(*image);
+    Color *pixels = rl_LoadImageColors(*image);
 
     for (int y = 0; y < image->height; y++)
     {
@@ -1952,7 +1952,7 @@ void ImageColorContrast(Image *image, float contrast)
     contrast = (100.0f + contrast)/100.0f;
     contrast *= contrast;
 
-    Color *pixels = LoadImageColors(*image);
+    Color *pixels = rl_LoadImageColors(*image);
 
     for (int y = 0; y < image->height; y++)
     {
@@ -2007,7 +2007,7 @@ void ImageColorBrightness(Image *image, int brightness)
     if (brightness < -255) brightness = -255;
     if (brightness > 255) brightness = 255;
 
-    Color *pixels = LoadImageColors(*image);
+    Color *pixels = rl_LoadImageColors(*image);
 
     for (int y = 0; y < image->height; y++)
     {
@@ -2047,7 +2047,7 @@ void ImageColorReplace(Image *image, Color color, Color replace)
     // Security check to avoid program crash
     if ((image->data == NULL) || (image->width == 0) || (image->height == 0)) return;
 
-    Color *pixels = LoadImageColors(*image);
+    Color *pixels = rl_LoadImageColors(*image);
 
     for (int y = 0; y < image->height; y++)
     {
@@ -2078,7 +2078,7 @@ void ImageColorReplace(Image *image, Color color, Color replace)
 
 // Load color data from image as a Color array (RGBA - 32bit)
 // NOTE: Memory allocated should be freed using UnloadImageColors();
-Color *LoadImageColors(Image image)
+Color *rl_LoadImageColors(Image image)
 {
     if ((image.width == 0) || (image.height == 0)) return NULL;
 
@@ -2196,13 +2196,13 @@ Color *LoadImageColors(Image image)
 
 // Load colors palette from image as a Color array (RGBA - 32bit)
 // NOTE: Memory allocated should be freed using UnloadImagePalette()
-Color *LoadImagePalette(Image image, int maxPaletteSize, int *colorCount)
+Color *rl_LoadImagePalette(Image image, int maxPaletteSize, int *colorCount)
 {
     #define COLOR_EQUAL(col1, col2) ((col1.r == col2.r)&&(col1.g == col2.g)&&(col1.b == col2.b)&&(col1.a == col2.a))
 
     int palCount = 0;
     Color *palette = NULL;
-    Color *pixels = LoadImageColors(image);
+    Color *pixels = rl_LoadImageColors(image);
 
     if (pixels != NULL)
     {
@@ -2250,13 +2250,13 @@ Color *LoadImagePalette(Image image, int maxPaletteSize, int *colorCount)
     return palette;
 }
 
-// Unload color data loaded with LoadImageColors()
+// Unload color data loaded with rl_LoadImageColors()
 void UnloadImageColors(Color *colors)
 {
     RL_FREE(colors);
 }
 
-// Unload colors palette loaded with LoadImagePalette()
+// Unload colors palette loaded with rl_LoadImagePalette()
 void UnloadImagePalette(Color *colors)
 {
     RL_FREE(colors);
@@ -2264,11 +2264,11 @@ void UnloadImagePalette(Color *colors)
 
 // Get image alpha border rectangle
 // NOTE: Threshold is defined as a percentatge: 0.0f -> 1.0f
-RlibRectangle GetImageAlphaBorder(Image image, float threshold)
+rl_Rectangle GetImageAlphaBorder(Image image, float threshold)
 {
-    RlibRectangle crop = { 0 };
+    rl_Rectangle crop = { 0 };
 
-    Color *pixels = LoadImageColors(image);
+    Color *pixels = rl_LoadImageColors(image);
 
     if (pixels != NULL)
     {
@@ -2294,7 +2294,7 @@ RlibRectangle GetImageAlphaBorder(Image image, float threshold)
         // Check for empty blank image
         if ((xMin != 65536) && (xMax != 65536))
         {
-            crop = (RlibRectangle){ (float)xMin, (float)yMin, (float)((xMax + 1) - xMin), (float)((yMax + 1) - yMin) };
+            crop = (rl_Rectangle){ (float)xMin, (float)yMin, (float)((xMax + 1) - xMin), (float)((yMax + 1) - yMin) };
         }
 
         UnloadImageColors(pixels);
@@ -2667,7 +2667,7 @@ void ImageDrawCircleV(Image *dst, Vector2 center, int radius, Color color)
 // Draw rectangle within an image
 void ImageDrawRectangle(Image *dst, int posX, int posY, int width, int height, Color color)
 {
-    ImageDrawRectangleRec(dst, (RlibRectangle){ (float)posX, (float)posY, (float)width, (float)height }, color);
+    ImageDrawRectangleRec(dst, (rl_Rectangle){ (float)posX, (float)posY, (float)width, (float)height }, color);
 }
 
 // Draw rectangle within an image (Vector version)
@@ -2677,7 +2677,7 @@ void ImageDrawRectangleV(Image *dst, Vector2 position, Vector2 size, Color color
 }
 
 // Draw rectangle within an image
-void ImageDrawRectangleRec(Image *dst, RlibRectangle rec, Color color)
+void ImageDrawRectangleRec(Image *dst, rl_Rectangle rec, Color color)
 {
     // Security check to avoid program crash
     if ((dst->data == NULL) || (dst->width == 0) || (dst->height == 0)) return;
@@ -2698,7 +2698,7 @@ void ImageDrawRectangleRec(Image *dst, RlibRectangle rec, Color color)
 }
 
 // Draw rectangle lines within an image
-void ImageDrawRectangleLines(Image *dst, RlibRectangle rec, int thick, Color color)
+void ImageDrawRectangleLines(Image *dst, rl_Rectangle rec, int thick, Color color)
 {
     ImageDrawRectangle(dst, (int)rec.x, (int)rec.y, (int)rec.width, thick, color);
     ImageDrawRectangle(dst, (int)rec.x, (int)(rec.y + thick), thick, (int)(rec.height - thick*2), color);
@@ -2708,7 +2708,7 @@ void ImageDrawRectangleLines(Image *dst, RlibRectangle rec, int thick, Color col
 
 // Draw an image (source) within an image (destination)
 // NOTE: Color tint is applied to source image
-void ImageDraw(Image *dst, Image src, RlibRectangle srcRec, RlibRectangle dstRec, Color tint)
+void ImageDraw(Image *dst, Image src, rl_Rectangle srcRec, rl_Rectangle dstRec, Color tint)
 {
     // Security check to avoid program crash
     if ((dst->data == NULL) || (dst->width == 0) || (dst->height == 0) ||
@@ -2734,7 +2734,7 @@ void ImageDraw(Image *dst, Image src, RlibRectangle srcRec, RlibRectangle dstRec
         {
             srcMod = ImageFromImage(src, srcRec);   // Create image from another image
             ImageResize(&srcMod, (int)dstRec.width, (int)dstRec.height);   // Resize to destination rectangle
-            srcRec = (RlibRectangle){ 0, 0, (float)srcMod.width, (float)srcMod.height };
+            srcRec = (rl_Rectangle){ 0, 0, (float)srcMod.width, (float)srcMod.height };
 
             srcPtr = &srcMod;
             useSrcMod = true;
@@ -2823,24 +2823,24 @@ void ImageDraw(Image *dst, Image src, RlibRectangle srcRec, RlibRectangle dstRec
 }
 
 // Draw text (default font) within an image (destination)
-void ImageDrawText(Image *dst, const char *text, int posX, int posY, int fontSize, Color color)
+void Imagerl_DrawText(Image *dst, const char *text, int posX, int posY, int fontSize, Color color)
 {
 #if defined(SUPPORT_MODULE_RTEXT)
     Vector2 position = { (float)posX, (float)posY };
     // NOTE: For default font, spacing is set to desired font size / default font size (10)
-    ImageDrawTextEx(dst, GetFontDefault(), text, position, (float)fontSize, (float)fontSize/10, color);   // WARNING: Module required: rtext
+    Imagerl_rl_DrawTextEx(dst, GetFontDefault(), text, position, (float)fontSize, (float)fontSize/10, color);   // WARNING: Module required: rtext
 #else
-    TRACELOG(LOG_WARNING, "IMAGE: ImageDrawText() requires module: rtext");
+    TRACELOG(LOG_WARNING, "IMAGE: Imagerl_DrawText() requires module: rtext");
 #endif
 }
 
 // Draw text (custom sprite font) within an image (destination)
-void ImageDrawTextEx(Image *dst, Font font, const char *text, Vector2 position, float fontSize, float spacing, Color tint)
+void Imagerl_rl_DrawTextEx(Image *dst, Font font, const char *text, Vector2 position, float fontSize, float spacing, Color tint)
 {
     Image imText = ImageTextEx(font, text, fontSize, spacing, tint);
 
-    RlibRectangle srcRec = { 0.0f, 0.0f, (float)imText.width, (float)imText.height };
-    RlibRectangle dstRec = { position.x, position.y, (float)imText.width, (float)imText.height };
+    rl_Rectangle srcRec = { 0.0f, 0.0f, (float)imText.width, (float)imText.height };
+    rl_Rectangle dstRec = { position.x, position.y, (float)imText.width, (float)imText.height };
 
     ImageDraw(dst, imText, srcRec, dstRec, WHITE);
 
@@ -2855,7 +2855,7 @@ Texture2D LoadTexture(const char *fileName)
 {
     Texture2D texture = { 0 };
 
-    Image image = LoadImage(fileName);
+    Image image = rl_LoadImage(fileName);
 
     if (image.data != NULL)
     {
@@ -2915,8 +2915,8 @@ TextureCubemap LoadTextureCubemap(Image image, int layout)
         int size = cubemap.width;
 
         Image faces = { 0 };                // Vertical column image
-        RlibRectangle faceRecs[6] = { 0 };      // Face source rectangles
-        for (int i = 0; i < 6; i++) faceRecs[i] = (RlibRectangle){ 0, 0, (float)size, (float)size };
+        rl_Rectangle faceRecs[6] = { 0 };      // Face source rectangles
+        for (int i = 0; i < 6; i++) faceRecs[i] = (rl_Rectangle){ 0, 0, (float)size, (float)size };
 
         if (layout == CUBEMAP_LAYOUT_LINE_VERTICAL)
         {
@@ -2955,7 +2955,7 @@ TextureCubemap LoadTextureCubemap(Image image, int layout)
 
             // NOTE: Image formating does not work with compressed textures
             
-            for (int i = 0; i < 6; i++) ImageDraw(&faces, image, faceRecs[i], (RlibRectangle){ 0, (float)size*i, (float)size, (float)size }, WHITE);
+            for (int i = 0; i < 6; i++) ImageDraw(&faces, image, faceRecs[i], (rl_Rectangle){ 0, (float)size*i, (float)size, (float)size }, WHITE);
         }
 
         // NOTE: Cubemap data is expected to be provided as 6 images in a single data array,
@@ -3044,7 +3044,7 @@ void UpdateTexture(Texture2D texture, const void *pixels)
 
 // Update GPU texture rectangle with new data
 // NOTE: pixels data must match texture.format
-void UpdateTextureRec(Texture2D texture, RlibRectangle rec, const void *pixels)
+void UpdateTextureRec(Texture2D texture, rl_Rectangle rec, const void *pixels)
 {
     rlUpdateTexture(texture.id, (int)rec.x, (int)rec.y, (int)rec.width, (int)rec.height, texture.format, pixels);
 }
@@ -3160,52 +3160,52 @@ void SetTextureWrap(Texture2D texture, int wrap)
 // Texture drawing functions
 //------------------------------------------------------------------------------------
 // Draw a Texture2D
-void DrawTexture(Texture2D texture, int posX, int posY, Color tint)
+void rl_DrawTexture(Texture2D texture, int posX, int posY, Color tint)
 {
-    DrawTextureEx(texture, (Vector2){ (float)posX, (float)posY }, 0.0f, 1.0f, tint);
+    rl_DrawTextureEx(texture, (Vector2){ (float)posX, (float)posY }, 0.0f, 1.0f, tint);
 }
 
 // Draw a Texture2D with position defined as Vector2
-void DrawTextureV(Texture2D texture, Vector2 position, Color tint)
+void rl_DrawTextureV(Texture2D texture, Vector2 position, Color tint)
 {
-    DrawTextureEx(texture, position, 0, 1.0f, tint);
+    rl_DrawTextureEx(texture, position, 0, 1.0f, tint);
 }
 
 // Draw a Texture2D with extended parameters
-void DrawTextureEx(Texture2D texture, Vector2 position, float rotation, float scale, Color tint)
+void rl_DrawTextureEx(Texture2D texture, Vector2 position, float rotation, float scale, Color tint)
 {
-    RlibRectangle source = { 0.0f, 0.0f, (float)texture.width, (float)texture.height };
-    RlibRectangle dest = { position.x, position.y, (float)texture.width*scale, (float)texture.height*scale };
+    rl_Rectangle source = { 0.0f, 0.0f, (float)texture.width, (float)texture.height };
+    rl_Rectangle dest = { position.x, position.y, (float)texture.width*scale, (float)texture.height*scale };
     Vector2 origin = { 0.0f, 0.0f };
 
-    DrawTexturePro(texture, source, dest, origin, rotation, tint);
+    rl_DrawTexturePro(texture, source, dest, origin, rotation, tint);
 }
 
 // Draw a part of a texture (defined by a rectangle)
-void DrawTextureRec(Texture2D texture, RlibRectangle source, Vector2 position, Color tint)
+void rl_DrawTextureRec(Texture2D texture, rl_Rectangle source, Vector2 position, Color tint)
 {
-    RlibRectangle dest = { position.x, position.y, fabsf(source.width), fabsf(source.height) };
+    rl_Rectangle dest = { position.x, position.y, fabsf(source.width), fabsf(source.height) };
     Vector2 origin = { 0.0f, 0.0f };
 
-    DrawTexturePro(texture, source, dest, origin, 0.0f, tint);
+    rl_DrawTexturePro(texture, source, dest, origin, 0.0f, tint);
 }
 
 // Draw texture quad with tiling and offset parameters
 // NOTE: Tiling and offset should be provided considering normalized texture values [0..1]
 // i.e tiling = { 1.0f, 1.0f } refers to all texture, offset = { 0.5f, 0.5f } moves texture origin to center
-void DrawTextureQuad(Texture2D texture, Vector2 tiling, Vector2 offset, RlibRectangle quad, Color tint)
+void rl_DrawTextureQuad(Texture2D texture, Vector2 tiling, Vector2 offset, rl_Rectangle quad, Color tint)
 {
     // WARNING: This solution only works if TEXTURE_WRAP_REPEAT is supported,
     // NPOT textures supported is required and OpenGL ES 2.0 could not support it
-    RlibRectangle source = { offset.x*texture.width, offset.y*texture.height, tiling.x*texture.width, tiling.y*texture.height };
+    rl_Rectangle source = { offset.x*texture.width, offset.y*texture.height, tiling.x*texture.width, tiling.y*texture.height };
     Vector2 origin = { 0.0f, 0.0f };
 
-    DrawTexturePro(texture, source, quad, origin, 0.0f, tint);
+    rl_DrawTexturePro(texture, source, quad, origin, 0.0f, tint);
 }
 
 // Draw part of a texture (defined by a rectangle) with rotation and scale tiled into dest.
-// NOTE: For tilling a whole texture DrawTextureQuad() is better
-void DrawTextureTiled(Texture2D texture, RlibRectangle source, RlibRectangle dest, Vector2 origin, float rotation, float scale, Color tint)
+// NOTE: For tilling a whole texture rl_DrawTextureQuad() is better
+void rl_DrawTextureTiled(Texture2D texture, rl_Rectangle source, rl_Rectangle dest, Vector2 origin, float rotation, float scale, Color tint)
 {
     if ((texture.id <= 0) || (scale <= 0.0f)) return;  // Wanna see a infinite loop?!...just delete this line!
     if ((source.width == 0) || (source.height == 0)) return;
@@ -3214,8 +3214,8 @@ void DrawTextureTiled(Texture2D texture, RlibRectangle source, RlibRectangle des
     if ((dest.width < tileWidth) && (dest.height < tileHeight))
     {
         // Can fit only one tile
-        DrawTexturePro(texture, (RlibRectangle){source.x, source.y, ((float)dest.width/tileWidth)*source.width, ((float)dest.height/tileHeight)*source.height},
-                    (RlibRectangle){dest.x, dest.y, dest.width, dest.height}, origin, rotation, tint);
+        rl_DrawTexturePro(texture, (rl_Rectangle){source.x, source.y, ((float)dest.width/tileWidth)*source.width, ((float)dest.height/tileHeight)*source.height},
+                    (rl_Rectangle){dest.x, dest.y, dest.width, dest.height}, origin, rotation, tint);
     }
     else if (dest.width <= tileWidth)
     {
@@ -3223,14 +3223,14 @@ void DrawTextureTiled(Texture2D texture, RlibRectangle source, RlibRectangle des
         int dy = 0;
         for (;dy+tileHeight < dest.height; dy += tileHeight)
         {
-            DrawTexturePro(texture, (RlibRectangle){source.x, source.y, ((float)dest.width/tileWidth)*source.width, source.height}, (RlibRectangle){dest.x, dest.y + dy, dest.width, (float)tileHeight}, origin, rotation, tint);
+            rl_DrawTexturePro(texture, (rl_Rectangle){source.x, source.y, ((float)dest.width/tileWidth)*source.width, source.height}, (rl_Rectangle){dest.x, dest.y + dy, dest.width, (float)tileHeight}, origin, rotation, tint);
         }
 
         // Fit last tile
         if (dy < dest.height)
         {
-            DrawTexturePro(texture, (RlibRectangle){source.x, source.y, ((float)dest.width/tileWidth)*source.width, ((float)(dest.height - dy)/tileHeight)*source.height},
-                        (RlibRectangle){dest.x, dest.y + dy, dest.width, dest.height - dy}, origin, rotation, tint);
+            rl_DrawTexturePro(texture, (rl_Rectangle){source.x, source.y, ((float)dest.width/tileWidth)*source.width, ((float)(dest.height - dy)/tileHeight)*source.height},
+                        (rl_Rectangle){dest.x, dest.y + dy, dest.width, dest.height - dy}, origin, rotation, tint);
         }
     }
     else if (dest.height <= tileHeight)
@@ -3239,14 +3239,14 @@ void DrawTextureTiled(Texture2D texture, RlibRectangle source, RlibRectangle des
         int dx = 0;
         for (;dx+tileWidth < dest.width; dx += tileWidth)
         {
-            DrawTexturePro(texture, (RlibRectangle){source.x, source.y, source.width, ((float)dest.height/tileHeight)*source.height}, (RlibRectangle){dest.x + dx, dest.y, (float)tileWidth, dest.height}, origin, rotation, tint);
+            rl_DrawTexturePro(texture, (rl_Rectangle){source.x, source.y, source.width, ((float)dest.height/tileHeight)*source.height}, (rl_Rectangle){dest.x + dx, dest.y, (float)tileWidth, dest.height}, origin, rotation, tint);
         }
 
         // Fit last tile
         if (dx < dest.width)
         {
-            DrawTexturePro(texture, (RlibRectangle){source.x, source.y, ((float)(dest.width - dx)/tileWidth)*source.width, ((float)dest.height/tileHeight)*source.height},
-                        (RlibRectangle){dest.x + dx, dest.y, dest.width - dx, dest.height}, origin, rotation, tint);
+            rl_DrawTexturePro(texture, (rl_Rectangle){source.x, source.y, ((float)(dest.width - dx)/tileWidth)*source.width, ((float)dest.height/tileHeight)*source.height},
+                        (rl_Rectangle){dest.x + dx, dest.y, dest.width - dx, dest.height}, origin, rotation, tint);
         }
     }
     else
@@ -3258,13 +3258,13 @@ void DrawTextureTiled(Texture2D texture, RlibRectangle source, RlibRectangle des
             int dy = 0;
             for (;dy+tileHeight < dest.height; dy += tileHeight)
             {
-                DrawTexturePro(texture, source, (RlibRectangle){dest.x + dx, dest.y + dy, (float)tileWidth, (float)tileHeight}, origin, rotation, tint);
+                rl_DrawTexturePro(texture, source, (rl_Rectangle){dest.x + dx, dest.y + dy, (float)tileWidth, (float)tileHeight}, origin, rotation, tint);
             }
 
             if (dy < dest.height)
             {
-                DrawTexturePro(texture, (RlibRectangle){source.x, source.y, source.width, ((float)(dest.height - dy)/tileHeight)*source.height},
-                    (RlibRectangle){dest.x + dx, dest.y + dy, (float)tileWidth, dest.height - dy}, origin, rotation, tint);
+                rl_DrawTexturePro(texture, (rl_Rectangle){source.x, source.y, source.width, ((float)(dest.height - dy)/tileHeight)*source.height},
+                    (rl_Rectangle){dest.x + dx, dest.y + dy, (float)tileWidth, dest.height - dy}, origin, rotation, tint);
             }
         }
 
@@ -3274,15 +3274,15 @@ void DrawTextureTiled(Texture2D texture, RlibRectangle source, RlibRectangle des
             int dy = 0;
             for (;dy+tileHeight < dest.height; dy += tileHeight)
             {
-                DrawTexturePro(texture, (RlibRectangle){source.x, source.y, ((float)(dest.width - dx)/tileWidth)*source.width, source.height},
-                        (RlibRectangle){dest.x + dx, dest.y + dy, dest.width - dx, (float)tileHeight}, origin, rotation, tint);
+                rl_DrawTexturePro(texture, (rl_Rectangle){source.x, source.y, ((float)(dest.width - dx)/tileWidth)*source.width, source.height},
+                        (rl_Rectangle){dest.x + dx, dest.y + dy, dest.width - dx, (float)tileHeight}, origin, rotation, tint);
             }
 
             // Draw final tile in the bottom right corner
             if (dy < dest.height)
             {
-                DrawTexturePro(texture, (RlibRectangle){source.x, source.y, ((float)(dest.width - dx)/tileWidth)*source.width, ((float)(dest.height - dy)/tileHeight)*source.height},
-                    (RlibRectangle){dest.x + dx, dest.y + dy, dest.width - dx, dest.height - dy}, origin, rotation, tint);
+                rl_DrawTexturePro(texture, (rl_Rectangle){source.x, source.y, ((float)(dest.width - dx)/tileWidth)*source.width, ((float)(dest.height - dy)/tileHeight)*source.height},
+                    (rl_Rectangle){dest.x + dx, dest.y + dy, dest.width - dx, dest.height - dy}, origin, rotation, tint);
             }
         }
     }
@@ -3290,7 +3290,7 @@ void DrawTextureTiled(Texture2D texture, RlibRectangle source, RlibRectangle des
 
 // Draw a part of a texture (defined by a rectangle) with 'pro' parameters
 // NOTE: origin is relative to destination rectangle size
-void DrawTexturePro(Texture2D texture, RlibRectangle source, RlibRectangle dest, Vector2 origin, float rotation, Color tint)
+void rl_DrawTexturePro(Texture2D texture, rl_Rectangle source, rl_Rectangle dest, Vector2 origin, float rotation, Color tint)
 {
     // Check if texture is valid
     if (texture.id > 0)
@@ -3414,7 +3414,7 @@ void DrawTexturePro(Texture2D texture, RlibRectangle source, RlibRectangle dest,
 }
 
 // Draws a texture (or part of it) that stretches or shrinks nicely using n-patch info
-void DrawTextureNPatch(Texture2D texture, NPatchInfo nPatchInfo, RlibRectangle dest, Vector2 origin, float rotation, Color tint)
+void rl_DrawTextureNPatch(Texture2D texture, NPatchInfo nPatchInfo, rl_Rectangle dest, Vector2 origin, float rotation, Color tint)
 {
     if (texture.id > 0)
     {
@@ -3613,7 +3613,7 @@ void DrawTextureNPatch(Texture2D texture, NPatchInfo nPatchInfo, RlibRectangle d
 // Draw textured polygon, defined by vertex and texturecoordinates
 // NOTE: Polygon center must have straight line path to all points
 // without crossing perimeter, points must be in anticlockwise order
-void DrawTexturePoly(Texture2D texture, Vector2 center, Vector2 *points, Vector2 *texcoords, int pointCount, Color tint)
+void rl_DrawTexturePoly(Texture2D texture, Vector2 center, Vector2 *points, Vector2 *texcoords, int pointCount, Color tint)
 {
     rlCheckRenderBatchLimit((pointCount - 1)*4);
 
@@ -4720,7 +4720,7 @@ static Image LoadASTC(const unsigned char *fileData, unsigned int fileSize)
 #endif
 
 // Get pixel data from image as Vector4 array (float normalized)
-static Vector4 *LoadImageDataNormalized(Image image)
+static Vector4 *rl_LoadImageDataNormalized(Image image)
 {
     Vector4 *pixels = (Vector4 *)RL_MALLOC(image.width*image.height*sizeof(Vector4));
 
