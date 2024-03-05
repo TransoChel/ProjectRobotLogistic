@@ -1,4 +1,49 @@
+#include <AFMotor.h>
+
 #include <SoftwareSerial.h>
+
+#define S1 1
+#define S2 2
+#define S3 3
+
+AF_DCMotor motor[2];
+
+void motorLeft(int v)
+{
+  motor[0].setSpeed(abs(v));
+  if(v / abs(v) > 0) motor[0].run(FORWARD);
+  else motor[0].run(BACKWARD);
+}
+
+void motorRight(int v)
+{
+  motor[1].setSpeed(abs(v));
+  if(v / abs(v) > 0) motor[1].run(FORWARD);
+  else motor[1].run(BACKWARD);
+}
+
+sensorData[2];
+
+void readSensors()
+{
+
+}
+
+void line()
+{
+  float err, u, kP = 1, kD = 10, kI = 0.001, i, eold = 0;
+  while()
+  {
+  readSensor();
+  err = sensorData[1] - sensorData[0];
+  u = err * kP + (err - eold) * kD + i;
+  i += kI * err
+  motorLeft(v + u);
+  motorRight(v - u);
+  delay(1);
+  eold = err;
+  }
+}
 
 enum St : char 
 {
