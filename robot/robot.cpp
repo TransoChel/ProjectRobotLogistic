@@ -9,6 +9,7 @@ void Robot::send(std::vector<char> path, ceSerial* com)//ceSerial *com,
         if(i != 0) s += ",";
         s += std::to_string(path[i]);   
     }
+    s += ';';
     printf("Writing %s of size %d\n", s.c_str(), s.length() + 1);
     successFlag = com->Write(s.c_str(), s.length() + 1); // write string
     Sleep(200);

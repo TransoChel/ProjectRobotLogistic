@@ -6,53 +6,93 @@
 #define S2 2
 #define S3 3
 
-AF_DCMotor motor[2];
+AF_DCMotor motorLeft(1, 90), motorRight(2, 90);
 
-void motorLeft(int v)
+void motorLeftGo(int v)
 {
-  motor[0].setSpeed(abs(v));
-  if(v / abs(v) > 0) motor[0].run(FORWARD);
-  else motor[0].run(BACKWARD);
+  motorLeft.setSpeed(abs(v));
+  if(v / abs(v) > 0) motorLeft.run(FORWARD);
+  else motorLeft.run(BACKWARD);
 }
 
-void motorRight(int v)
+void motorRightGo(int v)
 {
-  motor[1].setSpeed(abs(v));
-  if(v / abs(v) > 0) motor[1].run(FORWARD);
-  else motor[1].run(BACKWARD);
+  motorRight.setSpeed(abs(v));
+  if(v / abs(v) > 0) motorRight.run(FORWARD);
+  else motorRight.run(BACKWARD);
 }
 
-sensorData[2];
+bool sensorData[2];
 
 void readSensors()
 {
 
 }
 
-void line()
+void cross(byte v)
 {
   float err, u, kP = 1, kD = 10, kI = 0.001, i, eold = 0;
-  while()
+  short crossCounter = 0;
+  while(crossCounter > 50)
   {
-  readSensor();
-  err = sensorData[1] - sensorData[0];
+  readSensors();
+  err = sensorData[0] - sensorData[1];
   u = err * kP + (err - eold) * kD + i;
-  i += kI * err
-  motorLeft(v + u);
-  motorRight(v - u);
+  i += kI * err;
+  motorLeftGo(v + u);
+  motorRightGo(v - u);
   delay(1);
   eold = err;
+  if(sensorData[0] && sensorData[1]) crossCounter++;
   }
 }
 
+void forward(byte sp)
+{
+  motorLeftGo(sp);
+  motorRightGo(sp);
+  delay(400);
+}
+
+void turnToLine(byte sp)
+{
+
+}
+
+void goToNeighbor(short from, short to, short direction, byte sp)
+{
+	while(direction != to)
+	{
+		turnToLine(sp);
+		if(direction != numberOfDots - 1) direction++;
+		else direction = 0;
+		while(graf[from][direction] == -69) direction++;
+	}
+	cross(sp);
+	forward(sp);
+}
+void goTo(byte from, byte to, byte startDirection, byte sp)
+{
+	for(int i = 0; i < numberOfDots ; i++) writeDebugStreamLine("%d", path[i]);
+	short direction = startDirection;
+	for(byte i = 0; path[i] != to; i++)
+	{
+		goToNeighbor(path[i], path[i+1], direction, sp, ss);
+		turn(ninety*2);
+		direction = path[i];
+	}
+}
+
+String dataFromComputer = "", path;
+
 enum St : char 
 {
-  GOING_TO_START = 1
+  GOING_TO_START = 1,
   WAITING_FOR_TAKING = 2,
   DOING_REQUEST = 3,
-  WAITING_FOR_RDOPPING = 4,
+  WAITING__FOR_DROPPING = 4,
   DONE = 5,
-  READED = 6;
+  READED = 6
 };
 
 St status;
@@ -77,7 +117,8 @@ void setup()
   Serial.println("connected myserial");
   status = READED;
 }
-String dataFromComputer = "";
+
+
 void loop() 
 {  // run over and over
   if(status == GOING_TO_START)
@@ -105,11 +146,30 @@ void loop()
     char c = Serial3.read();
     if (c != -1) 
     {
-      dataFromComputer += String(c);
-      if (c == 0) 
+      if(c != ';')
       {
-        Serial.println(dataFromComputer);
-        dataFromComputer = "";
+        dataFromComputer += String(c);
+        if (c == 0) 
+        {
+          Serial.println(dataFromComputer);
+          dataFromComputer = "";
+        }
+      }
+      else
+      {
+        short j = 0;
+        for(short i = 0; i < dataFromComputer.length(); i++)
+        {
+          String nowNumber;
+          while(dataFromComputer[i] != ',' || dataFromComputer[i] != ';')
+          {
+            nowNumber += dataFromComputer[i];
+            i++;
+          }
+          path[j] += atoi(nowNumber.c_str());
+          j++;
+        }
+        status = READED;
       }
     }
     sendStatus();
@@ -118,6 +178,6 @@ void loop()
   else if(status == READED)
   {
     sendStatus();
-    
+    status = GOING_TO_START;
   }
 }
