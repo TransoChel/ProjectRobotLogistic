@@ -5,6 +5,7 @@
 #define S1 1
 #define S2 2
 #define S3 3
+#define COMMON_SPEED 90
 
 AF_DCMotor motorLeft(1, 90), motorRight(2, 90);
 
@@ -26,7 +27,8 @@ bool sensorData[2];
 
 void readSensors()
 {
-
+  sensorData[0] = digitalRead(S1);
+  sensorData[1] = digitalRead(S3);
 }
 
 void cross(byte v)
@@ -47,63 +49,31 @@ void cross(byte v)
   }
 }
 
-void forward(byte sp)
+void forward(short sp)
 {
   motorLeftGo(sp);
   motorRightGo(sp);
   delay(400);
 }
 
-void turnToLine(byte sp)
+void turnToLine(short sp)
 {
-  float err, u, kP = 1, kD = 10, kI = 0.001, i, eold = 0;
-  short crossCounter = 0;
-  while(crossCounter > 30)
+  int timer = millis();
+  while(digitalRead(S2) && millis() < timer + 300)
   {
-    readSensors();
-    err = sensorData[0] - sensorData[1];
-    u = err * kP + (err - eold) * kD + i;
-    i += kI * err;
-    motorLeftGo(v + u);
-    motorRightGo(v - u);
+    motorLeftGo(sp);
+    motorRightGo(-sp);
     delay(1);
-    eold = err;
-    if(sensorData[0] && sensorData[1]) crossCounter++;
   }
 }
 
-void goToNeighbor(short from, short to, short direction, byte sp)
-{
-	while(direction != to)
-	{
-		turnToLine(sp);
-		if(direction != numberOfDots - 1) direction++;
-		else direction = 0;
-		while(graf[from][direction] == -69) direction++;
-	}
-	cross(sp);
-	forward(sp);
-}
-void goTo(byte from, byte to, byte startDirection, byte sp)
-{
-	for(int i = 0; i < numberOfDots ; i++) writeDebugStreamLine("%d", path[i]);
-	short direction = startDirection;
-	for(byte i = 0; path[i] != to; i++)
-	{
-		goToNeighbor(path[i], path[i+1], direction, sp, ss);
-		turn(ninety*2);
-		direction = path[i];
-	}
-}
-
-String dataFromComputer = "", path;
+String dataFromComputer = "", algorithm;
 
 enum St : char 
 {
-  GOING_TO_START = 1,
   WAITING_FOR_TAKING = 2,
   DOING_REQUEST = 3,
-  WAITING__FOR_DROPPING = 4,
+  WAITING_FOR_DROPPING = 4,
   DONE = 5,
   READED = 6
 };
@@ -134,11 +104,7 @@ void setup()
 
 void loop() 
 {  // run over and over
-  if(status == GOING_TO_START)
-  {
-    
-  }
-  else if(status == WAITING_FOR_TAKING)
+  if(status == WAITING_FOR_TAKING)
   {
     delay(5000);
     status = DOING_REQUEST;
@@ -147,9 +113,24 @@ void loop()
   }
   else if(status == DOING_REQUEST)
   {
-
+    for(short i = 0; i < algorithm.length(); i++)
+    {
+      if(algorithm[i] == "1")
+      {
+        forward(COMMON_SPEED);
+      }
+      else if(algorithm[i] == "2")
+      {
+        turnToLine(COMMON_SPEED);
+      }
+      else if(algorithm[i] == "3")
+      {
+        turnToLine(-COMMON_SPEED);
+      }
+      status = WAITING_FOR_DROPPING;
+    }
   }
-  else if(status == WAITING__FOR_DROPPING)
+  else if(status == WAITING_FOR_DROPPING)
   {
     delay(5000);
     status = DONE;
@@ -161,26 +142,21 @@ void loop()
     {
       if(c != ';')
       {
-        dataFromComputer += String(c);
         if (c == 0) 
         {
           Serial.println(dataFromComputer);
           dataFromComputer = "";
         }
+        else
+        {
+          dataFromComputer += String(c);
+        }
       }
       else
       {
-        short j = 0;
         for(short i = 0; i < dataFromComputer.length(); i++)
         {
-          String nowNumber;
-          while(dataFromComputer[i] != ',' || dataFromComputer[i] != ';')
-          {
-            nowNumber += dataFromComputer[i];
-            i++;
-          }
-          path[j] += atoi(nowNumber.c_str());
-          j++;
+          algorithm[i] += dataFromComputer[i];
         }
         status = READED;
       }

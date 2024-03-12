@@ -6,7 +6,6 @@ void Robot::send(std::vector<char> path, ceSerial* com)//ceSerial *com,
     std::string s = "";
     for (short i = 0; i < path.size(); i++)
     {
-        if(i != 0) s += ",";
         s += std::to_string(path[i]);   
     }
     s += ';';
