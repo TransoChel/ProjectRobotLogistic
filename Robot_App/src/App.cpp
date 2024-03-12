@@ -111,6 +111,32 @@ void App::drawGeneral(float screenWidth, float screenHeight)
     }
     else if (status == SENT) 
     {
-        rl_DrawTextureEx(Sent, {(screenWidth - 500 - Sent.width * 10) / 2 + 500, (screenHeight - 100 - Sent.height * 10) / 2 + 100}, 0, 10, WHITE);
+        static unsigned char transparensy = 255;
+        static float sentSpeed = 0, sentScale = 10, sentTimer = 60;
+        static Vector2 sentPos = {(screenWidth - 500 - Sent.width * 10) / 2 + 500, (screenHeight - 100 - Sent.height * 10) / 2 + 100};
+        rl_DrawTextureEx(Sent, sentPos, 0, sentScale, {255, 255, 255, transparensy});
+        if(sentScale >= 3)
+        {
+            sentScale -= 0.25;
+        }
+        if(sentTimer > 45) 
+        {
+            sentSpeed -= 1;
+        }
+        else if(sentTimer > 0) 
+        {
+            sentSpeed += 2;
+        }
+        if(transparensy >= 6) transparensy-= 6;
+        sentTimer--;
+        sentPos.x = (screenWidth - 500 - Sent.width * sentScale) / 2 + 500;
+        if(sentTimer < -119)
+        {
+            sentSpeed = 0;
+            sentScale = 10;
+            sentTimer = 60;
+            sentPos = {(screenWidth - 500 - Sent.width * 10) / 2 + 500, (screenHeight - 100 - Sent.height * 10) / 2 + 100};
+        }
+        sentPos.y -= sentSpeed;
     }
 }
