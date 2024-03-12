@@ -33,17 +33,17 @@ void cross(byte v)
 {
   float err, u, kP = 1, kD = 10, kI = 0.001, i, eold = 0;
   short crossCounter = 0;
-  while(crossCounter > 50)
+  while(crossCounter > 30)
   {
-  readSensors();
-  err = sensorData[0] - sensorData[1];
-  u = err * kP + (err - eold) * kD + i;
-  i += kI * err;
-  motorLeftGo(v + u);
-  motorRightGo(v - u);
-  delay(1);
-  eold = err;
-  if(sensorData[0] && sensorData[1]) crossCounter++;
+    readSensors();
+    err = sensorData[0] - sensorData[1];
+    u = err * kP + (err - eold) * kD + i;
+    i += kI * err;
+    motorLeftGo(v + u);
+    motorRightGo(v - u);
+    delay(1);
+    eold = err;
+    if(sensorData[0] && sensorData[1]) crossCounter++;
   }
 }
 
@@ -56,7 +56,20 @@ void forward(byte sp)
 
 void turnToLine(byte sp)
 {
-
+  float err, u, kP = 1, kD = 10, kI = 0.001, i, eold = 0;
+  short crossCounter = 0;
+  while(crossCounter > 30)
+  {
+    readSensors();
+    err = sensorData[0] - sensorData[1];
+    u = err * kP + (err - eold) * kD + i;
+    i += kI * err;
+    motorLeftGo(v + u);
+    motorRightGo(v - u);
+    delay(1);
+    eold = err;
+    if(sensorData[0] && sensorData[1]) crossCounter++;
+  }
 }
 
 void goToNeighbor(short from, short to, short direction, byte sp)
