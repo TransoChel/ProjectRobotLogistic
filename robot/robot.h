@@ -22,7 +22,7 @@ private:
     RobotStatus status = OFF;
 
 public:
-    void send(std::vector<char> path, ceSerial* com);//ceSerial *com, 
+    void send(std::string path, ceSerial* com);//ceSerial *com, 
     void read(ceSerial *com);
     RobotStatus getStatus();
 };

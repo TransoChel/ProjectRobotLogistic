@@ -46,7 +46,7 @@ void App::LeftMouseButtonPressed()
         }
         if (AB.CheckUpdate() && ABto.CheckUpdate()) 
         {
-            if (CheckCollisionPointRec(GetMousePosition(), {1425, 900, 100, 100})) 
+            if(send.CheckButtonPressed()) //(CheckCollisionPointRec(GetMousePosition(), {1425, 900, 100, 100})) 
             {
                 if (AB.SendNum() == ABto.SendNum()) {
                     InvalidRequest = true;
@@ -158,7 +158,7 @@ void App::drawGeneral()
             rl_PlaySound(ding);
             sentSpeed += 2;
         }
-        if (GetTime() - startTimeSent < 0.15) {
+        if (GetTime() - startTimeSent < 0.65) {
             rl_PlaySound(woosh);
         }
         if(transparensy >= 4) transparensy-= 4;

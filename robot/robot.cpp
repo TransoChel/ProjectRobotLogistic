@@ -1,6 +1,6 @@
 #include "robot.h"
 
-void Robot::send(std::vector<char> path, ceSerial* com)//ceSerial *com, 
+void Robot::send(std::string path, ceSerial* com)//ceSerial *com, 
 {
     bool successFlag;
     std::string s = "";

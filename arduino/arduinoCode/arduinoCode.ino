@@ -71,6 +71,7 @@ String dataFromComputer = "", algorithm;
 
 enum St : char 
 {
+  GO_TO_TAKE = 1,
   WAITING_FOR_TAKING = 2,
   DOING_REQUEST = 3,
   WAITING_FOR_DROPPING = 4,

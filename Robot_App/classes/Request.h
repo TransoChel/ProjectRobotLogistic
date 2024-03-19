@@ -9,8 +9,9 @@
 class Request
 {
 public:
-    std::vector<char> path, algorithm;
+    std::string path, algorithm, algorithmtoStart;
     int from, to;
+    std::string calculatePath(int from, int to, Graf* graf);
     Request(int from, int to, Graf* graf);
-    std::vector<char> getPath();
+    std::string getPath();
 };
