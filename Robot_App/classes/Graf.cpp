@@ -1,27 +1,36 @@
 #include "Graf.h"
 
-void Graf::addWay(int from, int to, int lenght)
+void Graf::addWay(int from, int to, int lenght, int direction, int direction2)
 {
     if (!g[from].count(to) && !g[to].count(from))
     {
-        g[from][to] = lenght;
-        g[to][from] = lenght;
+        g[from][direction] = {to, lenght};
+        g[to][direction2] = {from, lenght};
     }
 }
 
-void Graf::addNeighbors(int from, std::vector<std::pair<int, int>> neighbors)
-{
-    for (int i = 0; i < neighbors.size(); i++)
-    {
-        addWay(from, neighbors[i].first, neighbors[i].second);
-    }
-}
 void Graf::writeGraf()
 {
-    addNeighbors(0, {{1, 10}, {2, 5}});
-    addNeighbors(1, {{2, 6}, {3, 15}});
-    addNeighbors(2, {{3, 14}, {4, 7}});
-    addNeighbors(3, {{4, 12}, {6, 2}});
-    addNeighbors(4, {{5, 11}});
-    addNeighbors(5, {{6, 6}});
+    addWay(1, 2, 1, 2, 0);
+	addWay(1, 3, 1, 3, 1);
+	addWay(1, 0, 1, 2, 2);
+	addWay(2, 6, 2, 3, 0);
+	addWay(2, 3, 1, 4, 1);
+	addWay(0, 3, 1, 2, 0);
+	addWay(0, 4, 2, 2, 1);
+	addWay(3, 5, 1, 3, 1);
+	addWay(6, 10, 2, 2, 0);
+	addWay(6, 7, 1, 4, 1);
+	addWay(6, 5, 1, 0, 2);
+	addWay(5, 7, 1, 3, 1);
+	addWay(5, 4, 1, 3, 2);
+	addWay(7, 4, 1, 0, 2);
+	addWay(7, 9, 1, 3, 1);
+	addWay(4, 8, 2, 1, 1);
+	addWay(10, 9, 1, 0, 1);
+	addWay(10, 11, 1, 2, 0);
+	addWay(9, 11, 1, 1, 1);
+	addWay(9, 8, 1, 2, 2);
+	addWay(8, 11, 1, 0, 0);
+    numberOfDots = g.size();
 }

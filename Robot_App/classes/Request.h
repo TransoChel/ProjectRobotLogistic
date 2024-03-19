@@ -8,7 +8,7 @@
 class Request
 {
 public:
-    std::vector<char> path;
+    std::vector<char> path, algorithm;
     int from, to;
     Request(int from, int to, Graf* graf);
     std::vector<char> getPath();

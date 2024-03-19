@@ -56,9 +56,28 @@ Request::Request(int from, int to, Graf* graf)
         std::cout << int(path[i]) << ' ';
     }
     std::cout <<'\n';
+
+
+}
+
+int calculateTurn(short from, short to, short direction, Graf* graf)
+{
+    
+}
+void goTo(byte from, byte to, byte startDirection, unsigned byte sp, bool ss)
+{
+	calculatePath(from, to);
+	for(int i = 0; i < numberOfDots ; i++) writeDebugStreamLine("%d", path[i]);
+	short direction = startDirection;
+	for(byte i = 0; path[i] != to; i++)
+	{
+		goToNeighbor(path[i], path[i+1], direction, sp, ss);
+		turn(ninety*2);
+		direction = path[i];
+	}
 }
 
 std::vector<char> Request::getPath()
 {
-    return path;
+    return algorithm;
 }

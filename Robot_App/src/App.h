@@ -39,8 +39,6 @@ private:
     RadioButton Dto = RadioButton({radioButtonToX, 625}, {350, 75}, RED, "D");
     RadioButton Eto = RadioButton({radioButtonToX, 725}, {350, 75}, RED, "E");
 public:
-    int errorTimer = 120, inReqOpacity = 0;
-    float inReqXpos = 1200, inReqMargin = 50;
     bool ShouldIDrawArrow = false;
     bool InvalidRequest = false;
     RadioButtonControl AB;

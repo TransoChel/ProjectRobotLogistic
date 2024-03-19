@@ -86,9 +86,13 @@ void App::drawGeneral(float screenWidth, float screenHeight)
             DrawRectangleV({(screenWidth - 500) / 2 - 5 + 500, std::min(AB.buttons[AB.SendNum()]->coord.y + 37, ABto.buttons[ABto.SendNum()]->coord.y + 37) + 10}, {10, std::abs(ABto.buttons[ABto.SendNum()]->coord.y - AB.buttons[AB.SendNum()]->coord.y)}, {200, 0, 0, 255});
             DrawRectangleV({ABto.buttons[ABto.SendNum()]->coord.x - 180, ABto.buttons[ABto.SendNum()]->coord.y + 37}, {180, 10}, {200, 0, 0, 255});
         }
-        if (InvalidRequest) {
-            if (errorTimer >= 0) {
-                //rl_DrawText("Invalid Request!", 1000, 945, 50, RED);
+        if (InvalidRequest) 
+        {
+            static unsigned char inReqOpacity = 0;
+            static int errorTimer = 120;
+            static float inReqXpos = 1200, inReqMargin = 50;
+            if (errorTimer >= 0) 
+            {
                 rl_DrawTextureEx(invalidRequest, {inReqXpos, 909}, 0, 5, {255, 255, 255, inReqOpacity});
                 inReqXpos -= inReqMargin;
                 if (inReqOpacity <= 255 - 20) {
@@ -100,7 +104,26 @@ void App::drawGeneral(float screenWidth, float screenHeight)
                 inReqMargin /= 2;
                 --errorTimer;
             }
-            else {
+            else if(errorTimer == -1)
+            {
+                inReqMargin = 10;
+                errorTimer--;
+            }
+            else if(errorTimer > -120)
+            {
+                rl_DrawTextureEx(invalidRequest, {inReqXpos, 909}, 0, 5, {255, 255, 255, inReqOpacity});
+                inReqXpos += inReqMargin;
+                if (inReqOpacity >= 40) {
+                    inReqOpacity -= 40;
+                }
+                else {
+                    inReqOpacity = 0;
+                }
+                inReqMargin /= 2;
+                --errorTimer;
+            }
+            else 
+            {
                 errorTimer = 120;
                 inReqXpos = 1200;
                 inReqMargin = 50;
@@ -136,6 +159,7 @@ void App::drawGeneral(float screenWidth, float screenHeight)
             sentScale = 10;
             sentTimer = 60;
             sentPos = {(screenWidth - 500 - Sent.width * 10) / 2 + 500, (screenHeight - 100 - Sent.height * 10) / 2 + 100};
+            transparensy = 255;
         }
         sentPos.y -= sentSpeed;
     }
