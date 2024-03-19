@@ -3,7 +3,7 @@
 
 
 
-App::App(Graf* graf, ceSerial* com, Robot* robot)
+App::App(Graf* graf, ceSerial* com, Robot* robot, float screenWidth, float screenHeight)
 {
     AB.buttons.push_back(&A);
     AB.buttons.push_back(&B);
@@ -16,7 +16,12 @@ App::App(Graf* graf, ceSerial* com, Robot* robot)
     ABto.buttons.push_back(&Dto);
     ABto.buttons.push_back(&Eto);
     this->graf = graf;
+    this->screenWidth = screenWidth;
+    this->screenHeight = screenHeight;
 
+    transparensy = 255;
+    sentSpeed = 0, sentScale = 10, sentTimer = 60;
+    sentPos = {(screenWidth - 500 - Sent.width * 10) / 2 + 500, (screenHeight - 100 - Sent.height * 10) / 2 + 100};
 }
 
 
@@ -50,6 +55,7 @@ void App::LeftMouseButtonPressed()
                     from = AB.SendNum();
                     to = ABto.SendNum();
                     status = SENT;
+                    startTimeSent = GetTime();
                     ShouldIDrawArrow = false;
                     InvalidRequest = false;
                     queue.addRequest({from, to, graf});
@@ -61,8 +67,9 @@ void App::LeftMouseButtonPressed()
     }
 }
 
-void App::drawGeneral(float screenWidth, float screenHeight)
+void App::drawGeneral()
 {
+    
     DrawRectangleV({0, 100}, {500, 935}, {255, 0, 0, 255});
     DrawRectangleV({0, 0}, {screenWidth, 100}, {200, 0, 0, 255});
     rl_DrawTextureEx(logo, {18, 18}, 0, 2, WHITE);
@@ -134,33 +141,36 @@ void App::drawGeneral(float screenWidth, float screenHeight)
     }
     else if (status == SENT) 
     {
-        static unsigned char transparensy = 255;
-        static float sentSpeed = 0, sentScale = 10, sentTimer = 60;
-        static Vector2 sentPos = {(screenWidth - 500 - Sent.width * 10) / 2 + 500, (screenHeight - 100 - Sent.height * 10) / 2 + 100};
+        //for sent Status
+        
         rl_DrawTextureEx(Sent, sentPos, 0, sentScale, {255, 255, 255, transparensy});
         if(sentScale >= 3)
         {
             sentScale -= 0.25;
         }
-        if(sentTimer > 45) 
+        if(GetTime() - startTimeSent < 0.35) 
         {
             sentSpeed -= 1;
         }
-        else if(sentTimer > 0) 
+        else if(GetTime() - startTimeSent < 1) 
         {
             sentSpeed += 2;
         }
-        if(transparensy >= 6) transparensy-= 6;
-        sentTimer--;
+        if(transparensy >= 4) transparensy-= 4;
         sentPos.x = (screenWidth - 500 - Sent.width * sentScale) / 2 + 500;
-        if(sentTimer < -119)
-        {
-            sentSpeed = 0;
-            sentScale = 10;
-            sentTimer = 60;
-            sentPos = {(screenWidth - 500 - Sent.width * 10) / 2 + 500, (screenHeight - 100 - Sent.height * 10) / 2 + 100};
-            transparensy = 255;
-        }
         sentPos.y -= sentSpeed;
+    }
+}
+
+void App::sentLogic()
+{
+    if(startTimeSent + 2 < GetTime())
+    {
+        this->status = STARTING;
+        sentSpeed = 0;
+        sentScale = 10;
+        sentTimer = 60;
+        sentPos = {(screenWidth - 500 - Sent.width * 10) / 2 + 500, (screenHeight - 100 - Sent.height * 10) / 2 + 100};
+        transparensy = 255;
     }
 }

@@ -17,7 +17,9 @@ private:
     ceSerial* com; 
     Robot* robot;
     Graf* graf;
-    int from, to;
+    double startTimeSent;
+    int from, to; 
+    float screenWidth, screenHeight;
     Texture2D logo = LoadTexture("../Robot_App/textures/logo.png");
     Texture2D queueTexture = LoadTexture("../Robot_App/textures/queue.png");
     Texture2D fromTo = LoadTexture("../Robot_App/textures/fromTo.png");
@@ -38,6 +40,11 @@ private:
     RadioButton Cto = RadioButton({radioButtonToX, 525}, {350, 75}, RED, "C");
     RadioButton Dto = RadioButton({radioButtonToX, 625}, {350, 75}, RED, "D");
     RadioButton Eto = RadioButton({radioButtonToX, 725}, {350, 75}, RED, "E");
+
+    short sentTimer = 2;
+    unsigned char transparensy;
+    float sentSpeed, sentScale;
+    Vector2 sentPos;
 public:
     bool ShouldIDrawArrow = false;
     bool InvalidRequest = false;
@@ -48,7 +55,8 @@ public:
     TextureButton send = TextureButton(Vector2({1425, 900}), 3, LoadTexture("../Robot_App/textures/send.png"));
     TextureButton toMenu = TextureButton(Vector2({1550, 900}), 3, LoadTexture("../Robot_App/textures/toMenu.png"));
     Queue queue;
-    App(Graf* graf, ceSerial* com, Robot* robot);
+    App(Graf* graf, ceSerial* com, Robot* robot, float screenWidth, float screenHeight);
     void LeftMouseButtonPressed();
-    void drawGeneral(float screenWidth, float screenHeight);
+    void drawGeneral();
+    void sentLogic();
 };

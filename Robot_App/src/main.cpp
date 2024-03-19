@@ -20,9 +20,7 @@ int main()
     graf.writeGraf();
 
     InitWindow(screenWidth, screenHeight, "RoboLogist");
-    App app(&graf, &com, &logist);
-
-    int sentTimer = 180;
+    App app(&graf, &com, &logist, screenWidth, screenHeight);
 
     SetTargetFPS(60); // Set our APP to run at 60 frames-per-second
     //---------------------------------------------------------------------------------------
@@ -43,13 +41,7 @@ int main()
 
         if (app.status == SENT) 
         {
-            if (sentTimer >= 0) {
-                --sentTimer;
-            }
-            else {
-                app.status = STARTING;
-                sentTimer = 180;
-            }
+            app.sentLogic();
          }
 
         if (IsMouseButtonPressed(MOUSE_BUTTON_LEFT))
@@ -65,7 +57,7 @@ int main()
 
         ClearBackground(WHITE);
         
-        app.drawGeneral(screenWidth, screenHeight);
+        app.drawGeneral();
         app.queue.draw({150, 250}, {255, 0, 0, 255});
 
         EndDrawing();
