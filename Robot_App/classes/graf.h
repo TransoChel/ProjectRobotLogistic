@@ -13,6 +13,6 @@ public:
     {
         g = std::vector<std::map<int, std::pair<int, int>>> (numberOfDots);
     }
-    void Graf::addWay(int from, int to, int lenght, int direction, int direction2);
+    void addWay(int from, int to, int lenght, int direction, int direction2);
     void writeGraf();
 };

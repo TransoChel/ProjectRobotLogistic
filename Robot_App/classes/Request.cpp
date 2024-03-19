@@ -34,11 +34,11 @@ Request::Request(int from, int to, Graf* graf)
             break;
         isUsed[v] = true; // помечаем v как уже обработанную
 
-        for (auto [target, len] : graf->g[v])
+        for (auto [target, rotation_len] : graf->g[v])
         {
-            if (d[v] + len < d[target]) //если существующая указанная длина пути до точки to больше, чем посчитанная нами, то заменим значение
+            if (d[v] + rotation_len.second < d[target]) //если существующая указанная длина пути до точки to больше, чем посчитанная нами, то заменим значение
             {
-                d[target] = d[v] + len;
+                d[target] = d[v] + rotation_len.second;
                 father[target] = v;//указать отцом точки to точку v
             }
         }
@@ -57,25 +57,42 @@ Request::Request(int from, int to, Graf* graf)
     }
     std::cout <<'\n';
 
-
+    for(short i; i < path.size(); i++)
+    {
+        
+    }
 }
 
-int calculateTurn(short from, short to, short direction, Graf* graf)
+std::string calculateTurn(short from, short to, short direction, Graf* graf)
 {
-    
+    std::string algorithm;
+    short result = graf->g[from][to].first - direction;
+    if(result >= 0)
+    {
+        for(short i = 0; i < result; i++)
+        {
+            algorithm += "2";
+        }
+    }
+    else
+    {
+        for(short i = 0; i > result; i--)
+        {
+            algorithm += "3";
+        }
+    }
+    return algorithm;
 }
-void goTo(byte from, byte to, byte startDirection, unsigned byte sp, bool ss)
-{
-	calculatePath(from, to);
-	for(int i = 0; i < numberOfDots ; i++) writeDebugStreamLine("%d", path[i]);
-	short direction = startDirection;
-	for(byte i = 0; path[i] != to; i++)
-	{
-		goToNeighbor(path[i], path[i+1], direction, sp, ss);
-		turn(ninety*2);
-		direction = path[i];
-	}
-}
+// void goTo(short from, short to, short startDirection, unsigned short sp, bool ss)
+// {
+// 	short direction = startDirection;
+// 	for(short i = 0; path[i] != to; i++)
+// 	{
+// 		goToNeighbor(path[i], path[i+1], direction, sp, ss);
+// 		turn(ninety*2);
+// 		direction = path[i];
+// 	}
+// }
 
 std::vector<char> Request::getPath()
 {

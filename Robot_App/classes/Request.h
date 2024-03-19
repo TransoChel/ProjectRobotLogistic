@@ -2,7 +2,8 @@
 #include <iostream>
 #include <vector>
 #include <algorithm>
-#include<map>
+#include <map>
+#include <string>
 #include "Graf.h"
 
 class Request

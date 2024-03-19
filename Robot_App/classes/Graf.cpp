@@ -4,8 +4,8 @@ void Graf::addWay(int from, int to, int lenght, int direction, int direction2)
 {
     if (!g[from].count(to) && !g[to].count(from))
     {
-        g[from][direction] = {to, lenght};
-        g[to][direction2] = {from, lenght};
+        g[from][to] = {direction, lenght};
+        g[to][from] = {direction2, lenght};
     }
 }
 
