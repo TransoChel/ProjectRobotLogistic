@@ -28,6 +28,8 @@ private:
     Texture2D fromTexture = LoadTexture("../Robot_App/textures/from.png");
     Texture2D toTexture = LoadTexture("../Robot_App/textures/to.png");
     Texture2D invalidRequest = LoadTexture("../Robot_App/textures/invalidRequest.png");
+    Sound woosh = LoadSound("../Robot_App/sounds/sound_sent.wav");
+    Sound ding = LoadSound("../Robot_App/sounds/sound_sent_2.wav");
 
     float radioButtonFromX = (1920 - 500 - 350) / 2 + 500 - 350, radioButtonToX = (1920 - 500 - 350) / 2 + 500 + 350;
     RadioButton A = RadioButton({radioButtonFromX, 325}, {350, 75}, RED, "A");

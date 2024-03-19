@@ -20,6 +20,7 @@ int main()
     graf.writeGraf();
 
     InitWindow(screenWidth, screenHeight, "RoboLogist");
+    InitAudioDevice();
     App app(&graf, &com, &logist, screenWidth, screenHeight);
 
     SetTargetFPS(60); // Set our APP to run at 60 frames-per-second

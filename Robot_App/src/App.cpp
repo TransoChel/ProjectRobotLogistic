@@ -143,6 +143,7 @@ void App::drawGeneral()
     {
         //for sent Status
         
+        
         rl_DrawTextureEx(Sent, sentPos, 0, sentScale, {255, 255, 255, transparensy});
         if(sentScale >= 3)
         {
@@ -154,7 +155,11 @@ void App::drawGeneral()
         }
         else if(GetTime() - startTimeSent < 1) 
         {
+            rl_PlaySound(ding);
             sentSpeed += 2;
+        }
+        if (GetTime() - startTimeSent < 0.15) {
+            rl_PlaySound(woosh);
         }
         if(transparensy >= 4) transparensy-= 4;
         sentPos.x = (screenWidth - 500 - Sent.width * sentScale) / 2 + 500;
