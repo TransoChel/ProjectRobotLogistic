@@ -18,6 +18,7 @@ App::App(Graf* graf, ceSerial* com, Robot* robot, float screenWidth, float scree
     this->graf = graf;
     this->screenWidth = screenWidth;
     this->screenHeight = screenHeight;
+    this->robot = robot;
 
     transparensy = 255;
     sentSpeed = 0, sentScale = 10, sentTimer = 60;
@@ -58,7 +59,7 @@ void App::LeftMouseButtonPressed()
                     startTimeSent = GetTime();
                     ShouldIDrawArrow = false;
                     InvalidRequest = false;
-                    queue.addRequest({from, to, graf});
+                    queue.addRequest(Request(from, to, graf, robot));
                     AB.NullUpdate();
                     ABto.NullUpdate();
                 }

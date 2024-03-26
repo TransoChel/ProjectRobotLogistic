@@ -32,5 +32,5 @@ void Graf::writeGraf()
 	addWay(9, 11, 1, 1, 1);
 	addWay(9, 8, 1, 2, 2);
 	addWay(8, 11, 1, 0, 0);
-    numberOfDots = g.size();
+    numberOfDots = 12;
 }

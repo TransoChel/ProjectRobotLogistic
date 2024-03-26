@@ -32,8 +32,12 @@ int main()
     {
         // Update
         //----------------------debug-functions---------------------------------------------
-
+        if(IsKeyPressed(KEY_F1)) app.queue.sendRequest(&logist, &com);
         //----------------------------------------------------------------------------------
+        
+        logist.read(&com);
+        if(logist.getStatus() == ON);
+        
 
         if (app.AB.CheckUpdate() && app.ABto.CheckUpdate()) 
         {
@@ -49,7 +53,7 @@ int main()
         {
             app.LeftMouseButtonPressed();
         }
-
+        
         //----------------------------------------------------------------------------------
 
         // Draw

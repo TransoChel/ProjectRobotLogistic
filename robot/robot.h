@@ -9,19 +9,22 @@
 
 enum RobotStatus : char
 {
-    OFF = 0,
-    WAITING_FOR_TAKING = 1,
-    DOING_REQUEST = 2,
-    WAITING_FOR_RDOPPING = 3,
-    DONE = 4,
+    ON = 0,
+    GO_TO_TAKE = 1,
+    WAITING_FOR_TAKING = 2,
+    DOING_REQUEST = 3,
+    WAITING_FOR_DROPPING = 4,
+    DONE = 5,
+    READED = 6
 };
 
 class Robot
 {
 private:
-    RobotStatus status = OFF;
+    RobotStatus status = ON;
 
 public:
+    int correctPosition = 0, correctDirection = 0;
     void send(std::string path, ceSerial* com);//ceSerial *com, 
     void read(ceSerial *com);
     RobotStatus getStatus();

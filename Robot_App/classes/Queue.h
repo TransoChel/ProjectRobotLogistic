@@ -13,7 +13,6 @@ private:
     Graf* graf;
 public:
     Request* getNext();
-    void doneThis();
     void addRequest(Request request);
     void sendRequest(Robot* robot, ceSerial* com);
     Queue() {};

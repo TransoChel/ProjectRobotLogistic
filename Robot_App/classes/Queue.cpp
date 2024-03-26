@@ -6,15 +6,6 @@ Request* Queue::getNext()
     return priority[1];
 }
 
-void Queue::doneThis()
-{
-    for(short i = 0; i < priority.size() - 1; i++)
-    {
-        priority[i] = priority[i + 1];
-    }
-    priority.pop_back();
-}
-
 void Queue::addRequest(Request request)
 {
     requests.push_back(request);
@@ -40,6 +31,6 @@ void Queue::draw(Vector2 coord, Color color)
 
 void Queue::sendRequest(Robot* robot, ceSerial* com)
 {
-    robot->send(requests[0].path, com);
+    robot->send(requests[0].getPath(), com);
     requests.erase(requests.begin());
 }

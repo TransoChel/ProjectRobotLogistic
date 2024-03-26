@@ -54,6 +54,8 @@ void forward(short sp)
   motorLeftGo(sp);
   motorRightGo(sp);
   delay(400);
+  motorLeftGo(0);
+  motorRightGo(0);
 }
 
 void turnToLine(short sp)
@@ -67,10 +69,11 @@ void turnToLine(short sp)
   }
 }
 
-String dataFromComputer = "", algorithm;
+String dataFromComputer = "", algorithm, algorithmToStart;
 
 enum St : char 
 {
+  ON = 0,
   GO_TO_TAKE = 1,
   WAITING_FOR_TAKING = 2,
   DOING_REQUEST = 3,
@@ -79,7 +82,7 @@ enum St : char
   READED = 6
 };
 
-St status;
+St status = ON;
 
 void sendStatus()
 {
@@ -99,12 +102,33 @@ void setup()
   // set the data rate for the SoftwareSerial port
   Serial3.begin(9600);
   Serial.println("connected myserial");
-  status = READED;
+  sendStatus();
+  status = DONE;
 }
 
 
 void loop() 
 {  // run over and over
+  if(status == GO_TO_TAKE)
+  {
+    for(short i = 0; i < algorithmToStart.length(); i++)
+    {
+      if(algorithmToStart[i] == "1")
+        {
+          cross(COMMON_SPEED);
+          forward(COMMON_SPEED);
+        }
+        else if(algorithmToStart[i] == "2")
+        {
+          turnToLine(COMMON_SPEED);
+        }
+        else if(algorithmToStart[i] == "3")
+        {
+          turnToLine(-COMMON_SPEED);
+        }
+    }
+    status = WAITING_FOR_TAKING;
+  }
   if(status == WAITING_FOR_TAKING)
   {
     delay(5000);
@@ -118,6 +142,7 @@ void loop()
     {
       if(algorithm[i] == "1")
       {
+        cross(COMMON_SPEED);
         forward(COMMON_SPEED);
       }
       else if(algorithm[i] == "2")
@@ -142,22 +167,20 @@ void loop()
     if (c != -1) 
     {
       if(c != ';')
-      {
-        if (c == 0) 
-        {
-          Serial.println(dataFromComputer);
-          dataFromComputer = "";
-        }
-        else
-        {
-          dataFromComputer += String(c);
-        }
+      {       
+        dataFromComputer += String(c);
       }
       else
       {
-        for(short i = 0; i < dataFromComputer.length(); i++)
+        short j = 0;
+        for(short i = 0; i < dataFromComputer[i] != 4; i++)
         {
-          algorithm[i] += dataFromComputer[i];
+          algorithmToStart += dataFromComputer[i];
+          j = i;
+        }
+        for(; j < dataFromComputer.length(); j++)
+        {
+          algorithm += dataFromComputer[j];
         }
         status = READED;
       }
@@ -168,6 +191,6 @@ void loop()
   else if(status == READED)
   {
     sendStatus();
-    status = GOING_TO_START;
+    status = GO_TO_TAKE;
   }
 }
