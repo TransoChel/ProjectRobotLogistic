@@ -45,12 +45,12 @@ std::string Request::calculatePath(int from, int to, Graf* graf)
 
     for (char v = to; v != from; v = father[v]) //восстанавливаем путь до изначально точки to от точки from
     {
-        this->path.push_back(v);
+        path += v;
     }
     //std::cout <<"IM ALIVE3";
-    this->path.push_back(from);
+    path += from;
     //std::cout <<"IM ALIVE4";
-    std::reverse(this->path.begin(), this->path.end());
+    std::reverse(path.begin(), path.end());
     //std::cout <<"IM ALIVE5";
     return path;
 }
@@ -68,13 +68,19 @@ Request::Request(int from, int to, Graf* graf, Robot* robot)
     // std::cout <<'\n';
     for(short i = 1; i < pathToFrom.size(); i++)
     {
-        algorithmToStart += calculateTurn(pathToFrom[i - 1], pathToFrom[i], robot->correctDirection, graf);
+        static short direction = robot->correctDirection;
+        algorithmToStart += calculateTurn(pathToFrom[i - 1], pathToFrom[i], direction, graf);
         algorithmToStart += "1";
+        direction = graf->g[pathToFrom[i - 1]][pathToFrom[i]].first;
     }
-    for(short i = 0; i < path.size(); i++)
+    for(short i = 1; i < path.size(); i++)
     {
-        algorithm += calculateTurn(pathToFrom[i - 1], pathToFrom[i], robot->correctDirection, graf);
+        static short direction;
+        if(pathToFrom.size() > 1) direction = graf->g[pathToFrom[pathToFrom.size() - 1]][from].first;
+        else direction = robot->correctDirection;
+        algorithm += calculateTurn(path[i - 1], path[i], direction, graf);
         algorithm += "1";
+        direction = graf->g[path[i - 1]][path[i]].first;
     }
 }
 
@@ -111,5 +117,5 @@ std::string Request::calculateTurn(short from, short to, short direction, Graf* 
 
 std::string Request::getPath()
 {
-    return algorithm + "4" + algorithmToStart;
+    return algorithmToStart + "4" + algorithm;
 }

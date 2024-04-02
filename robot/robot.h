@@ -24,7 +24,7 @@ private:
     RobotStatus status = ON;
 
 public:
-    int correctPosition = 0, correctDirection = 0;
+    int correctPosition = 0, correctDirection = 2;
     void send(std::string path, ceSerial* com);//ceSerial *com, 
     void read(ceSerial *com);
     RobotStatus getStatus();
