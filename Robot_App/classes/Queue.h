@@ -18,5 +18,6 @@ public:
     Queue() {};
     Queue(std::vector<Request> requests);
     void draw(Vector2 coord, Color color);
+    double drawDelta = 0;
 };
 #endif
