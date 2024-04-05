@@ -6,6 +6,7 @@
 #define CE_SERIAL_IMPLEMENTATION
 #include "App.h"
 
+
 int main()
 {
     ceSerial com("\\\\.\\COM4", 9600, 8, 'N', 1);

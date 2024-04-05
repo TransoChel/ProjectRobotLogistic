@@ -73,8 +73,11 @@ void App::drawGeneral()
     
     DrawRectangleV({0, 100}, {500, 935}, {255, 0, 0, 255});
     DrawRectangleV({0, 0}, {screenWidth, 100}, {200, 0, 0, 255});
-    rl_DrawTextureEx(logo, {18, 18}, 0, 2, WHITE);
-    rl_DrawTextureEx(queueTexture, {100, 125}, 0, 5, WHITE);
+    rl_DrawTextureEx(logo, {18, 18}, 0, 2, WHITE); 
+    rl_DrawTextureEx(queueTexture, {100, 125}, 0, 5, WHITE); 
+    DrawRectangleV({25, 775}, {450, 200}, {255, 255, 255, 255});
+    DrawRectangleV({35, 785}, {430, 180}, {255, 0, 0, 255});\
+    rl_DrawText(std::to_string(int(robot->getStatus())).c_str(), 235, 835, 80, WHITE);
     if (status == STARTING)
     {
         doRequest.Draw();
@@ -90,7 +93,7 @@ void App::drawGeneral()
         ABto.Draw();
         if (ShouldIDrawArrow)
         {
-            DrawRectangleV({AB.buttons[AB.SendNum()]->coord.x + 350, AB.buttons[AB.SendNum()]->coord.y + 37}, {180, 10}, {200, 0, 0, 255});
+            DrawRectangleV({AB.buttons[AB.SendNum()]->coord.x + 350, AB.buttons[AB.SendNum()]->coord.y + 37}, {180, 10}, {200, 0, 0, 255}); 
             DrawRectangleV({(screenWidth - 500) / 2 - 5 + 500, std::min(AB.buttons[AB.SendNum()]->coord.y + 37, ABto.buttons[ABto.SendNum()]->coord.y + 37) + 10}, {10, std::abs(ABto.buttons[ABto.SendNum()]->coord.y - AB.buttons[AB.SendNum()]->coord.y)}, {200, 0, 0, 255});
             DrawRectangleV({ABto.buttons[ABto.SendNum()]->coord.x - 180, ABto.buttons[ABto.SendNum()]->coord.y + 37}, {180, 10}, {200, 0, 0, 255});
         }
