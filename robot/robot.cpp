@@ -4,10 +4,10 @@ void Robot::send(std::string path, ceSerial* com)//ceSerial *com,
 {
     bool successFlag;
     std::string s = path;
-    s += ';';
+    //s += ';';
     printf("Writing %s of size %d\n", s.c_str(), s.length() + 1);
-    successFlag = com->Write(s.c_str(), s.length() + 1); // write string
-    Sleep(200);
+    successFlag = com->Write(s.c_str(), s.length()); // write string
+    Sleep(2000);
 }
 
 void Robot::read(ceSerial *com)

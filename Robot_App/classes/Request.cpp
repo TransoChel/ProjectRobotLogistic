@@ -66,22 +66,20 @@ Request::Request(int from, int to, Graf* graf, Robot* robot)
     //     std::cout << int(path[i]) << ' ';
     // }
     // std::cout <<'\n';
+    short direction = robot->correctDirection;
     for(short i = 1; i < pathToFrom.size(); i++)
     {
-        static short direction = robot->correctDirection;
         algorithmToStart += calculateTurn(pathToFrom[i - 1], pathToFrom[i], direction, graf);
         algorithmToStart += "1";
-        direction = graf->g[pathToFrom[i - 1]][pathToFrom[i]].first;
+        direction = graf->g[pathToFrom[i]][pathToFrom[i - 1]].first;
     }
     for(short i = 1; i < path.size(); i++)
     {
-        static short direction;
-        if(pathToFrom.size() > 1) direction = graf->g[pathToFrom[pathToFrom.size() - 1]][from].first;
-        else direction = robot->correctDirection;
         algorithm += calculateTurn(path[i - 1], path[i], direction, graf);
         algorithm += "1";
-        direction = graf->g[path[i - 1]][path[i]].first;
+        direction = graf->g[path[i]][path[i - 1]].first;
     }
+    robot->correctDirection = direction;
 }
 
 std::string Request::calculateTurn(short from, short to, short direction, Graf* graf)

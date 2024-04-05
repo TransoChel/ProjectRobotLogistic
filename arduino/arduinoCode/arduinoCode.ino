@@ -163,27 +163,23 @@ void loop()
   }
   else if (status == DONE) 
   {
-    char c = Serial3.read();
+    algorithm = "";
+    algorithmToStart = "";
+    String c = Serial3.readString();
     if (c != -1) 
     {
-      if(c != ';')
-      {       
-        dataFromComputer += String(c);
-      }
-      else
-      {
         short j = 0;
-        for(short i = 0; i < dataFromComputer[i] != 4; i++)
+        for(short i = 0; c[i] != '4'; i++)
         {
-          algorithmToStart += dataFromComputer[i];
-          j = i;
+          algorithmToStart += c[i];
+          j = i + 2;
+
         }
-        for(; j < dataFromComputer.length(); j++)
+        for(; j < c.length(); j++)
         {
-          algorithm += dataFromComputer[j];
+          algorithm += c[j];
         }
         status = READED;
-      }
     }
     sendStatus();
     Serial.println("reading");
@@ -191,6 +187,9 @@ void loop()
   else if(status == READED)
   {
     sendStatus();
+    Serial.println(algorithmToStart);
+    Serial.println(algorithm);
     status = GO_TO_TAKE;
   }
+  delay(1000);
 }
