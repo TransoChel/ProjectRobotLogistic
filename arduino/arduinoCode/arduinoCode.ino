@@ -2,25 +2,25 @@
 
 #include <SoftwareSerial.h>
 
-#define S1 1
-#define S2 2
+#define S1 22
+#define S2 23
 #define S3 3
 #define COMMON_SPEED 90
 
-AF_DCMotor motorLeft(1, 90), motorRight(2, 90);
+AF_DCMotor motorLeft(1), motorRight(2);
 
 void motorLeftGo(int v)
 {
   motorLeft.setSpeed(abs(v));
-  if(v / abs(v) > 0) motorLeft.run(FORWARD);
-  else motorLeft.run(BACKWARD);
+  if(v / abs(v) > 0) motorLeft.run(BACKWARD);
+  else motorLeft.run(FORWARD);
 }
 
 void motorRightGo(int v)
 {
   motorRight.setSpeed(abs(v));
-  if(v / abs(v) > 0) motorRight.run(FORWARD);
-  else motorRight.run(BACKWARD);
+  if(v / abs(v) > 0) motorLeft.run(BACKWARD);
+  else motorLeft.run(FORWARD);
 }
 
 bool sensorData[2];
@@ -28,34 +28,44 @@ bool sensorData[2];
 void readSensors()
 {
   sensorData[0] = digitalRead(S1);
-  sensorData[1] = digitalRead(S3);
+  sensorData[1] = digitalRead(S2);
+}
+
+void testSensors()
+{
+  readSensors();
+  Serial.print(sensorData[0]);
+  Serial.print(" ");
+  Serial.println(sensorData[1]);
 }
 
 void cross(byte v)
 {
   float err, u, kP = 1, kD = 10, kI = 0.001, i, eold = 0;
   short crossCounter = 0;
-  while(crossCounter > 30)
+  while(crossCounter < 30)
   {
     readSensors();
     err = sensorData[0] - sensorData[1];
     u = err * kP + (err - eold) * kD + i;
     i += kI * err;
-    motorLeftGo(v + u);
-    motorRightGo(v - u);
-    delay(1);
+    motorLeftGo(v + u * 50);
+    motorRightGo(v - u * 50);
     eold = err;
     if(sensorData[0] && sensorData[1]) crossCounter++;
+    Serial.println(u * 50);
   }
+  Serial.println("CROSS");
 }
 
 void forward(short sp)
 {
   motorLeftGo(sp);
   motorRightGo(sp);
-  delay(400);
+  delay(1400);
   motorLeftGo(0);
   motorRightGo(0);
+  Serial.println("done step");
 }
 
 void turnToLine(short sp)
@@ -67,6 +77,7 @@ void turnToLine(short sp)
     motorRightGo(-sp);
     delay(1);
   }
+  Serial.println("TURNED");
 }
 
 String dataFromComputer = "", algorithm, algorithmToStart;
@@ -79,7 +90,8 @@ enum St : char
   DOING_REQUEST = 3,
   WAITING_FOR_DROPPING = 4,
   DONE = 5,
-  READED = 6
+  READED = 6,
+  TEST = 10
 };
 
 St status = ON;
@@ -98,12 +110,14 @@ void setup()
   // Open serial communications and wait for port to open:
   Serial.begin(9600);
   Serial.println("begin");
+  pinMode(S1, INPUT);
+  pinMode(S2, INPUT);
 
   // set the data rate for the SoftwareSerial port
   Serial3.begin(9600);
   Serial.println("connected myserial");
   sendStatus();
-  status = DONE;
+  status = TEST;
 }
 
 
@@ -114,19 +128,20 @@ void loop()
     for(short i = 0; i < algorithmToStart.length(); i++)
     {
       if(algorithmToStart[i] == "1")
-        {
-          cross(COMMON_SPEED);
-          forward(COMMON_SPEED);
-        }
-        else if(algorithmToStart[i] == "2")
-        {
-          turnToLine(COMMON_SPEED);
-        }
-        else if(algorithmToStart[i] == "3")
-        {
-          turnToLine(-COMMON_SPEED);
-        }
+      {
+        cross(COMMON_SPEED);
+        forward(COMMON_SPEED);
+      }
+      else if(algorithmToStart[i] == "2")
+      {
+        turnToLine(COMMON_SPEED);
+      }
+      else if(algorithmToStart[i] == "3")
+      {
+        turnToLine(-COMMON_SPEED);
+      }
     }
+    Serial.println("went to take");
     status = WAITING_FOR_TAKING;
   }
   if(status == WAITING_FOR_TAKING)
@@ -155,11 +170,13 @@ void loop()
       }
       status = WAITING_FOR_DROPPING;
     }
+    Serial.println("DONE REQUEST");
   }
   else if(status == WAITING_FOR_DROPPING)
   {
     delay(5000);
     status = DONE;
+    Serial.println("DROPPED");
   }
   else if (status == DONE) 
   {
@@ -168,6 +185,7 @@ void loop()
     String c = Serial3.readString();
     if (c != -1) 
     {
+      Serial.print("begin reading");
         short j = 0;
         for(short i = 0; c[i] != '4'; i++)
         {
@@ -191,5 +209,9 @@ void loop()
     Serial.println(algorithm);
     status = GO_TO_TAKE;
   }
-  delay(1000);
+  else if(status == TEST)
+  {
+    testSensors();
+    cross(100);
+  }
 }
