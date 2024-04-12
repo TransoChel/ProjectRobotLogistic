@@ -3,11 +3,12 @@
 #include <SoftwareSerial.h>
 
 #define S1 22
-#define S2 23
+#define S2 24
 #define S3 3
 #define COMMON_SPEED 90
 
-AF_DCMotor motorLeft(1), motorRight(2);
+AF_DCMotor motorLeft(4);
+AF_DCMotor motorRight(1);
 
 void motorLeftGo(int v)
 {
@@ -19,16 +20,16 @@ void motorLeftGo(int v)
 void motorRightGo(int v)
 {
   motorRight.setSpeed(abs(v));
-  if(v / abs(v) > 0) motorLeft.run(BACKWARD);
-  else motorLeft.run(FORWARD);
+  if(v / abs(v) > 0) motorRight.run(FORWARD);
+  else motorRight.run(BACKWARD);
 }
 
 bool sensorData[2];
 
 void readSensors()
 {
-  sensorData[0] = digitalRead(S1);
-  sensorData[1] = digitalRead(S2);
+  sensorData[0] = !digitalRead(S1);
+  sensorData[1] = !digitalRead(S2);
 }
 
 void testSensors()
@@ -43,19 +44,26 @@ void cross(byte v)
 {
   float err, u, kP = 1, kD = 10, kI = 0.001, i, eold = 0;
   short crossCounter = 0;
-  while(crossCounter < 30)
+  readSensors();
+  while(sensorData[0] || sensorData[1])
   {
     readSensors();
     err = sensorData[0] - sensorData[1];
-    u = err * kP + (err - eold) * kD + i;
+    u = err * kP + (err - eold) * kD;
     i += kI * err;
-    motorLeftGo(v + u * 50);
-    motorRightGo(v - u * 50);
+    motorLeftGo(v - u * 50);
+    motorRightGo(v + u * 50);
     eold = err;
-    if(sensorData[0] && sensorData[1]) crossCounter++;
+    Serial.print(sensorData[0]);
+    Serial.print(" ");
+    Serial.print(sensorData[1]);
+    Serial.print("\t");
     Serial.println(u * 50);
   }
-  Serial.println("CROSS");
+  motorLeftGo(0);
+  motorRightGo(0);
+  delay(100);
+  Serial.println("done CROSS");
 }
 
 void forward(short sp)
@@ -65,6 +73,7 @@ void forward(short sp)
   delay(1400);
   motorLeftGo(0);
   motorRightGo(0);
+  delay(100);
   Serial.println("done step");
 }
 
@@ -75,8 +84,10 @@ void turnToLine(short sp)
   {
     motorLeftGo(sp);
     motorRightGo(-sp);
-    delay(1);
   }
+  motorLeftGo(0);
+  motorRightGo(0);
+  delay(100);
   Serial.println("TURNED");
 }
 
@@ -117,7 +128,7 @@ void setup()
   Serial3.begin(9600);
   Serial.println("connected myserial");
   sendStatus();
-  status = TEST;
+  status = DONE;
 }
 
 
@@ -211,7 +222,10 @@ void loop()
   }
   else if(status == TEST)
   {
-    testSensors();
+    // motorLeftGo(100);
+    // motorRightGo(100);
+    //testSensors();
     cross(100);
+    delay(1000);
   }
 }
