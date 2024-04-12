@@ -32,16 +32,21 @@ private:
     Sound ding = LoadSound("../Robot_App/sounds/sound_sent_2.wav");
 
     float radioButtonFromX = (1920 - 500 - 350) / 2 + 500 - 350, radioButtonToX = (1920 - 500 - 350) / 2 + 500 + 350;
-    RadioButton A = RadioButton({radioButtonFromX, 325}, {350, 75}, RED, "A");
-    RadioButton B = RadioButton({radioButtonFromX, 425}, {350, 75}, RED, "B");
-    RadioButton C = RadioButton({radioButtonFromX, 525}, {350, 75}, RED, "C");
-    RadioButton D = RadioButton({radioButtonFromX, 625}, {350, 75}, RED, "D");
-    RadioButton E = RadioButton({radioButtonFromX, 725}, {350, 75}, RED, "E");
-    RadioButton Ato = RadioButton({radioButtonToX, 325}, {350, 75}, RED, "A");
-    RadioButton Bto = RadioButton({radioButtonToX, 425}, {350, 75}, RED, "B");
-    RadioButton Cto = RadioButton({radioButtonToX, 525}, {350, 75}, RED, "C");
-    RadioButton Dto = RadioButton({radioButtonToX, 625}, {350, 75}, RED, "D");
-    RadioButton Eto = RadioButton({radioButtonToX, 725}, {350, 75}, RED, "E");
+    RadioButton A = RadioButton({radioButtonFromX, 225}, {350, 50}, RED, "1");
+    RadioButton B = RadioButton({radioButtonFromX, 285}, {350, 50}, RED, "2");
+    RadioButton C = RadioButton({radioButtonFromX, 345}, {350, 50}, RED, "3");
+    RadioButton D = RadioButton({radioButtonFromX, 405}, {350, 50}, RED, "4");
+    RadioButton E = RadioButton({radioButtonFromX, 465}, {350, 50}, RED, "5");
+    RadioButton F = RadioButton({radioButtonFromX, 525}, {350, 50}, RED, "6");
+    RadioButton G = RadioButton({radioButtonFromX, 585}, {350, 50}, RED, "7");
+    RadioButton H = RadioButton({radioButtonFromX, 645}, {350, 50}, RED, "8");
+    RadioButton I = RadioButton({radioButtonFromX, 705}, {350, 50}, RED, "9");
+    RadioButton J = RadioButton({radioButtonFromX, 765}, {350, 50}, RED, "10");
+    RadioButton Ato = RadioButton({radioButtonToX, 325}, {350, 50}, RED, "A");
+    RadioButton Bto = RadioButton({radioButtonToX, 425}, {350, 50}, RED, "B");
+    RadioButton Cto = RadioButton({radioButtonToX, 525}, {350, 50}, RED, "C");
+    RadioButton Dto = RadioButton({radioButtonToX, 625}, {350, 50}, RED, "D");
+    RadioButton Eto = RadioButton({radioButtonToX, 725}, {350, 50}, RED, "E");
 
     short sentTimer = 2;
     unsigned char transparensy;

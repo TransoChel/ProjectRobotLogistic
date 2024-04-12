@@ -10,6 +10,13 @@ App::App(Graf* graf, ceSerial* com, Robot* robot, float screenWidth, float scree
     AB.buttons.push_back(&C);
     AB.buttons.push_back(&D);
     AB.buttons.push_back(&E);
+    AB.buttons.push_back(&F);
+    AB.buttons.push_back(&G);
+    AB.buttons.push_back(&H);
+    AB.buttons.push_back(&I);
+    AB.buttons.push_back(&J);
+    // AB.buttons.push_back(&K);
+    // AB.buttons.push_back(&L);
     ABto.buttons.push_back(&Ato);
     ABto.buttons.push_back(&Bto);
     ABto.buttons.push_back(&Cto);
@@ -70,14 +77,13 @@ void App::LeftMouseButtonPressed()
 
 void App::drawGeneral()
 {
-    
     DrawRectangleV({0, 100}, {500, 935}, {255, 0, 0, 255});
     DrawRectangleV({0, 0}, {screenWidth, 100}, {200, 0, 0, 255});
     rl_DrawTextureEx(logo, {18, 18}, 0, 2, WHITE); 
     rl_DrawTextureEx(queueTexture, {100, 125}, 0, 5, WHITE); 
     DrawRectangleV({25, 775}, {450, 200}, {255, 255, 255, 255});
-    DrawRectangleV({35, 785}, {430, 180}, {255, 0, 0, 255});\
-    rl_DrawText(std::to_string(int(robot->getStatus())).c_str(), 235, 835, 80, WHITE);
+    DrawRectangleV({35, 785}, {430, 180}, {255, 0, 0, 255});
+    rl_DrawText(robot->getStatusString().c_str(), 240 - MeasureText(robot->getStatusString().c_str(), 50)/2, 875 - MeasureTextEx(GetFontDefault(), robot->getStatusString().c_str(), 50, 0).y/2, 50, WHITE);
     if (status == STARTING)
     {
         doRequest.Draw();
@@ -85,8 +91,8 @@ void App::drawGeneral()
     else if (status == ORDERING)
     {
         toMenu.Draw();
-        rl_DrawTextureEx(fromTexture, {screenWidth - 710 - 180 - 175 - (52 * 5 / 2), 250}, 0, 5, WHITE);
-        rl_DrawTextureEx(toTexture, {radioButtonToX + 175 - (34 * 5 / 2), 250}, 0, 5, WHITE);
+        rl_DrawTextureEx(fromTexture, {screenWidth - 710 - 180 - 175 - (52 * 5 / 2), 125}, 0, 5, WHITE);
+        rl_DrawTextureEx(toTexture, {radioButtonToX + 175 - (34 * 5 / 2), 175}, 0, 5, WHITE);
         //DrawLine(0, 949, 1500, 949, BLACK);
         send.Draw();
         AB.Draw();
