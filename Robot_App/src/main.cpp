@@ -17,6 +17,8 @@ int main()
     const int screenWidth = 1920;
     const int screenHeight = 1035;
 
+    int sendtimer = 90;
+
     Graf graf;
     graf.writeGraf();
 
@@ -33,9 +35,17 @@ int main()
     {
         // Update
         //----------------------debug-functions---------------------------------------------
-        if(IsKeyPressed(KEY_F1)) app.queue.sendRequest(&logist, &com);
+        
         //----------------------------------------------------------------------------------
         
+        if (sendtimer >= 0) {
+            --sendtimer;
+        }
+        else {
+            if(logist.getStatus() == 5) app.queue.sendRequest(&logist, &com);
+            sendtimer = 90;
+        }
+
         logist.read(&com);
         if(logist.getStatus() == ON);
         

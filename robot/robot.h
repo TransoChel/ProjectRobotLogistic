@@ -28,6 +28,8 @@ public:
     void send(std::string path, ceSerial* com);//ceSerial *com, 
     void read(ceSerial *com);
     RobotStatus getStatus();
+    std::string getStatusString();
+    // void changeStatus(int a);
 };
 
 #endif
