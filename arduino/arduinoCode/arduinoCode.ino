@@ -40,12 +40,12 @@ void testSensors()
   Serial.println(sensorData[1]);
 }
 
-void cross(byte v)
+void cross(byte v = COMMON_SPEED)
 {
   float err, u, kP = 1, kD = 10, kI = 0.001, i, eold = 0;
   short crossCounter = 0;
   readSensors();
-  while(sensorData[0] || sensorData[1])
+  while(crossCounter < 30)
   {
     readSensors();
     err = sensorData[0] - sensorData[1];
@@ -59,6 +59,8 @@ void cross(byte v)
     Serial.print(sensorData[1]);
     Serial.print("\t");
     Serial.println(u * 50);
+    if(sensorData[0] || sensorData[1]) crossCounter++;
+    else crossCounter = 0;
   }
   motorLeftGo(0);
   motorRightGo(0);
@@ -66,22 +68,29 @@ void cross(byte v)
   Serial.println("done CROSS");
 }
 
-void forward(short sp)
+void forward(short sp = COMMON_SPEED)
 {
   motorLeftGo(sp);
   motorRightGo(sp);
-  delay(1400);
+  delay(100);
+  motorLeftGo(0);
+  motorRightGo(0);
+  delay(100);
+  motorLeftGo(2 *sp);
+  motorRightGo(-2 * sp);
+  delay(2000);
   motorLeftGo(0);
   motorRightGo(0);
   delay(100);
   Serial.println("done step");
 }
 
-void turnToLine(short sp)
+void turnToLine(short sp = COMMON_SPEED)
 {
   int timer = millis();
-  while(digitalRead(S2) && millis() < timer + 300)
+  while(sensorData[!(sp > 0)] && millis() < timer + 300)
   {
+    readSensors();
     motorLeftGo(sp);
     motorRightGo(-sp);
   }
@@ -128,7 +137,7 @@ void setup()
   Serial3.begin(9600);
   Serial.println("connected myserial");
   sendStatus();
-  status = DONE;
+  status = TEST;
 }
 
 
@@ -154,10 +163,11 @@ void loop()
     }
     Serial.println("went to take");
     status = WAITING_FOR_TAKING;
+    sendStatus();
   }
   if(status == WAITING_FOR_TAKING)
   {
-    delay(5000);
+    delay(10000);
     status = DOING_REQUEST;
     sendStatus();
     Serial.println("took");
@@ -179,13 +189,14 @@ void loop()
       {
         turnToLine(-COMMON_SPEED);
       }
-      status = WAITING_FOR_DROPPING;
     }
+    status = WAITING_FOR_DROPPING;
     Serial.println("DONE REQUEST");
   }
   else if(status == WAITING_FOR_DROPPING)
   {
-    delay(5000);
+    sendStatus();
+    delay(10000);
     status = DONE;
     Serial.println("DROPPED");
   }
@@ -225,7 +236,9 @@ void loop()
     // motorLeftGo(100);
     // motorRightGo(100);
     //testSensors();
-    cross(100);
+    cross();
+    forward();
+    turnToLine();
     delay(1000);
   }
 }

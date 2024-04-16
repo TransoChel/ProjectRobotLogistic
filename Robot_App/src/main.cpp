@@ -42,7 +42,7 @@ int main()
             --sendtimer;
         }
         else {
-            if(logist.getStatus() == 5) app.queue.sendRequest(&logist, &com);
+            app.queue.sendRequestIfNeed(&logist, &com);
             sendtimer = 90;
         }
 

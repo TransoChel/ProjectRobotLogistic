@@ -39,3 +39,7 @@ void Queue::sendRequest(Robot* robot, ceSerial* com)
     robot->send(requests[0].getPath(), com);
     requests.erase(requests.begin());
 }
+void Queue::sendRequestIfNeed(Robot* robot, ceSerial* com)
+{
+    if(robot->getStatus() == 5 && requests.size()) sendRequest(robot, com);
+}
