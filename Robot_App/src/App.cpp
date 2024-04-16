@@ -15,13 +15,20 @@ App::App(Graf* graf, ceSerial* com, Robot* robot, float screenWidth, float scree
     AB.buttons.push_back(&H);
     AB.buttons.push_back(&I);
     AB.buttons.push_back(&J);
-    // AB.buttons.push_back(&K);
-    // AB.buttons.push_back(&L);
+    AB.buttons.push_back(&K);
+    AB.buttons.push_back(&L);
     ABto.buttons.push_back(&Ato);
     ABto.buttons.push_back(&Bto);
     ABto.buttons.push_back(&Cto);
     ABto.buttons.push_back(&Dto);
     ABto.buttons.push_back(&Eto);
+    ABto.buttons.push_back(&Fto);
+    ABto.buttons.push_back(&Gto);
+    ABto.buttons.push_back(&Hto);
+    ABto.buttons.push_back(&Ito);
+    ABto.buttons.push_back(&Jto);
+    ABto.buttons.push_back(&Kto);
+    ABto.buttons.push_back(&Lto);
     this->graf = graf;
     this->screenWidth = screenWidth;
     this->screenHeight = screenHeight;
@@ -92,16 +99,16 @@ void App::drawGeneral()
     {
         toMenu.Draw();
         rl_DrawTextureEx(fromTexture, {screenWidth - 710 - 180 - 175 - (52 * 5 / 2), 125}, 0, 5, WHITE);
-        rl_DrawTextureEx(toTexture, {radioButtonToX + 175 - (34 * 5 / 2), 175}, 0, 5, WHITE);
+        rl_DrawTextureEx(toTexture, {radioButtonToX + 175 - (34 * 5 / 2), 125}, 0, 5, WHITE);
         //DrawLine(0, 949, 1500, 949, BLACK);
         send.Draw();
         AB.Draw();
         ABto.Draw();
         if (ShouldIDrawArrow)
         {
-            DrawRectangleV({AB.buttons[AB.SendNum()]->coord.x + 350, AB.buttons[AB.SendNum()]->coord.y + 37}, {180, 10}, {200, 0, 0, 255}); 
-            DrawRectangleV({(screenWidth - 500) / 2 - 5 + 500, std::min(AB.buttons[AB.SendNum()]->coord.y + 37, ABto.buttons[ABto.SendNum()]->coord.y + 37) + 10}, {10, std::abs(ABto.buttons[ABto.SendNum()]->coord.y - AB.buttons[AB.SendNum()]->coord.y)}, {200, 0, 0, 255});
-            DrawRectangleV({ABto.buttons[ABto.SendNum()]->coord.x - 180, ABto.buttons[ABto.SendNum()]->coord.y + 37}, {180, 10}, {200, 0, 0, 255});
+            DrawRectangleV({AB.buttons[AB.SendNum()]->coord.x + 350, AB.buttons[AB.SendNum()]->coord.y + 20}, {180, 10}, {200, 0, 0, 255}); 
+            DrawRectangleV({(screenWidth - 500) / 2 - 5 + 500, std::min(AB.buttons[AB.SendNum()]->coord.y + 20, ABto.buttons[ABto.SendNum()]->coord.y + 20) + 10}, {10, std::abs(ABto.buttons[ABto.SendNum()]->coord.y - AB.buttons[AB.SendNum()]->coord.y)}, {200, 0, 0, 255});
+            DrawRectangleV({ABto.buttons[ABto.SendNum()]->coord.x - 180, ABto.buttons[ABto.SendNum()]->coord.y + 20}, {180, 10}, {200, 0, 0, 255});
         }
         if (InvalidRequest) 
         {

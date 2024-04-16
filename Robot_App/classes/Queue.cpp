@@ -25,7 +25,7 @@ void Queue::draw(Vector2 coord, Color color)
     {
         double drawPosition = i + drawDelta;
         DrawRectangleV({coord.x, coord.y + 75 * drawPosition}, {200, 50}, color);
-        const char text[5] = {char(requests[i].from + 65), '-', '>', char(requests[i].to + 65), 0};
+        const char text[5] = {char(requests[i].from + 49), '-', '>', char(requests[i].to + 49), 0};
         rl_DrawText(&text[0], coord.x + 65, 10 + coord.y + 75 * drawPosition, 30, WHITE);
     }
 
