@@ -92,7 +92,7 @@ void App::drawGeneral()
     DrawRectangleV({25, 775}, {450, 200}, {255, 255, 255, 255});//статус робота
     DrawRectangleV({35, 785}, {430, 180}, {255, 0, 0, 255});
 
-    const char* statusText = std::to_string(robot->getStatus()).c_str();
+    const char* statusText = robot->getStatusString().c_str();
     rl_DrawText(statusText, 240 - MeasureText(statusText, 50)/2, 875 - MeasureTextEx(GetFontDefault(), statusText, 50, 0).y/2, 50, WHITE);
     if (status == STARTING)
     {

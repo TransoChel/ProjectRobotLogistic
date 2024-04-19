@@ -25,13 +25,14 @@ RobotStatus Robot::getStatus()
 
 std::string Robot::getStatusString() {
     switch(status) {
-        case 0: return "ON";
+        case 0: return "OFF";
         case 1: return "GO TO TAKE";
         case 2: return "WAITING FOR\nTAKING";
         case 3: return "DOING REQUEST";
         case 4: return "WAITING FOR\nDROPPING";
         case 5: return "DONE";
         case 6: return "READ";
+        default : return "IDK";
     }
 }
 

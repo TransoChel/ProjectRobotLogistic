@@ -57,9 +57,8 @@ int main()
         if (app.status == SENT) 
         {
             app.sentLogic();
-         }
-
-        if (IsMouseButtonPressed(MOUSE_BUTTON_LEFT))
+        }
+        else if (IsMouseButtonPressed(MOUSE_BUTTON_LEFT))
         {
             app.LeftMouseButtonPressed();
         }

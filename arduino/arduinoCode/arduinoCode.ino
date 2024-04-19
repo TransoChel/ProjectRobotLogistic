@@ -45,21 +45,21 @@ void cross(byte v = COMMON_SPEED)
   float err, u, kP = 1, kD = 10, kI = 0.001, i, eold = 0;
   short crossCounter = 0;
   readSensors();
-  while(crossCounter < 30)
+  while(crossCounter < 15)
   {
     readSensors();
     err = sensorData[0] - sensorData[1];
     u = err * kP + (err - eold) * kD;
     i += kI * err;
-    motorLeftGo(v - u * 50);
-    motorRightGo(v + u * 50);
+    motorLeftGo(v - u * 15);
+    motorRightGo(v + u * 15);
     eold = err;
     Serial.print(sensorData[0]);
     Serial.print(" ");
     Serial.print(sensorData[1]);
     Serial.print("\t");
-    Serial.println(u * 50);
-    if(sensorData[0] || sensorData[1]) crossCounter++;
+    Serial.println(u * 10);
+    if(!sensorData[0] && !sensorData[1]) crossCounter++;
     else crossCounter = 0;
   }
   motorLeftGo(0);
@@ -72,13 +72,13 @@ void forward(short sp = COMMON_SPEED)
 {
   motorLeftGo(sp);
   motorRightGo(sp);
-  delay(100);
+  delay(600);
   motorLeftGo(0);
   motorRightGo(0);
   delay(100);
   motorLeftGo(2 *sp);
   motorRightGo(-2 * sp);
-  delay(2000);
+  delay(1900);
   motorLeftGo(0);
   motorRightGo(0);
   delay(100);
@@ -88,11 +88,11 @@ void forward(short sp = COMMON_SPEED)
 void turnToLine(short sp = COMMON_SPEED)
 {
   int timer = millis();
-  while(sensorData[!(sp > 0)] && millis() < timer + 300)
+  while(sensorData[!(sp > 0)] || millis() < timer + 700)
   {
     readSensors();
-    motorLeftGo(sp);
-    motorRightGo(-sp);
+    motorLeftGo(-sp);
+    motorRightGo(sp);
   }
   motorLeftGo(0);
   motorRightGo(0);
@@ -199,11 +199,11 @@ void loop()
     delay(10000);
     status = DONE;
     Serial.println("DROPPED");
+    algorithm = "";
+    algorithmToStart = "";
   }
   else if (status == DONE) 
   {
-    algorithm = "";
-    algorithmToStart = "";
     String c = Serial3.readString();
     if (c != -1) 
     {
@@ -236,9 +236,16 @@ void loop()
     // motorLeftGo(100);
     // motorRightGo(100);
     //testSensors();
+    // +
+    cross();
+    forward();
+    turnToLine(-COMMON_SPEED);
+    turnToLine(-COMMON_SPEED);
     cross();
     forward();
     turnToLine();
-    delay(1000);
+    cross();
+    forward();
+    delay(10000);
   }
 }
