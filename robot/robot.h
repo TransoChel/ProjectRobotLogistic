@@ -9,7 +9,7 @@
 
 enum RobotStatus : char
 {
-    ON = 0,
+    OFF = 0,
     GO_TO_TAKE = 1,
     WAITING_FOR_TAKING = 2,
     DOING_REQUEST = 3,
@@ -21,7 +21,7 @@ enum RobotStatus : char
 class Robot
 {
 private:
-    RobotStatus status = ON;
+    RobotStatus status = OFF;
 
 public:
     int correctPosition = 0, correctDirection = 2;

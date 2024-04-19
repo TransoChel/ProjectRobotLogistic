@@ -84,13 +84,16 @@ void App::LeftMouseButtonPressed()
 
 void App::drawGeneral()
 {
-    DrawRectangleV({0, 100}, {500, 935}, {255, 0, 0, 255});
-    DrawRectangleV({0, 0}, {screenWidth, 100}, {200, 0, 0, 255});
-    rl_DrawTextureEx(logo, {18, 18}, 0, 2, WHITE); 
-    rl_DrawTextureEx(queueTexture, {100, 125}, 0, 5, WHITE); 
-    DrawRectangleV({25, 775}, {450, 200}, {255, 255, 255, 255});
+    DrawRectangleV({0, 100}, {500, 935}, {255, 0, 0, 255});//queue light-red zone
+    DrawRectangleV({0, 0}, {screenWidth, 100}, {200, 0, 0, 255});//red zone in the top
+    rl_DrawTextureEx(logo, {18, 18}, 0, 2, WHITE); //наше лого в уголке
+    rl_DrawTextureEx(queueTexture, {100, 125}, 0, 5, WHITE); //надпись "очередь"
+
+    DrawRectangleV({25, 775}, {450, 200}, {255, 255, 255, 255});//статус робота
     DrawRectangleV({35, 785}, {430, 180}, {255, 0, 0, 255});
-    rl_DrawText(robot->getStatusString().c_str(), 240 - MeasureText(robot->getStatusString().c_str(), 50)/2, 875 - MeasureTextEx(GetFontDefault(), robot->getStatusString().c_str(), 50, 0).y/2, 50, WHITE);
+
+    const char* statusText = std::to_string(robot->getStatus()).c_str();
+    rl_DrawText(statusText, 240 - MeasureText(statusText, 50)/2, 875 - MeasureTextEx(GetFontDefault(), statusText, 50, 0).y/2, 50, WHITE);
     if (status == STARTING)
     {
         doRequest.Draw();

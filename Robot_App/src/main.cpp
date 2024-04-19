@@ -47,7 +47,6 @@ int main()
         }
 
         logist.read(&com);
-        if(logist.getStatus() == ON);
         
 
         if (app.AB.CheckUpdate() && app.ABto.CheckUpdate()) 
