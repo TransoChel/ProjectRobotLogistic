@@ -7,7 +7,7 @@
 class RadioButtonControl
 {
 public:
-    std::vector<RadioButton *> buttons;
+    RadioButton* buttons[12];
     void Update();
     void Draw();
     bool CheckUpdate();

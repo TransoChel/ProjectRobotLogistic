@@ -5,30 +5,14 @@
 
 App::App(Graf* graf, ceSerial* com, Robot* robot, float screenWidth, float screenHeight)
 {
-    AB.buttons.push_back(&A);
-    AB.buttons.push_back(&B);
-    AB.buttons.push_back(&C);
-    AB.buttons.push_back(&D);
-    AB.buttons.push_back(&E);
-    AB.buttons.push_back(&F);
-    AB.buttons.push_back(&G);
-    AB.buttons.push_back(&H);
-    AB.buttons.push_back(&I);
-    AB.buttons.push_back(&J);
-    AB.buttons.push_back(&K);
-    AB.buttons.push_back(&L);
-    ABto.buttons.push_back(&Ato);
-    ABto.buttons.push_back(&Bto);
-    ABto.buttons.push_back(&Cto);
-    ABto.buttons.push_back(&Dto);
-    ABto.buttons.push_back(&Eto);
-    ABto.buttons.push_back(&Fto);
-    ABto.buttons.push_back(&Gto);
-    ABto.buttons.push_back(&Hto);
-    ABto.buttons.push_back(&Ito);
-    ABto.buttons.push_back(&Jto);
-    ABto.buttons.push_back(&Kto);
-    ABto.buttons.push_back(&Lto);
+    for (int i = 0; i < 12; ++i) {
+        RadioButton* A = new RadioButton({radioButtonFromX, 180 + 60 * i}, {350, 50}, RED, std::to_string(i + 1));
+        LeftPanel.buttons[i] = (A);
+    }
+    for (int i = 0; i < 12; ++i) {
+        RadioButton* A = new RadioButton({radioButtonToX, 180 + 60 * i}, {350, 50}, RED, std::to_string(i + 1));
+        RightPanel.buttons[i] = (A);
+    }
     this->graf = graf;
     this->screenWidth = screenWidth;
     this->screenHeight = screenHeight;
@@ -49,33 +33,33 @@ void App::LeftMouseButtonPressed()
     }
     else if (status = ORDERING)
     {
-        AB.Update();
-        ABto.Update();
+        LeftPanel.Update();
+        RightPanel.Update();
         if (toMenu.CheckButtonPressed())
         {
             status = STARTING;
             ShouldIDrawArrow = false;
             InvalidRequest = false;
-            AB.NullUpdate();
-            ABto.NullUpdate();
+            LeftPanel.NullUpdate();
+            RightPanel.NullUpdate();
         }
-        if (AB.CheckUpdate() && ABto.CheckUpdate()) 
+        if (LeftPanel.CheckUpdate() && RightPanel.CheckUpdate()) 
         {
             if(send.CheckButtonPressed()) //(CheckCollisionPointRec(GetMousePosition(), {1425, 900, 100, 100})) 
             {
-                if (AB.SendNum() == ABto.SendNum()) {
+                if (LeftPanel.SendNum() == RightPanel.SendNum()) {
                     InvalidRequest = true;
                 }
                 else {
-                    from = AB.SendNum();
-                    to = ABto.SendNum();
+                    from = LeftPanel.SendNum();
+                    to = RightPanel.SendNum();
                     status = SENT;
                     startTimeSent = GetTime();
                     ShouldIDrawArrow = false;
                     InvalidRequest = false;
                     queue.addRequest(Request(from, to, graf, robot));
-                    AB.NullUpdate();
-                    ABto.NullUpdate();
+                    LeftPanel.NullUpdate();
+                    RightPanel.NullUpdate();
                 }
             }
         }
@@ -105,13 +89,13 @@ void App::drawGeneral()
         rl_DrawTextureEx(toTexture, {radioButtonToX + 175 - (34 * 5 / 2), 125}, 0, 5, WHITE);
         //DrawLine(0, 949, 1500, 949, BLACK);
         send.Draw();
-        AB.Draw();
-        ABto.Draw();
+        LeftPanel.Draw();
+        RightPanel.Draw();
         if (ShouldIDrawArrow)
         {
-            DrawRectangleV({AB.buttons[AB.SendNum()]->coord.x + 350, AB.buttons[AB.SendNum()]->coord.y + 20}, {180, 10}, {200, 0, 0, 255}); 
-            DrawRectangleV({(screenWidth - 500) / 2 - 5 + 500, std::min(AB.buttons[AB.SendNum()]->coord.y + 20, ABto.buttons[ABto.SendNum()]->coord.y + 20) + 10}, {10, std::abs(ABto.buttons[ABto.SendNum()]->coord.y - AB.buttons[AB.SendNum()]->coord.y)}, {200, 0, 0, 255});
-            DrawRectangleV({ABto.buttons[ABto.SendNum()]->coord.x - 180, ABto.buttons[ABto.SendNum()]->coord.y + 20}, {180, 10}, {200, 0, 0, 255});
+            DrawRectangleV({LeftPanel.buttons[LeftPanel.SendNum()]->coord.x + 350, LeftPanel.buttons[LeftPanel.SendNum()]->coord.y + 20}, {180, 10}, {200, 0, 0, 255}); 
+            DrawRectangleV({(screenWidth - 500) / 2 - 5 + 500, std::min(LeftPanel.buttons[LeftPanel.SendNum()]->coord.y + 20, RightPanel.buttons[RightPanel.SendNum()]->coord.y + 20) + 10}, {10, std::abs(RightPanel.buttons[RightPanel.SendNum()]->coord.y - LeftPanel.buttons[LeftPanel.SendNum()]->coord.y)}, {200, 0, 0, 255});
+            DrawRectangleV({RightPanel.buttons[RightPanel.SendNum()]->coord.x - 180, RightPanel.buttons[RightPanel.SendNum()]->coord.y + 20}, {180, 10}, {200, 0, 0, 255});
         }
         if (InvalidRequest) 
         {

@@ -3,7 +3,7 @@
 void RadioButtonControl::Update()
 {
     int check = -1;
-    for (int i = 0; i < buttons.size(); ++i)
+    for (int i = 0; i < 12; ++i)
     {
         if (buttons[i]->CheckButtonPressed())
         {
@@ -15,7 +15,7 @@ void RadioButtonControl::Update()
 
     if (check >= 0)
     {
-        for (int i = 0; i < buttons.size(); ++i)
+        for (int i = 0; i < 12; ++i)
         {
             if (i != check)
             {
@@ -27,7 +27,7 @@ void RadioButtonControl::Update()
 
 void RadioButtonControl::Draw()
 {
-    for (int i = 0; i < buttons.size(); ++i)
+    for (int i = 0; i < 12; ++i)
     {
         buttons[i]->Draw();
     }
@@ -35,7 +35,7 @@ void RadioButtonControl::Draw()
 
 bool RadioButtonControl::CheckUpdate()
 {
-    for (int i = 0; i < buttons.size(); ++i)
+    for (int i = 0; i < 12; ++i)
     {
         if (buttons[i]->active) {
             return true;
@@ -46,7 +46,7 @@ bool RadioButtonControl::CheckUpdate()
 
 void RadioButtonControl::NullUpdate() 
 {
-    for (int i = 0; i < buttons.size(); ++i)
+    for (int i = 0; i < 12; ++i)
     {
         if (buttons[i]->active) {
             buttons[i]->active = false;
@@ -56,7 +56,7 @@ void RadioButtonControl::NullUpdate()
 
 int RadioButtonControl::SendNum() 
 {
-    for (int i = 0; i < buttons.size(); ++i)
+    for (int i = 0; i < 12; ++i)
     {
         if (buttons[i]->active) {
             return i;

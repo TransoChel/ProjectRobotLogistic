@@ -49,7 +49,7 @@ int main()
         logist.read(&com);
         
 
-        if (app.AB.CheckUpdate() && app.ABto.CheckUpdate()) 
+        if (app.LeftPanel.CheckUpdate() && app.RightPanel.CheckUpdate()) 
         {
             app.ShouldIDrawArrow = true;
         }
