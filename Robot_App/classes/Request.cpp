@@ -13,8 +13,7 @@ std::string Request::calculatePath(int from, int to, Graf* graf)
         father[i] = 0;
         d[i] = -1;
     }
-    //std::cout <<"IM ALIVE";
-    
+
     d[from] = 0;
     
     for (int i = 0; i < graf->numberOfDots; i++) // выполнить для всех точек

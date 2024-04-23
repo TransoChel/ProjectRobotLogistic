@@ -5,6 +5,9 @@
 
 App::App(Graf* graf, ceSerial* com, Robot* robot, float screenWidth, float screenHeight)
 {
+    InitWindow(screenWidth, screenHeight, "RoboLogist");
+    InitAudioDevice();
+    SetTargetFPS(60); // Set our APP to run at 60 frames-per-second
     AB.buttons.push_back(&A);
     AB.buttons.push_back(&B);
     AB.buttons.push_back(&C);
@@ -33,10 +36,6 @@ App::App(Graf* graf, ceSerial* com, Robot* robot, float screenWidth, float scree
     this->screenWidth = screenWidth;
     this->screenHeight = screenHeight;
     this->robot = robot;
-
-    transparensy = 255;
-    sentSpeed = 0, sentScale = 10, sentTimer = 60;
-    sentPos = {(screenWidth - 500 - Sent.width * 10) / 2 + 500, (screenHeight - 100 - Sent.height * 10) / 2 + 100};
 }
 
 
@@ -84,6 +83,9 @@ void App::LeftMouseButtonPressed()
 
 void App::drawGeneral()
 {
+    BeginDrawing();
+    ClearBackground(WHITE);
+
     DrawRectangleV({0, 100}, {500, 935}, {255, 0, 0, 255});//queue light-red zone
     DrawRectangleV({0, 0}, {screenWidth, 100}, {200, 0, 0, 255});//red zone in the top
     rl_DrawTextureEx(logo, {18, 18}, 0, 2, WHITE); //наше лого в уголке
@@ -91,6 +93,8 @@ void App::drawGeneral()
 
     DrawRectangleV({25, 775}, {450, 200}, {255, 255, 255, 255});//статус робота
     DrawRectangleV({35, 785}, {430, 180}, {255, 0, 0, 255});
+
+    queue.draw({150, 250}, {255, 0, 0, 255});
 
     const char* statusText = robot->getStatusString().c_str();
     rl_DrawText(statusText, 240 - MeasureText(statusText, 50)/2, 875 - MeasureTextEx(GetFontDefault(), statusText, 50, 0).y/2, 50, WHITE);
@@ -162,8 +166,9 @@ void App::drawGeneral()
     else if (status == SENT) 
     {
         //for sent Status
-        
-        
+        static unsigned char transparensy = 255;
+        static float sentSpeed = 0, sentScale = 10, sentTimer = 60;
+        static Vector2 sentPos = {(screenWidth - 500 - Sent.width * 10) / 2 + 500, (screenHeight - 100 - Sent.height * 10) / 2 + 100};
         rl_DrawTextureEx(Sent, sentPos, 0, sentScale, {255, 255, 255, transparensy});
         if(sentScale >= 3)
         {
@@ -184,18 +189,29 @@ void App::drawGeneral()
         if(transparensy >= 4) transparensy-= 4;
         sentPos.x = (screenWidth - 500 - Sent.width * sentScale) / 2 + 500;
         sentPos.y -= sentSpeed;
+
+        if(GetTime() - startTimeSent > 2)
+        {
+            sentSpeed = 0;
+            sentScale = 10;
+            sentTimer = 60;
+            sentPos = {(screenWidth - 500 - Sent.width * 10) / 2 + 500, (screenHeight - 100 - Sent.height * 10) / 2 + 100};
+            transparensy = 255;
+        }
     }
+    
+    EndDrawing();
 }
 
-void App::sentLogic()
+void App::logic()
 {
-    if(startTimeSent + 2 < GetTime())
+    if (status == SENT && GetTime() - startTimeSent > 2) 
     {
-        this->status = STARTING;
-        sentSpeed = 0;
-        sentScale = 10;
-        sentTimer = 60;
-        sentPos = {(screenWidth - 500 - Sent.width * 10) / 2 + 500, (screenHeight - 100 - Sent.height * 10) / 2 + 100};
-        transparensy = 255;
+        status = STARTING;
     }
+    else if (IsMouseButtonPressed(MOUSE_BUTTON_LEFT))
+    {
+        LeftMouseButtonPressed();
+    }
+    queue.sendRequestIfNeed(robot, com);
 }

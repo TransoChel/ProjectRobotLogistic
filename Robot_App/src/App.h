@@ -56,11 +56,6 @@ private:
     RadioButton Jto = RadioButton({radioButtonToX, 720}, {350, 50}, RED, "10");
     RadioButton Kto = RadioButton({radioButtonToX, 780}, {350, 50}, RED, "11");
     RadioButton Lto = RadioButton({radioButtonToX, 840}, {350, 50}, RED, "12");
-
-    short sentTimer = 2;
-    unsigned char transparensy;
-    float sentSpeed, sentScale;
-    Vector2 sentPos;
 public:
     bool ShouldIDrawArrow = false;
     bool InvalidRequest = false;
@@ -75,4 +70,5 @@ public:
     void LeftMouseButtonPressed();
     void drawGeneral();
     void sentLogic();
+    void logic();
 };

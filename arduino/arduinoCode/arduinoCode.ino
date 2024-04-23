@@ -72,7 +72,7 @@ void forward(short sp = COMMON_SPEED)
 {
   motorLeftGo(sp);
   motorRightGo(sp);
-  delay(600);
+  delay(900);
   motorLeftGo(0);
   motorRightGo(0);
   delay(100);

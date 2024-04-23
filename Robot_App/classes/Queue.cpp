@@ -41,5 +41,10 @@ void Queue::sendRequest(Robot* robot, ceSerial* com)
 }
 void Queue::sendRequestIfNeed(Robot* robot, ceSerial* com)
 {
-    if(robot->getStatus() == 5 && requests.size()) sendRequest(robot, com);
+    static double timer = GetTime();
+    if(robot->getStatus() == 5 && requests.size() && GetTime() - timer > 1) 
+    {
+        sendRequest(robot, com);
+        timer  = GetTime();    
+    }
 }
